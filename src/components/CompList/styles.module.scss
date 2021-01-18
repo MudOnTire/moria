@@ -1,5 +1,13 @@
 .container {
-  width: 30vw;
+  width: 480px;
+  height: 100vh;
   min-width: 200px;
   border: 1px dashed #ccc;
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+}
+
+.compItem {
+  flex: 1;
 }

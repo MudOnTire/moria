@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import styles from './styles.module.scss';
 
-export default function Dragable({ children }) {
+export default function Dragable({ children, className, style, ...res }) {
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -16,10 +16,11 @@ export default function Dragable({ children }) {
 
   return (
     <div
-      className={`${styles.draggable} ${isDragging ? styles.dragging : ''}`}
+      className={`${styles.draggable} ${isDragging ? styles.dragging : ''} ${className}`}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       draggable="true"
+      {...res}
     >
       {children}
     </div>

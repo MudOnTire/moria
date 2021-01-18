@@ -13,7 +13,7 @@ function App() {
   return (
     <StoreProvider>
       <BrowserRouter>
-        <div className="App" style={{backgroundColor: 'crimson'}}>
+        <div className="App">
           <Switch>
             <Route exact path="/">
               <Editor />
