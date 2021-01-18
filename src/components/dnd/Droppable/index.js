@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { queryWidget } from 'Src/config/widgets';
+import { context, actions } from 'Src/store';
 
 import styles from './styles.module.scss'
 
 export default function Droppable({ children }) {
+  const store = useContext(context);
+  const { dispatch } = store
 
   const [isDragOver, setIsDragOver] = useState(false);
 
@@ -22,7 +26,13 @@ export default function Droppable({ children }) {
   const handleDragDrop = (e) => {
     setIsDragOver(false);
     const widgetId = e.dataTransfer.getData('text');
-    console.log('dropped', widgetId);
+    if (!widgetId) return;
+    const widget = queryWidget(widgetId);
+    if (!widget) return;
+    dispatch({
+      type: actions.UPDATE_PAGE_CONFIG,
+      payload: [widget]
+    });
   }
 
   return (

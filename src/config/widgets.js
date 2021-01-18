@@ -28,4 +28,19 @@ const widgets = [
   }
 ]
 
+const cache = {}
+
+const queryWidget = (id) => {
+  if (cache[id]) return cache[id];
+  for (const category of widgets) {
+    for (const widget of category.list) {
+      if (widget.id === id) {
+        cache[id] = widget;
+        return widget;
+      }
+    }
+  }
+}
+
 export default widgets;
+export { queryWidget };

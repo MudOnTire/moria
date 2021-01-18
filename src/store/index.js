@@ -5,7 +5,7 @@ const actions = {
 }
 
 const initialState = {
-  pageConfig: {},
+  pageConfig: [],
   dispatch: () => { },
 };
 
