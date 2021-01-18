@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 export default function CompList() {
   return (
-    <div className={styles.container}>
+    <div className={styles.compList}>
       <Dragable className={styles.compItem}>
         <h1>title</h1>
       </Dragable>

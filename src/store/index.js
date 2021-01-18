@@ -1,19 +1,19 @@
 import React, { useReducer } from 'react';
 
 const actions = {
-  ADD_COUNT: 'ADD_COUNT'
+  UPDATE_PAGE_CONFIG: 'UPDATE_PAGE_CONFIG'
 }
 
 const initialState = {
-  count: 0,
+  pageConfig: {},
   dispatch: () => { },
 };
 
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
-    case actions.ADD_COUNT: {
-      return { ...state, count: state.count + payload };
+    case actions.UPDATE_PAGE_CONFIG: {
+      return { ...state, pageConfig: payload };
     }
     default:
       return state;
