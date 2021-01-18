@@ -1,0 +1,12 @@
+.draggable {
+  border: 1px dotted #ccc;
+  cursor: pointer;
+  background-color: #778899;
+  position: relative;
+  height: 150px;
+  width: 150px;
+}
+
+.dragging {
+  border: 4px rgb(90, 171, 224) solid;
+}
