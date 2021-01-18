@@ -1,30 +1,35 @@
 import React from 'react';
 import Dragable from 'Src/components/dnd/Dragable';
-import CompItem from 'Src/components/CompItem';
+import widgets from 'Src/config/widgets.js';
 
 import styles from './styles.module.scss';
 
 export default function CompList() {
   return (
     <div className={styles.compList}>
-      <h4 className={styles.secTitle}>Form Components</h4>
-      <div className={styles.listSec}>
-        <Dragable className={styles.compItem}>
-          Input
-        </Dragable>
-        <Dragable className={styles.compItem}>
-          Checkbox
-        </Dragable>
-        <Dragable className={styles.compItem}>
-          Radio Button
-        </Dragable>
-        <Dragable className={styles.compItem}>
-          Button
-        </Dragable>
-        <Dragable className={styles.compItem}>
-          Switch
-        </Dragable>
-      </div>
+      {
+        widgets && widgets.map(cate => {
+          return (
+            <div className={styles.sec}>
+              <h4 className={styles.secTitle}>{cate.category}</h4>
+              <div className={styles.secBody}>
+                {
+                  cate.list && cate.list.map(w => {
+                    return (
+                      <Dragable
+                        className={styles.compItem}
+                        widgetId={w.id}
+                      >
+                        {w.name}
+                      </Dragable>
+                    )
+                  })
+                }
+              </div>
+            </div>
+          )
+        })
+      }
     </div>
   )
 }

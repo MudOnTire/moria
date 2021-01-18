@@ -21,7 +21,8 @@ export default function Droppable({ children }) {
 
   const handleDragDrop = (e) => {
     setIsDragOver(false);
-    console.log('drag drop');
+    const widgetId = e.dataTransfer.getData('text');
+    console.log('dropped', widgetId);
   }
 
   return (

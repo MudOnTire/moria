@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 
 import styles from './styles.module.scss';
 
-export default function Dragable({ children, className, style, ...res }) {
+export default function Dragable({ children, widgetId, className, style, ...res }) {
 
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleDragStart = () => {
+  const handleDragStart = (e) => {
     setIsDragging(true);
+    e.dataTransfer.setData('text/plain', widgetId);
   }
 
   const handleDragEnd = () => {
