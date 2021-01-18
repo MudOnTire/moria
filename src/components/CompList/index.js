@@ -22,7 +22,7 @@ export default function CompList() {
           Button
         </Dragable>
         <Dragable className={styles.compItem}>
-          Table
+          Switch
         </Dragable>
       </div>
     </div>

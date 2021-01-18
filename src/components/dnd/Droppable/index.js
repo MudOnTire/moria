@@ -1,9 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-export default function Droppable() {
+import styles from './styles.module.scss'
+
+export default function Droppable({ children }) {
+
+  const [isDragOver, setIsDragOver] = useState(false);
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  }
+
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  }
+
+  const handleDragLeave = (e) => {
+    setIsDragOver(false);
+  }
+
+  const handleDragDrop = (e) => {
+    setIsDragOver(false);
+    console.log('drag drop');
+  }
+
   return (
-    <div>
-      
+    <div
+      className={`${styles.droppable} ${isDragOver ? styles.dragOver : ''}`}
+      onDragOver={handleDragOver}
+      onDragEnter={handleDragEnter}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDragDrop}
+    >
+      {children}
     </div>
   )
 }
