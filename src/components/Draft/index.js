@@ -18,7 +18,7 @@ export default function Draft() {
           {
             pageConfig?.length > 0 && pageConfig.map(c => {
               return (
-                <c.component />
+                <c.component key={c.id} />
               )
             })
           }

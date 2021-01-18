@@ -7,6 +7,7 @@ import {
 import { StoreProvider } from 'Src/store';
 import Editor from 'Src/pages/Editor';
 
+import 'antd/dist/antd.css';
 import 'Src/common/css/normalize.css';
 
 function App() {

@@ -10,13 +10,14 @@ export default function CompList() {
       {
         widgets && widgets.map(cate => {
           return (
-            <div className={styles.sec}>
+            <div className={styles.sec} key={cate.category}>
               <h4 className={styles.secTitle}>{cate.category}</h4>
               <div className={styles.secBody}>
                 {
                   cate.list && cate.list.map(w => {
                     return (
                       <Dragable
+                        key={w.id}
                         className={styles.compItem}
                         widgetId={w.id}
                       >
