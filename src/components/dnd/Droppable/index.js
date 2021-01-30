@@ -29,6 +29,7 @@ export default function Droppable({ children }) {
     if (!widgetId) return;
     const widget = queryWidget(widgetId);
     if (!widget) return;
+    console.log('drop', widget);
     dispatch({
       type: actions.UPDATE_PAGE_CONFIG,
       payload: [...pageConfig, widget]
