@@ -1,0 +1,14 @@
+.widgetsContainer {
+  position: relative;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.settingBtn {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  opacity: 0.8;
+  z-index: 10;
+}

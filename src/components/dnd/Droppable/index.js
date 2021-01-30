@@ -6,7 +6,7 @@ import styles from './styles.module.scss'
 
 export default function Droppable({ children }) {
   const store = useContext(context);
-  const { dispatch } = store
+  const { dispatch, pageConfig } = store
 
   const [isDragOver, setIsDragOver] = useState(false);
 
@@ -31,7 +31,7 @@ export default function Droppable({ children }) {
     if (!widget) return;
     dispatch({
       type: actions.UPDATE_PAGE_CONFIG,
-      payload: [widget]
+      payload: [...pageConfig, widget]
     });
   }
 
