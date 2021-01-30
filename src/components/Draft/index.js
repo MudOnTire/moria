@@ -15,7 +15,7 @@ export default function Draft() {
   return (
     <div className={styles.draft}>
       <Droppable>
-        <WidgetsContainer className={styles.header}>
+        <WidgetsContainer className={styles.header} id="header">
           {
             pageConfig?.length > 0 && pageConfig.map(c => {
               return (
