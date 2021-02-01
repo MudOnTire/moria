@@ -1,12 +1,20 @@
 import { Input, Select, Switch, TimePicker } from 'antd';
 import WidgetsContainer from 'Src/components/WidgetsContainer';
 
+const WIDGET_IDs = {
+  WIDGET_CONTAINER: 'WIDGET_CONTAINER',
+  FORM_INPUT: 'FORM_INPUT',
+  FORM_SELECT: 'FORM_SELECT',
+  FORM_SWITCH: 'FORM_SWITCH',
+  FORM_TIME_PICKER: 'FORM_TIME_PICKER'
+}
+
 const widgets = [
   {
     category: "Container",
     list: [
       {
-        widgetId: "widget-container",
+        widgetId: WIDGET_IDs.WIDGET_CONTAINER,
         name: "Widget Container",
         component: WidgetsContainer
       }
@@ -16,22 +24,22 @@ const widgets = [
     category: "Form Widgets",
     list: [
       {
-        widgetId: 'form-input',
+        widgetId: WIDGET_IDs.FORM_INPUT,
         name: "Input",
         component: Input
       },
       {
-        widgetId: 'form-select',
+        widgetId: WIDGET_IDs.FORM_SELECT,
         name: "Select",
         component: Select
       },
       {
-        widgetId: 'form-switch',
+        widgetId: WIDGET_IDs.FORM_SWITCH,
         name: "Switch ",
         component: Switch
       },
       {
-        widgetId: 'form-timepicker',
+        widgetId: WIDGET_IDs.FORM_TIME_PICKER,
         name: "Time Picker",
         component: TimePicker
       },
@@ -54,4 +62,4 @@ const queryWidget = (id) => {
 }
 
 export default widgets;
-export { queryWidget };
+export { queryWidget, WIDGET_IDs };

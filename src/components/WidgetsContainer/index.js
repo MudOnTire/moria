@@ -31,6 +31,7 @@ export default function WidgetsContainer({
 
   const handleSetting = (e) => {
     if (!config) return;
+    console.log('setting', config);
     dispatch({
       type: actions.SET_CURRENT_WIDGETCONFIG,
       payload: config
@@ -40,8 +41,6 @@ export default function WidgetsContainer({
   const handleWidgetDrop = (widgetId) => {
     if (!widgetId) return;
     const pageConfigCy = { ...pageConfig };
-    console.log('widget drop', widgetId, ' in', config.id);
-    console.log('config', config);
     const id = `${widgetId}_${new Date().valueOf()}`;
     if (!config.children) config.children = [];
     config.children.push({

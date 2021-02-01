@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import ContainerSettings from './components/ContainerSettings'
+import { WIDGET_IDs } from 'Src/config/widgets';
 
 import styles from './styles.module.scss';
 
@@ -23,7 +24,10 @@ export default function SettingDrawer() {
   return (
     <div className={`${styles.settingDrawer} ${currentWidgetConfig ? styles.visible : styles.hidden}`}>
       <div className={styles.content}>
-        <ContainerSettings />
+        {
+          currentWidgetConfig?.widgetId === WIDGET_IDs.WIDGET_CONTAINER &&
+          <ContainerSettings />
+        }
       </div>
       <Button
         type="text"
