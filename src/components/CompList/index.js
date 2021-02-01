@@ -17,9 +17,9 @@ export default function CompList() {
                   cate.list && cate.list.map(w => {
                     return (
                       <Dragable
-                        key={w.id}
+                        key={w.widgetId}
                         className={styles.compItem}
-                        widgetId={w.id}
+                        widgetId={w.widgetId}
                       >
                         {w.name}
                       </Dragable>

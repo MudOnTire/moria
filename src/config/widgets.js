@@ -6,7 +6,7 @@ const widgets = [
     category: "Container",
     list: [
       {
-        id: "widget-container",
+        widgetId: "widget-container",
         name: "Widget Container",
         component: WidgetsContainer
       }
@@ -16,22 +16,22 @@ const widgets = [
     category: "Form Widgets",
     list: [
       {
-        id: 'form-input',
+        widgetId: 'form-input',
         name: "Input",
         component: Input
       },
       {
-        id: 'form-select',
+        widgetId: 'form-select',
         name: "Select",
         component: Select
       },
       {
-        id: 'form-switch',
+        widgetId: 'form-switch',
         name: "Switch ",
         component: Switch
       },
       {
-        id: 'form-timepicker',
+        widgetId: 'form-timepicker',
         name: "Time Picker",
         component: TimePicker
       },
@@ -45,7 +45,7 @@ const queryWidget = (id) => {
   if (cache[id]) return cache[id];
   for (const category of widgets) {
     for (const widget of category.list) {
-      if (widget.id === id) {
+      if (widget.widgetId === id) {
         cache[id] = widget;
         return widget;
       }

@@ -7,7 +7,12 @@ import { queryWidget } from 'Src/config/widgets';
 
 import styles from './styles.module.scss';
 
-export default function WidgetsContainer({ id, className = '', children, ...rest }) {
+export default function WidgetsContainer({
+  className = '',
+  config = {},
+  children,
+  ...rest
+}) {
 
   const store = useContext(context);
   const { dispatch, configedContainerId, pageConfig } = store;
@@ -23,30 +28,25 @@ export default function WidgetsContainer({ id, className = '', children, ...rest
   }
 
   const handleSetting = (e) => {
-    if (!id) return;
+    if (!config.id) return;
     dispatch({
       type: actions.SET_CONFIG_CONTAINER,
-      payload: id
+      payload: config.id
     });
   }
 
   const handleWidgetDrop = (widgetId) => {
     if (!widgetId) return;
-    const widget = queryWidget(widgetId);
-    if (!widget) return;
     const pageConfigCy = { ...pageConfig };
-    let config = pageConfigCy;
-    console.log('page config', pageConfig);
-    const idPath = id.split('.');
-    while (idPath.length > 0) {
-      config = config[idPath.pop()];
-    }
-    console.log('widget drop', widgetId, ' in', id);
+    console.log('widget drop', widgetId, ' in', config.id);
     console.log('config', config);
-    const key = `${widget.id}_${new Date().valueOf()}`;
+    const id = `${widgetId}_${new Date().valueOf()}`;
+    if (!config.children) config.children = [];
     config.children.push({
-      ...widget,
-      key
+      id,
+      widgetId,
+      children: [],
+      settings: {}
     });
     dispatch({
       type: actions.UPDATE_PAGE_CONFIG,
@@ -72,6 +72,15 @@ export default function WidgetsContainer({ id, className = '', children, ...rest
       }
       <Droppable onDrop={handleWidgetDrop}>
         {children}
+        {
+          config?.children?.map(c => {
+            const widget = queryWidget(c.widgetId);
+            if (!widget) return null;
+            return (
+              <widget.component key={c.id} config={c} />
+            )
+          })
+        }
       </Droppable>
     </div>
   )

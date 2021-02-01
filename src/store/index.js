@@ -7,10 +7,10 @@ const actions = {
 
 const initialState = {
   pageConfig: {
-    root: {
-      children: [],
-      config: {}
-    }
+    id: 'root',
+    widgetId: 'widget-container', // 组件类型Id
+    children: [], // 子组件
+    settings: {} // 该组件的相关配置
   }, // 页面配置文件
   configedContainerId: '', // 正在被设置的widgets container id
   dispatch: () => { },

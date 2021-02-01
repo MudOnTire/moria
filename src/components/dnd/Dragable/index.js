@@ -9,6 +9,7 @@ export default function Dragable({ children, widgetId, className, style, ...res 
   const handleDragStart = (e) => {
     setIsDragging(true);
     e.dataTransfer.setData('text/plain', widgetId);
+    console.log('drag', widgetId);
   }
 
   const handleDragEnd = () => {

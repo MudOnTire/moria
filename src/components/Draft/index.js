@@ -12,14 +12,9 @@ export default function Draft() {
   console.log('page config', pageConfig);
 
   return (
-    <WidgetsContainer id="root" className={styles.draft}>
-      {
-        pageConfig?.length > 0 && pageConfig.map(c => {
-          return (
-            <c.component key={c.key} />
-          )
-        })
-      }
-    </WidgetsContainer>
+    <WidgetsContainer
+      className={styles.draft}
+      config={pageConfig}
+    />
   )
 }
