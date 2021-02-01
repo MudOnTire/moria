@@ -9,19 +9,19 @@ import styles from './styles.module.scss';
 export default function SettingDrawer() {
 
   const store = useContext(context);
-  const { dispatch, configedContainerId } = store;
+  const { dispatch, currentWidgetConfig } = store;
 
-  console.log('configedContainerId', configedContainerId);
+  console.log('currentWidgetConfig', currentWidgetConfig);
 
   const close = () => {
     dispatch({
-      type: actions.SET_CONFIG_CONTAINER,
+      type: actions.SET_CURRENT_WIDGETCONFIG,
       payload: null
     });
   }
 
   return (
-    <div className={`${styles.settingDrawer} ${configedContainerId ? styles.visible : styles.hidden}`}>
+    <div className={`${styles.settingDrawer} ${currentWidgetConfig ? styles.visible : styles.hidden}`}>
       <div className={styles.content}>
         <ContainerSettings />
       </div>

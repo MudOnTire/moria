@@ -2,11 +2,13 @@
   position: relative;
   min-height: 200px;
   display: flex;
-  border: 6px solid rgba(24, 144, 255, 0.3);
+  // border: 6px solid rgba(24, 144, 255, 0.3);
+  border: 6px solid #f0f2f7;
   margin: 10px;
 
   &:hover {
     cursor: pointer;
+    border: 6px dashed #f0f2f7;
   }
 }
 

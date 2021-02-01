@@ -15,7 +15,7 @@ export default function WidgetsContainer({
 }) {
 
   const store = useContext(context);
-  const { dispatch, configedContainerId, pageConfig } = store;
+  const { dispatch, currentWidgetConfig, pageConfig } = store;
 
   const [showSettingBtn, setShowSettingBtn] = useState(false);
 
@@ -30,10 +30,10 @@ export default function WidgetsContainer({
   }
 
   const handleSetting = (e) => {
-    if (!config.id) return;
+    if (!config) return;
     dispatch({
-      type: actions.SET_CONFIG_CONTAINER,
-      payload: config.id
+      type: actions.SET_CURRENT_WIDGETCONFIG,
+      payload: config
     });
   }
 

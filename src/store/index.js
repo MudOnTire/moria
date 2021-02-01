@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 
 const actions = {
   UPDATE_PAGE_CONFIG: 'UPDATE_PAGE_CONFIG', // 更新页面配置文件
-  SET_CONFIG_CONTAINER: 'SET_CONFIG_CONTAINER', // 设置正在被设置的widgets container id
+  SET_CURRENT_WIDGETCONFIG: 'SET_CURRENT_WIDGETCONFIG', // 设置正在被设置的widget的config
 }
 
 const initialState = {
@@ -12,7 +12,7 @@ const initialState = {
     children: [], // 子组件
     settings: {} // 该组件的相关配置
   }, // 页面配置文件
-  configedContainerId: '', // 正在被设置的widgets container id
+  currentWidgetConfig: '', // 正在被设置的widget的config
   dispatch: () => { },
 };
 
@@ -22,8 +22,8 @@ function reducer(state, action) {
     case actions.UPDATE_PAGE_CONFIG: {
       return { ...state, pageConfig: payload };
     }
-    case actions.SET_CONFIG_CONTAINER: {
-      return { ...state, configedContainerId: payload };
+    case actions.SET_CURRENT_WIDGETCONFIG: {
+      return { ...state, currentWidgetConfig: payload };
     }
     default:
       return state;
