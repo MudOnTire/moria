@@ -5,22 +5,22 @@ const widgets = [
     category: "Form Widgets",
     list: [
       {
-        id: '00-00',
+        id: 'form-input',
         name: "Input",
         component: Input
       },
       {
-        id: '00-01',
+        id: 'form-select',
         name: "Select",
         component: Select
       },
       {
-        id: '00-02',
+        id: 'form-switch',
         name: "Switch ",
         component: Switch
       },
       {
-        id: '00-03',
+        id: 'form-timepicker',
         name: "Time Picker",
         component: TimePicker
       },

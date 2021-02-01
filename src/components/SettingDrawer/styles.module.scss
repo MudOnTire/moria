@@ -18,8 +18,12 @@
   width: 0;
 }
 
+.content {
+  padding: 36px 8px 12px;
+}
+
 .closeBtn {
-  position: absolute;
+  position: absolute !important;
   top: 0;
   right: 0;
   color: #444;

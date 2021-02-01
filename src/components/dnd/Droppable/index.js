@@ -29,10 +29,10 @@ export default function Droppable({ children }) {
     if (!widgetId) return;
     const widget = queryWidget(widgetId);
     if (!widget) return;
-    console.log('drop', widget);
+    const key = `${widget.id}_${new Date().valueOf()}`;
     dispatch({
       type: actions.UPDATE_PAGE_CONFIG,
-      payload: [...pageConfig, widget]
+      payload: [...pageConfig, { ...widget, key }]
     });
   }
 
