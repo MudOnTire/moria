@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { WIDGET_IDs } from 'Src/config/widgets';
 
 const actions = {
   UPDATE_PAGE_CONFIG: 'UPDATE_PAGE_CONFIG', // 更新页面配置文件
@@ -8,7 +9,7 @@ const actions = {
 const initialState = {
   pageConfig: {
     id: 'root',
-    widgetId: 'widget-container', // 组件类型Id
+    widgetId: WIDGET_IDs.WIDGET_CONTAINER, // 组件类型Id
     children: [], // 子组件
     settings: {} // 该组件的相关配置
   }, // 页面配置文件
