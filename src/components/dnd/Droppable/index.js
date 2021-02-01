@@ -4,7 +4,7 @@ import { context, actions } from 'Src/store';
 
 import styles from './styles.module.scss'
 
-export default function Droppable({ children }) {
+export default function Droppable({ children, className = '', ...rest }) {
   const store = useContext(context);
   const { dispatch, pageConfig } = store
 
@@ -12,18 +12,22 @@ export default function Droppable({ children }) {
 
   const handleDragOver = (e) => {
     e.preventDefault();
+    e.stopPropagation();
   }
 
   const handleDragEnter = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setIsDragOver(true);
   }
 
   const handleDragLeave = (e) => {
+    e.stopPropagation();
     setIsDragOver(false);
   }
 
   const handleDragDrop = (e) => {
+    e.stopPropagation();
     setIsDragOver(false);
     const widgetId = e.dataTransfer.getData('text');
     if (!widgetId) return;
@@ -38,11 +42,12 @@ export default function Droppable({ children }) {
 
   return (
     <div
-      className={`${styles.droppable} ${isDragOver ? styles.dragOver : ''}`}
+      className={`${styles.droppable} ${isDragOver ? styles.dragOver : ''} ${className}`}
       onDragOver={handleDragOver}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDrop={handleDragDrop}
+      {...rest}
     >
       {children}
     </div>

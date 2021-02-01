@@ -1,5 +1,9 @@
 .widgetsContainer {
   position: relative;
+  min-height: 200px;
+  display: flex;
+  border: 1px solid #ccc;
+
   &:hover {
     cursor: pointer;
   }

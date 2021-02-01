@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Button } from 'antd';
+import Droppable from 'Src/components/dnd/Droppable';
 import { SettingFilled } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 
@@ -44,7 +45,9 @@ export default function WidgetsContainer({ id, className = '', children, ...rest
           onClick={handleSetting}
         />
       }
-      {children}
+      <Droppable>
+        {children}
+      </Droppable>
     </div>
   )
 }

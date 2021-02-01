@@ -13,9 +13,15 @@ export default function Draft() {
   console.log('page config', pageConfig);
 
   return (
-    <div className={styles.draft}>
-      <Droppable>
-        <WidgetsContainer className={styles.header} id="header">
+    <Droppable className={styles.draft}>
+      {
+        pageConfig?.length > 0 && pageConfig.map(c => {
+          return (
+            <c.component key={c.key} />
+          )
+        })
+      }
+      {/* <WidgetsContainer className={styles.header} id="header">
           {
             pageConfig?.length > 0 && pageConfig.map(c => {
               return (
@@ -23,8 +29,7 @@ export default function Draft() {
               )
             })
           }
-        </WidgetsContainer>
-      </Droppable>
-    </div>
+        </WidgetsContainer> */}
+    </Droppable>
   )
 }
