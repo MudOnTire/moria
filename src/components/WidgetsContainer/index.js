@@ -20,10 +20,12 @@ export default function WidgetsContainer({
   const [showSettingBtn, setShowSettingBtn] = useState(false);
 
   const handleMouseEnter = (e) => {
+    e.stopPropagation();
     setShowSettingBtn(true);
   }
 
   const handleMouseLeave = (e) => {
+    e.stopPropagation();
     setShowSettingBtn(false);
   }
 

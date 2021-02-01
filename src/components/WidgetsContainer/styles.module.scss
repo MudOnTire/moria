@@ -2,7 +2,8 @@
   position: relative;
   min-height: 200px;
   display: flex;
-  border: 1px solid #ccc;
+  border: 6px solid rgba(24, 144, 255, 0.3);
+  margin: 10px;
 
   &:hover {
     cursor: pointer;
