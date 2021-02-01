@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Button } from 'antd';
 import Droppable from 'Src/components/dnd/Droppable';
-import { SettingFilled } from '@ant-design/icons';
+import { SettingFilled, DeleteFilled } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import { queryWidget } from 'Src/config/widgets';
 
@@ -15,18 +15,18 @@ export default function WidgetsContainer({
 }) {
 
   const store = useContext(context);
-  const { dispatch, currentWidgetConfig, pageConfig } = store;
+  const { dispatch, pageConfig } = store;
 
-  const [showSettingBtn, setShowSettingBtn] = useState(false);
+  const [showActions, setShowActions] = useState(false);
 
   const handleMouseEnter = (e) => {
     e.stopPropagation();
-    setShowSettingBtn(true);
+    setShowActions(true);
   }
 
   const handleMouseLeave = (e) => {
     e.stopPropagation();
-    setShowSettingBtn(false);
+    setShowActions(false);
   }
 
   const handleSetting = (e) => {
@@ -36,6 +36,10 @@ export default function WidgetsContainer({
       type: actions.SET_CURRENT_WIDGETCONFIG,
       payload: config
     });
+  }
+
+  const handleDelete = (e) => {
+
   }
 
   const handleWidgetDrop = (widgetId) => {
@@ -63,13 +67,19 @@ export default function WidgetsContainer({
       {...rest}
     >
       {
-        showSettingBtn &&
-        <Button
-          type="primary"
-          className={styles.settingBtn}
-          icon={<SettingFilled />}
-          onClick={handleSetting}
-        />
+        showActions &&
+        <div className={styles.actions}>
+          <Button
+            type="text"
+            icon={<SettingFilled style={{ color: "#1890ff" }} />}
+            onClick={handleSetting}
+          />
+          <Button
+            type="text"
+            icon={<DeleteFilled style={{ color: '#f5222d' }} />}
+            onClick={handleDelete}
+          />
+        </div>
       }
       <Droppable onDrop={handleWidgetDrop}>
         {children}
