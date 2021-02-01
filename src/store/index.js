@@ -6,7 +6,12 @@ const actions = {
 }
 
 const initialState = {
-  pageConfig: [], // 页面配置文件
+  pageConfig: {
+    root: {
+      children: [],
+      config: {}
+    }
+  }, // 页面配置文件
   configedContainerId: '', // 正在被设置的widgets container id
   dispatch: () => { },
 };

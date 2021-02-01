@@ -4,7 +4,12 @@ import { context, actions } from 'Src/store';
 
 import styles from './styles.module.scss'
 
-export default function Droppable({ children, className = '', ...rest }) {
+export default function Droppable({
+  children,
+  className = '',
+  onDrop = () => { },
+  ...rest
+}) {
   const store = useContext(context);
   const { dispatch, pageConfig } = store
 
@@ -30,14 +35,7 @@ export default function Droppable({ children, className = '', ...rest }) {
     e.stopPropagation();
     setIsDragOver(false);
     const widgetId = e.dataTransfer.getData('text');
-    if (!widgetId) return;
-    const widget = queryWidget(widgetId);
-    if (!widget) return;
-    const key = `${widget.id}_${new Date().valueOf()}`;
-    dispatch({
-      type: actions.UPDATE_PAGE_CONFIG,
-      payload: [...pageConfig, { ...widget, key }]
-    });
+    onDrop(widgetId);
   }
 
   return (

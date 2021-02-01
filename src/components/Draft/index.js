@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import Droppable from 'Src/components/dnd/Droppable';
-import { context, actions } from 'Src/store';
+import { context } from 'Src/store';
 import WidgetsContainer from 'Src/components/WidgetsContainer';
 
 import styles from './styles.module.scss';
@@ -13,7 +12,7 @@ export default function Draft() {
   console.log('page config', pageConfig);
 
   return (
-    <Droppable className={styles.draft}>
+    <WidgetsContainer id="root" className={styles.draft}>
       {
         pageConfig?.length > 0 && pageConfig.map(c => {
           return (
@@ -21,15 +20,6 @@ export default function Draft() {
           )
         })
       }
-      {/* <WidgetsContainer className={styles.header} id="header">
-          {
-            pageConfig?.length > 0 && pageConfig.map(c => {
-              return (
-                <c.component key={c.key} />
-              )
-            })
-          }
-        </WidgetsContainer> */}
-    </Droppable>
+    </WidgetsContainer>
   )
 }
