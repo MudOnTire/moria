@@ -1,0 +1,26 @@
+.settingDrawer {
+  position: relative;
+  overflow: hidden;
+  background-color: #eee;
+  border-left: 1px dashed #ccc;
+  transition: all 0.5s;
+}
+
+.visible {
+  width: 320px;
+}
+
+.hidden {
+  .content {
+    display: none;
+  }
+
+  width: 0;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #444;
+}
