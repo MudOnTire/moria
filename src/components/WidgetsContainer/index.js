@@ -65,9 +65,14 @@ export default function WidgetsContainer({
     setIsDragOver(true);
   }
 
+  const handleDragOver = (e) => {
+    setIsDragOver(true);
+  }
+
   const handleDragLeave = (e) => {
     setIsDragOver(false);
   }
+
   return (
     <div
       className={`${styles.widgetsContainer} ${isDragOver ? styles.dragOver : ''} ${className}`}
@@ -92,6 +97,7 @@ export default function WidgetsContainer({
       }
       <Droppable
         onDragEnter={handleDragEnter}
+        onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleWidgetDrop}
       >

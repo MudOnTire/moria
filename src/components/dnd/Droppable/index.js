@@ -1,6 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { queryWidget } from 'Src/config/widgets';
-import { context, actions } from 'Src/store';
+import React, { useState } from 'react';
 
 import styles from './styles.module.scss'
 
@@ -9,17 +7,17 @@ export default function Droppable({
   className = '',
   onDrop = () => { },
   onDragEnter = () => { },
+  onDragOver = () => { },
   onDragLeave = () => { },
   ...rest
 }) {
-  const store = useContext(context);
-  const { dispatch, pageConfig } = store
-
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleDragOver = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsDragOver(true);
+    onDragOver(e);
   }
 
   const handleDragEnter = (e) => {
