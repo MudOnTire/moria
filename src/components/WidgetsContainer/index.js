@@ -18,6 +18,7 @@ export default function WidgetsContainer({
   const { dispatch, pageConfig } = store;
 
   const [showActions, setShowActions] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
 
   const handleMouseEnter = (e) => {
     e.stopPropagation();
@@ -43,6 +44,7 @@ export default function WidgetsContainer({
   }
 
   const handleWidgetDrop = (widgetId) => {
+    setIsDragOver(false);
     if (!widgetId) return;
     const pageConfigCy = { ...pageConfig };
     const id = `${widgetId}_${new Date().valueOf()}`;
@@ -59,9 +61,16 @@ export default function WidgetsContainer({
     });
   }
 
+  const handleDragEnter = (e) => {
+    setIsDragOver(true);
+  }
+
+  const handleDragLeave = (e) => {
+    setIsDragOver(false);
+  }
   return (
     <div
-      className={`${styles.widgetsContainer} ${className}`}
+      className={`${styles.widgetsContainer} ${isDragOver ? styles.dragOver : ''} ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       {...rest}
@@ -81,7 +90,11 @@ export default function WidgetsContainer({
           />
         </div>
       }
-      <Droppable onDrop={handleWidgetDrop}>
+      <Droppable
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDrop={handleWidgetDrop}
+      >
         {children}
         {
           config?.children?.map(c => {

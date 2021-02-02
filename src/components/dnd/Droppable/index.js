@@ -8,6 +8,8 @@ export default function Droppable({
   children,
   className = '',
   onDrop = () => { },
+  onDragEnter = () => { },
+  onDragLeave = () => { },
   ...rest
 }) {
   const store = useContext(context);
@@ -24,11 +26,13 @@ export default function Droppable({
     e.preventDefault();
     e.stopPropagation();
     setIsDragOver(true);
+    onDragEnter(e);
   }
 
   const handleDragLeave = (e) => {
     e.stopPropagation();
     setIsDragOver(false);
+    onDragLeave(e);
   }
 
   const handleDragDrop = (e) => {
@@ -47,10 +51,6 @@ export default function Droppable({
       onDrop={handleDragDrop}
       {...rest}
     >
-      {
-        isDragOver &&
-        <div className={styles.mask} />
-      }
       {children}
     </div>
   )
