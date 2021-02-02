@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import Droppable from 'Src/components/dnd/Droppable';
 import { SettingFilled, DeleteFilled } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
-import { queryWidget } from 'Src/config/widgets';
+import { queryWidget, WIDGET_IDs } from 'Src/config/widgets';
 
 import styles from './styles.module.scss';
 
@@ -34,13 +34,17 @@ export default function WidgetsContainer({
     if (!config) return;
     console.log('setting', config);
     dispatch({
-      type: actions.SET_CURRENT_WIDGETCONFIG,
+      type: actions.SET_CURRENT_WIDGET_CONFIG,
       payload: config
     });
   }
 
   const handleDelete = (e) => {
-
+    console.log('deleting', config);
+    dispatch({
+      type: actions.DELETE_WIDGET_CONFIG,
+      payload: config.id
+    });
   }
 
   const handleWidgetDrop = (widgetId) => {
@@ -49,12 +53,15 @@ export default function WidgetsContainer({
     const pageConfigCy = { ...pageConfig };
     const id = `${widgetId}_${new Date().valueOf()}`;
     if (!config.children) config.children = [];
-    config.children.push({
+    const child = {
       id,
       widgetId,
-      children: [],
       settings: {}
-    });
+    };
+    if (widgetId === WIDGET_IDs.WIDGET_CONTAINER) {
+      child.children = [];
+    }
+    config.children.push(child);
     dispatch({
       type: actions.UPDATE_PAGE_CONFIG,
       payload: pageConfigCy

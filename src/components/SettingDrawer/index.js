@@ -16,7 +16,7 @@ export default function SettingDrawer() {
 
   const close = () => {
     dispatch({
-      type: actions.SET_CURRENT_WIDGETCONFIG,
+      type: actions.SET_CURRENT_WIDGET_CONFIG,
       payload: null
     });
   }

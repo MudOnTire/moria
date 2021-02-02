@@ -1,9 +1,11 @@
 import React, { useReducer } from 'react';
 import { WIDGET_IDs } from 'Src/config/widgets';
+import { removeTreeItem } from 'Src/uitls/fns';
 
 const actions = {
   UPDATE_PAGE_CONFIG: 'UPDATE_PAGE_CONFIG', // 更新页面配置文件
-  SET_CURRENT_WIDGETCONFIG: 'SET_CURRENT_WIDGETCONFIG', // 设置正在被设置的widget的config
+  SET_CURRENT_WIDGET_CONFIG: 'SET_CURRENT_WIDGET_CONFIG', // 设置正在被设置的widget的config
+  DELETE_WIDGET_CONFIG: 'DELETE_WIDGET_CONFIG', // 设置正在被设置的widget的config
 }
 
 const initialState = {
@@ -23,8 +25,20 @@ function reducer(state, action) {
     case actions.UPDATE_PAGE_CONFIG: {
       return { ...state, pageConfig: payload };
     }
-    case actions.SET_CURRENT_WIDGETCONFIG: {
+    case actions.SET_CURRENT_WIDGET_CONFIG: {
       return { ...state, currentWidgetConfig: payload };
+    }
+    case actions.DELETE_WIDGET_CONFIG: {
+      // payload is id
+      if (payload === state.pageConfig.id) return state;
+      const updatedChildren = removeTreeItem(state.pageConfig.children, payload);
+      return {
+        ...state,
+        pageConfig: {
+          ...state.pageConfig,
+          children: updatedChildren
+        }
+      }
     }
     default:
       return state;
