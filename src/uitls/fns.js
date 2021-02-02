@@ -17,4 +17,15 @@ function removeTreeItem(tree, id) {
   return tree;
 }
 
-export { removeTreeItem }
+function throttle(fn, wait) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = new Date();
+    if (now - lastCall >= wait) {
+      fn.apply(this, args);
+      lastCall = now;
+    }
+  }
+}
+
+export { removeTreeItem, throttle }

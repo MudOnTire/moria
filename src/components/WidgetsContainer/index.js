@@ -4,6 +4,7 @@ import Droppable from 'Src/components/dnd/Droppable';
 import { SettingFilled, DeleteFilled } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import { queryWidget, WIDGET_IDs } from 'Src/config/widgets';
+import { throttle } from 'Src/uitls/fns';
 
 import styles from './styles.module.scss';
 
@@ -45,7 +46,6 @@ export default function WidgetsContainer({
 
   const handleSetting = (e) => {
     if (!config) return;
-    console.log('setting', config);
     dispatch({
       type: actions.SET_CURRENT_WIDGET_CONFIG,
       payload: config
@@ -53,7 +53,6 @@ export default function WidgetsContainer({
   }
 
   const handleDelete = (e) => {
-    console.log('deleting', config);
     dispatch({
       type: actions.DELETE_WIDGET_CONFIG,
       payload: config.id
@@ -127,7 +126,7 @@ export default function WidgetsContainer({
       }
       <Droppable
         onDragEnter={handleDragEnter}
-        onDragOver={handleDragOver}
+        onDragOver={throttle(handleDragOver, 1000)}
         onDragLeave={handleDragLeave}
         onDrop={handleWidgetDrop}
       >
