@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 import { Button } from 'antd';
 import Droppable from 'Src/components/dnd/Droppable';
 import { SettingFilled, DeleteFilled } from '@ant-design/icons';
@@ -15,19 +15,32 @@ export default function WidgetsContainer({
 }) {
 
   const store = useContext(context);
-  const { dispatch, pageConfig } = store;
+  const { dispatch, pageConfig, hoveringWidgetId } = store;
 
-  const [showActions, setShowActions] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleMouseEnter = (e) => {
     e.stopPropagation();
-    setShowActions(true);
+    dispatch({
+      type: actions.SET_HOVERING_WIDGET,
+      payload: config.id
+    });
+  }
+
+  const handleMouseOver = (e) => {
+    e.stopPropagation();
+    dispatch({
+      type: actions.SET_HOVERING_WIDGET,
+      payload: config.id
+    });
   }
 
   const handleMouseLeave = (e) => {
     e.stopPropagation();
-    setShowActions(false);
+    dispatch({
+      type: actions.SET_HOVERING_WIDGET,
+      payload: null
+    });
   }
 
   const handleSetting = (e) => {
@@ -50,7 +63,6 @@ export default function WidgetsContainer({
   const handleWidgetDrop = (widgetId) => {
     setIsDragOver(false);
     if (!widgetId) return;
-    const pageConfigCy = { ...pageConfig };
     const id = `${widgetId}_${new Date().valueOf()}`;
     if (!config.children) config.children = [];
     const child = {
@@ -64,7 +76,7 @@ export default function WidgetsContainer({
     config.children.push(child);
     dispatch({
       type: actions.UPDATE_PAGE_CONFIG,
-      payload: pageConfigCy
+      payload: pageConfig
     });
   }
 
@@ -80,15 +92,26 @@ export default function WidgetsContainer({
     setIsDragOver(false);
   }
 
+  const hovering = hoveringWidgetId === config.id;
+
+  const classes = useMemo(() => {
+    let res = styles.widgetsContainer;
+    if (isDragOver) res += ` ${styles.dragOver}`;
+    if (hoveringWidgetId === config.id) res += ` ${styles.hover}`;
+    if (className) res += ` ${className}`;
+    return res;
+  }, [config, className, isDragOver, hoveringWidgetId]);
+
   return (
     <div
-      className={`${styles.widgetsContainer} ${isDragOver ? styles.dragOver : ''} ${className}`}
+      className={classes}
       onMouseEnter={handleMouseEnter}
+      onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
       {...rest}
     >
       {
-        showActions &&
+        hovering &&
         <div className={styles.actions}>
           <Button
             type="text"
