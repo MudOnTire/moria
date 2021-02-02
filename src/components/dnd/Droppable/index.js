@@ -47,6 +47,10 @@ export default function Droppable({
       onDrop={handleDragDrop}
       {...rest}
     >
+      {
+        isDragOver &&
+        <div className={styles.mask} />
+      }
       {children}
     </div>
   )
