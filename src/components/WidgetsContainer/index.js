@@ -81,6 +81,27 @@ export default function WidgetsContainer({
     });
   }
 
+  /**
+   * Insert widget into children
+   */
+  const handleInsertWidget = (widgetId, index) => {
+    console.log('will insert ', widgetId, index);
+    const id = `${widgetId}_${new Date().valueOf()}`;
+    const child = {
+      id,
+      widgetId,
+      settings: {}
+    };
+    if (widgetId === WIDGET_IDs.WIDGET_CONTAINER) {
+      child.children = [];
+    }
+    config.children.splice(index, 0, child);
+    dispatch({
+      type: actions.UPDATE_PAGE_CONFIG,
+      payload: pageConfig
+    });
+  }
+
   const handleDragEnter = (e) => {
     setIsDragOver(true);
   }
@@ -146,12 +167,12 @@ export default function WidgetsContainer({
               <Fragment key={c.id}>
                 {
                   index === 0 &&
-                  <Divider />
+                  <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index) }} />
                 }
                 <widget.component config={c} />
                 {
                   index !== config.children.length - 1 &&
-                  <Divider />
+                  <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index + 1) }} />
                 }
               </Fragment>
             )

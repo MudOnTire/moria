@@ -23,7 +23,8 @@ export default function Divider({ onDrop = () => { } }) {
   const handleDrop = (e) => {
     e.stopPropagation();
     setIsDragOver(false);
-    onDrop(e);
+    const widgetId = e.dataTransfer.getData('text');
+    onDrop(widgetId);
   }
 
   return (
