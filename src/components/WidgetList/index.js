@@ -1,8 +1,25 @@
 import React from 'react';
-import WidgetItem from 'Src/components/WidgetList';
 import widgets from 'Src/config/widgets.js';
+import Dragable from 'Src/components/dnd/Dragable';
 
 import styles from './styles.module.scss';
+
+function WidgetItem({ widget = {} }) {
+
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData('text/plain', widget.widgetId);
+    console.log('drag', widget.widgetId);
+  }
+
+  return (
+    <Dragable
+      className={styles.widgetItem}
+      onDragStart={handleDragStart}
+    >
+      {widget.name}
+    </Dragable>
+  )
+}
 
 export default function WidgetList() {
   return (
