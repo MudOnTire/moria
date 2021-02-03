@@ -12,6 +12,7 @@ export default function Droppable({
   ...rest
 }) {
   const [isDragOver, setIsDragOver] = useState(false);
+  const [activeSensor, setActiveSensor] = useState(null);
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -40,6 +41,16 @@ export default function Droppable({
     onDrop(widgetId);
   }
 
+  const handleDragOverSensors = (direction) => {
+    if (!direction) return;
+    setActiveSensor(direction);
+  }
+
+  const handleDragLeaveSensors = (direction) => {
+    if (!direction) return;
+    setActiveSensor(null);
+  }
+
   return (
     <div
       className={`${styles.droppable} ${isDragOver ? styles.dragOver : ''} ${className}`}
@@ -50,6 +61,16 @@ export default function Droppable({
       {...rest}
     >
       {children}
+      <div
+        className={`${styles.sensor} ${styles.topSensor} ${activeSensor === 'top' ? styles.activeSensor : ''}`}
+        onDragOver={() => { handleDragOverSensors('top') }}
+        onDragLeave={() => { handleDragLeaveSensors('top') }}
+      />
+      <div
+        className={`${styles.sensor} ${styles.bottomSensor} ${activeSensor === 'bottom' ? styles.activeSensor : ''}`}
+        onDragOver={() => { handleDragOverSensors('bottom') }}
+        onDragLeave={() => { handleDragLeaveSensors('bottom') }}
+      />
     </div>
   )
 }
