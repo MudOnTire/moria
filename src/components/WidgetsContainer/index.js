@@ -170,10 +170,7 @@ export default function WidgetsContainer({
                   <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index) }} />
                 }
                 <widget.component config={c} />
-                {
-                  index !== config.children.length - 1 &&
-                  <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index + 1) }} />
-                }
+                <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index + 1) }} />
               </Fragment>
             )
           })
