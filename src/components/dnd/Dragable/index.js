@@ -13,13 +13,15 @@ export default function Dragable({
   const [isDragging, setIsDragging] = useState(false);
 
   const handleDragStart = (e) => {
+    e.stopPropagation();
     setIsDragging(true);
     onDragStart(e);
   }
 
-  const handleDragEnd = () => {
+  const handleDragEnd = (e) => {
+    e.stopPropagation();
     setIsDragging(false);
-    onDragStart(e);
+    onDragEnd(e);
   }
 
   return (

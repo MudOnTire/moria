@@ -103,7 +103,7 @@ export default function WidgetsContainer({
   }, [config, className, isDragOver, hoveringWidgetId]);
 
   return (
-    <div
+    <Dragable
       className={classes}
       onMouseEnter={handleMouseEnter}
       onMouseOver={handleMouseOver}
@@ -131,19 +131,17 @@ export default function WidgetsContainer({
         onDragLeave={handleDragLeave}
         onDrop={handleWidgetDrop}
       >
-        <Dragable>
-          {children}
-          {
-            config?.children?.map(c => {
-              const widget = queryWidget(c.widgetId);
-              if (!widget) return null;
-              return (
-                <widget.component key={c.id} config={c} />
-              )
-            })
-          }
-        </Dragable>
+        {children}
+        {
+          config?.children?.map(c => {
+            const widget = queryWidget(c.widgetId);
+            if (!widget) return null;
+            return (
+              <widget.component key={c.id} config={c} />
+            )
+          })
+        }
       </Droppable>
-    </div>
+    </Dragable>
   )
 }
