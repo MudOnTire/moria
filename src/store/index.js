@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { WIDGET_IDs } from 'Src/config/widgets';
+import WIDGET_IDs from 'Src/config/widgetIds';
 import { removeTreeItem } from 'Src/uitls/fns';
 
 const actions = {

@@ -1,34 +1,47 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   Form,
-  Select,
-  InputNumber,
-  Switch,
-  Radio,
-  Slider,
-  Button,
-  Upload,
-  Rate,
-  Checkbox,
-  Row,
-  Col,
+  Select
 } from 'antd';
+import WIDGET_IDs from 'Src/config/widgetIds';
+import defaultSettings from 'Src/config/widgetsDefault';
 
 const { Option } = Select;
 
-export default function ContainerSettings({ }) {
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+
+export default function ContainerSettings({ settings = {} }) {
+
+  const initialValues = useMemo(() => {
+    return {
+      ...defaultSettings[WIDGET_IDs.WIDGET_CONTAINER],
+      ...settings
+    }
+  }, [settings]);
+
+  const handleValuesChange = (changedValue, allValues) => {
+    console.log('value changed', changedValue, allValues);
+  }
+
   return (
-    <div>
+    <Form
+      {...layout}
+      name="basic"
+      initialValues={initialValues}
+      onValuesChange={handleValuesChange}
+    >
       <Form.Item
-        name="select"
         label="Flex direction"
-        hasFeedback
+        name="flexDirection"
       >
         <Select placeholder="Select a direction">
           <Option value="row">Row</Option>
           <Option value="column">Column</Option>
         </Select>
       </Form.Item>
-    </div>
+    </Form>
   )
 }

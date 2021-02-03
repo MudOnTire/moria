@@ -4,9 +4,11 @@ import Droppable from 'Src/components/dnd/Droppable';
 import Dragable from 'Src/components/dnd/Dragable';
 import { SettingFilled, DeleteFilled } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
-import { queryWidget, WIDGET_IDs } from 'Src/config/widgets';
+import WIDGET_IDs from 'Src/config/widgetIds';
+import { queryWidget } from 'Src/config/widgets';
 import { throttle, getTreeItemIndex } from 'Src/uitls/fns';
 import Divider from 'Src/components/dnd/Divider';
+import Content from './content';
 
 import styles from './styles.module.scss';
 
@@ -158,23 +160,24 @@ export default function WidgetsContainer({
         onDragLeave={handleDragLeave}
         onDrop={handleWidgetDrop}
       >
-        {children}
-        {
-          config?.children?.map((c, index) => {
-            const widget = queryWidget(c.widgetId);
-            if (!widget) return null;
-            return (
-              <Fragment key={c.id}>
-                {
-                  index === 0 &&
-                  <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index) }} />
-                }
-                <widget.component config={c} />
-                <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index + 1) }} />
-              </Fragment>
-            )
-          })
-        }
+        <Content settings={config.settings}>
+          {
+            config?.children?.map((c, index) => {
+              const widget = queryWidget(c.widgetId);
+              if (!widget) return null;
+              return (
+                <Fragment key={c.id}>
+                  {
+                    index === 0 &&
+                    <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index) }} />
+                  }
+                  <widget.component config={c} />
+                  <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index + 1) }} />
+                </Fragment>
+              )
+            })
+          }
+        </Content>
       </Droppable>
     </Dragable>
   )

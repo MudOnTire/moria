@@ -1,13 +1,6 @@
 import { Input, Select, Switch, TimePicker } from 'antd';
 import WidgetsContainer from 'Src/components/WidgetsContainer';
-
-const WIDGET_IDs = {
-  WIDGET_CONTAINER: 'WIDGET_CONTAINER',
-  FORM_INPUT: 'FORM_INPUT',
-  FORM_SELECT: 'FORM_SELECT',
-  FORM_SWITCH: 'FORM_SWITCH',
-  FORM_TIME_PICKER: 'FORM_TIME_PICKER'
-}
+import WIDGET_IDs from 'Src/config/widgetIds';
 
 const widgets = [
   {
