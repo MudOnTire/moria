@@ -1,6 +1,7 @@
 import React, { useState, useContext, useMemo } from 'react';
 import { Button } from 'antd';
 import Droppable from 'Src/components/dnd/Droppable';
+import Dragable from 'Src/components/dnd/Dragable';
 import { SettingFilled, DeleteFilled } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import { queryWidget, WIDGET_IDs } from 'Src/config/widgets';
@@ -130,16 +131,18 @@ export default function WidgetsContainer({
         onDragLeave={handleDragLeave}
         onDrop={handleWidgetDrop}
       >
-        {children}
-        {
-          config?.children?.map(c => {
-            const widget = queryWidget(c.widgetId);
-            if (!widget) return null;
-            return (
-              <widget.component key={c.id} config={c} />
-            )
-          })
-        }
+        <Dragable>
+          {children}
+          {
+            config?.children?.map(c => {
+              const widget = queryWidget(c.widgetId);
+              if (!widget) return null;
+              return (
+                <widget.component key={c.id} config={c} />
+              )
+            })
+          }
+        </Dragable>
       </Droppable>
     </div>
   )

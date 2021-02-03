@@ -1,5 +1,5 @@
 import React from 'react';
-import CompList from 'Src/components/CompList';
+import WidgetList from 'Src/components/WidgetList';
 import Draft from 'Src/components/Draft';
 import SettingDrawer from 'Src/components/SettingDrawer';
 
@@ -9,7 +9,7 @@ export default function Editor() {
 
   return (
     <div className={styles.editor}>
-      <CompList />
+      <WidgetList />
       <Draft />
       <SettingDrawer />
     </div>

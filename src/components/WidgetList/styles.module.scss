@@ -1,10 +1,10 @@
-.compList {
+.widgetList {
   padding: 12px;
   width: 320px;
   // border-right: 1px solid #ccc;
 }
 
-.secTitle{
+.secTitle {
   margin: 10px 0 10px;
 }
 
@@ -21,4 +21,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px dotted #ccc;
 }

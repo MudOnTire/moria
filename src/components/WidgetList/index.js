@@ -4,9 +4,15 @@ import widgets from 'Src/config/widgets.js';
 
 import styles from './styles.module.scss';
 
-export default function CompList() {
+export default function WidgetList() {
+
+  const handleDragStart = (e, widgetId) => {
+    e.dataTransfer.setData('text/plain', widgetId);
+    console.log('drag', widgetId);
+  }
+
   return (
-    <div className={styles.compList}>
+    <div className={styles.widgetList}>
       {
         widgets && widgets.map(cate => {
           return (
@@ -19,7 +25,7 @@ export default function CompList() {
                       <Dragable
                         key={w.widgetId}
                         className={styles.compItem}
-                        widgetId={w.widgetId}
+                        onDragStart={(e) => handleDragStart(e, w.widgetId)}
                       >
                         {w.name}
                       </Dragable>

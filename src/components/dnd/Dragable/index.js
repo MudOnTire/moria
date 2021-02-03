@@ -2,18 +2,24 @@ import React, { useState } from 'react'
 
 import styles from './styles.module.scss';
 
-export default function Dragable({ children, widgetId, className, style, ...res }) {
+export default function Dragable({
+  children,
+  className,
+  style,
+  onDragStart = () => { },
+  onDragEnd = () => { },
+  ...rest }) {
 
   const [isDragging, setIsDragging] = useState(false);
 
   const handleDragStart = (e) => {
     setIsDragging(true);
-    e.dataTransfer.setData('text/plain', widgetId);
-    console.log('drag', widgetId);
+    onDragStart(e);
   }
 
   const handleDragEnd = () => {
     setIsDragging(false);
+    onDragStart(e);
   }
 
   return (
@@ -22,7 +28,7 @@ export default function Dragable({ children, widgetId, className, style, ...res 
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       draggable="true"
-      {...res}
+      {...rest}
     >
       {children}
     </div>

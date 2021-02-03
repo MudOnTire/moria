@@ -1,9 +1,8 @@
 .draggable {
-  border: 1px dotted #ccc;
   cursor: pointer;
   position: relative;
 }
 
 .dragging {
-  border: 2px #52c41a solid;
+  border: 2px #52c41a solid !important;
 }
