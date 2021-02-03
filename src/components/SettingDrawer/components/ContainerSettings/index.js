@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useContext } from 'react';
 import {
   Form,
   Select
 } from 'antd';
 import WIDGET_IDs from 'Src/config/widgetIds';
 import defaultSettings from 'Src/config/widgetsDefault';
+import { context, actions } from 'Src/store';
 
 const { Option } = Select;
 
@@ -13,7 +14,9 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-export default function ContainerSettings({ settings = {} }) {
+export default function ContainerSettings({ id, settings = {} }) {
+  const store = useContext(context);
+  const { dispatch } = store;
 
   const initialValues = useMemo(() => {
     return {
@@ -24,6 +27,13 @@ export default function ContainerSettings({ settings = {} }) {
 
   const handleValuesChange = (changedValue, allValues) => {
     console.log('value changed', changedValue, allValues);
+    dispatch({
+      type: actions.UPDATE_WIDGET_SETTINGS,
+      payload: {
+        id,
+        settings: allValues
+      }
+    });
   }
 
   return (

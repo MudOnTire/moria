@@ -8,7 +8,9 @@ export default function Draft() {
 
   const store = useContext(context);
   const { pageConfig, dispatch } = store;
-  
+
+  console.log('pageConfig', pageConfig);
+
   return (
     <WidgetsContainer
       className={styles.draft}

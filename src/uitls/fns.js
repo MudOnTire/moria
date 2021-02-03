@@ -46,6 +46,33 @@ function getTreeItemIndex(tree, id) {
   return result;
 }
 
+/**
+ * Update tree item with payload
+ */
+function updateTreeItem(tree, id, payload) {
+
+  function traverse(subTree, id) {
+    for (let i = 0; i < subTree.length; i++) {
+      let node = subTree[i];
+      if (node.id === id) {
+        subTree[i] = {
+          ...node,
+          ...payload
+        }
+        break;
+      } else {
+        if (node.children) {
+          traverse(node.children, id);
+        }
+      }
+    }
+  }
+
+  traverse(tree, id);
+  return tree;
+}
+
+
 function throttle(fn, wait) {
   let lastCall = 0;
   return function (...args) {
@@ -57,4 +84,4 @@ function throttle(fn, wait) {
   }
 }
 
-export { removeTreeItem, getTreeItemIndex, throttle }
+export { removeTreeItem, getTreeItemIndex, updateTreeItem, throttle }

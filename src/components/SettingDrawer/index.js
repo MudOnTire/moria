@@ -26,7 +26,7 @@ export default function SettingDrawer() {
       <div className={styles.content}>
         {
           currentWidgetConfig?.widgetId === WIDGET_IDs.WIDGET_CONTAINER &&
-          <ContainerSettings settings={currentWidgetConfig.settings} />
+          <ContainerSettings id={currentWidgetConfig.id} settings={currentWidgetConfig.settings} />
         }
       </div>
       <Button

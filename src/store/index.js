@@ -1,12 +1,13 @@
 import React, { useReducer } from 'react';
 import WIDGET_IDs from 'Src/config/widgetIds';
-import { removeTreeItem } from 'Src/uitls/fns';
+import { removeTreeItem, updateTreeItem } from 'Src/uitls/fns';
 
 const actions = {
   UPDATE_PAGE_CONFIG: 'UPDATE_PAGE_CONFIG', // 更新页面配置文件
   SET_CURRENT_WIDGET_CONFIG: 'SET_CURRENT_WIDGET_CONFIG', // 设置正在被设置的widget的config
   DELETE_WIDGET_CONFIG: 'DELETE_WIDGET_CONFIG', // 删除widget的config
   SET_HOVERING_WIDGET: 'SET_HOVERING_WIDGET', // 设置当前hover的widget
+  UPDATE_WIDGET_SETTINGS: 'UPDATE_WIDGET_SETTINGS', // 设置widget的settings
 }
 
 const initialState = {
@@ -44,6 +45,26 @@ function reducer(state, action) {
     }
     case actions.SET_HOVERING_WIDGET: {
       return { ...state, hoveringWidgetId: payload }
+    }
+    case actions.UPDATE_WIDGET_SETTINGS: {
+      const { id, settings } = payload;
+      if (id === 'root') {
+        return {
+          ...state,
+          pageConfig: {
+            ...state.pageConfig,
+            settings
+          }
+        }
+      }
+      const updated = updateTreeItem(state.pageConfig.children, id, { settings });
+      return {
+        ...state,
+        pageConfig: {
+          ...state.pageConfig,
+          children: updated
+        }
+      }
     }
     default:
       return state;
