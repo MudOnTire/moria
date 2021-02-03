@@ -149,7 +149,10 @@ export default function WidgetsContainer({
                   <Divider />
                 }
                 <widget.component config={c} />
-                <Divider />
+                {
+                  index !== config.children.length - 1 &&
+                  <Divider />
+                }
               </Fragment>
             )
           })

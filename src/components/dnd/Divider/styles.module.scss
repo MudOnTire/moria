@@ -1,11 +1,11 @@
 .divider {
-  height: 10px;
-  // border: 1px dashed #eee;
-  transition: all 0.5s;
+  height: 20px;
+  transition: all 0.3s;
+  cursor: pointer !important;
+  margin: 0 10px;
 }
 
 .dragOver {
-  margin: 0 10px;
-  height: 100px;
+  height: 200px;
   border: 5px dashed #b5f5ec;
 }

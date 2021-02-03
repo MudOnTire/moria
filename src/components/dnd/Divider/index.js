@@ -5,8 +5,13 @@ export default function Divider({ onDrop = () => { } }) {
 
   const [isDragOver, setIsDragOver] = useState(false);
 
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+  }
+
   const handleDragOver = (e) => {
     e.stopPropagation();
+    e.preventDefault();
     setIsDragOver(true);
   }
 
@@ -24,6 +29,7 @@ export default function Divider({ onDrop = () => { } }) {
   return (
     <div
       className={`${styles.divider} ${isDragOver ? styles.dragOver : ''}`}
+      onDragEnter={handleDragEnter}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
