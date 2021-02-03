@@ -1,11 +1,12 @@
-import React, { useState, useContext, useMemo } from 'react';
+import React, { useState, useContext, useMemo, Fragment } from 'react';
 import { Button } from 'antd';
 import Droppable from 'Src/components/dnd/Droppable';
 import Dragable from 'Src/components/dnd/Dragable';
 import { SettingFilled, DeleteFilled } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import { queryWidget, WIDGET_IDs } from 'Src/config/widgets';
-import { throttle } from 'Src/uitls/fns';
+import { throttle, getTreeItemIndex } from 'Src/uitls/fns';
+import Divider from 'Src/components/dnd/Divider';
 
 import styles from './styles.module.scss';
 
@@ -108,6 +109,11 @@ export default function WidgetsContainer({
       onMouseEnter={handleMouseEnter}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
+      onClick={(e) => {
+        e.stopPropagation();
+        const index = getTreeItemIndex(pageConfig.children, config.id)
+        console.log(config.id, 'siblingIndex', index);
+      }}
       {...rest}
     >
       {
@@ -133,11 +139,18 @@ export default function WidgetsContainer({
       >
         {children}
         {
-          config?.children?.map(c => {
+          config?.children?.map((c, index) => {
             const widget = queryWidget(c.widgetId);
             if (!widget) return null;
             return (
-              <widget.component key={c.id} config={c} />
+              <Fragment key={c.id}>
+                {
+                  index === 0 &&
+                  <Divider />
+                }
+                <widget.component config={c} />
+                <Divider />
+              </Fragment>
             )
           })
         }

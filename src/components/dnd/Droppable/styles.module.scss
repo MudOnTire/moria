@@ -1,25 +1,4 @@
-$sensorHeight: 4px;
-
 .droppable {
   flex: 1;
   position: relative;
-}
-
-.sensor {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: $sensorHeight;
-}
-
-.topSensor {
-  top: -$sensorHeight - 10px;
-}
-
-.bottomSensor {
-  bottom: -$sensorHeight - 10px;
-}
-
-.activeSensor {
-  background-color: lightgreen;
 }
