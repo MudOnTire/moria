@@ -132,11 +132,6 @@ export default function WidgetsContainer({
       onMouseEnter={handleMouseEnter}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
-      onClick={(e) => {
-        e.stopPropagation();
-        const index = getTreeItemIndex(pageConfig.children, config.id)
-        console.log(config.id, 'siblingIndex', index);
-      }}
       {...rest}
     >
       {

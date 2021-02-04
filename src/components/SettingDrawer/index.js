@@ -12,8 +12,6 @@ export default function SettingDrawer() {
   const store = useContext(context);
   const { dispatch, currentWidgetConfig } = store;
 
-  console.log('currentWidgetConfig', currentWidgetConfig);
-
   const close = () => {
     dispatch({
       type: actions.SET_CURRENT_WIDGET_CONFIG,

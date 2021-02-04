@@ -1,5 +1,8 @@
 .settingDrawer {
-  position: relative;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
   overflow: hidden;
   background-color: #f0f2f7;
   transition: all 0.5s;

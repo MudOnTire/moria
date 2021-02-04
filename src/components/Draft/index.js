@@ -7,13 +7,13 @@ import styles from './styles.module.scss';
 export default function Draft() {
 
   const store = useContext(context);
-  const { pageConfig, dispatch } = store;
+  const { pageConfig, currentWidgetConfig } = store;
 
   console.log('pageConfig', pageConfig);
 
   return (
     <WidgetsContainer
-      className={styles.draft}
+      className={`${styles.draft} ${currentWidgetConfig && styles.showSettingDrawer}`}
       config={pageConfig}
     />
   )

@@ -1,6 +1,7 @@
 import { Input, Select, Switch, TimePicker } from 'antd';
 import WidgetsContainer from 'Src/components/WidgetsContainer';
 import WIDGET_IDs from 'Src/config/widgetIds';
+import { Image } from 'Src/widgets';
 
 const widgets = [
   {
@@ -10,6 +11,16 @@ const widgets = [
         widgetId: WIDGET_IDs.WIDGET_CONTAINER,
         name: "Widget Container",
         component: WidgetsContainer
+      }
+    ]
+  },
+  {
+    category: "Data Display",
+    list: [
+      {
+        widgetId: WIDGET_IDs.DATA_DISPLAY_IMAGE,
+        name: "Image",
+        component: Image
       }
     ]
   },
