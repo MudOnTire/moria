@@ -1,4 +1,4 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo, useContext, useEffect } from 'react';
 import {
   Form,
   Select
@@ -18,12 +18,20 @@ export default function ContainerSettings({ id, settings = {} }) {
   const store = useContext(context);
   const { dispatch } = store;
 
+  const [form] = Form.useForm();
+
   const initialValues = useMemo(() => {
     return {
       ...defaultSettings[WIDGET_IDs.WIDGET_CONTAINER],
       ...settings
     }
   }, [settings]);
+
+  useEffect(() => {
+    form.resetFields();
+  }, [settings]);
+
+  console.log('initialValues', initialValues);
 
   const handleValuesChange = (changedValue, allValues) => {
     console.log('value changed', changedValue, allValues);
@@ -39,6 +47,7 @@ export default function ContainerSettings({ id, settings = {} }) {
   return (
     <Form
       {...layout}
+      form={form}
       name="basic"
       initialValues={initialValues}
       onValuesChange={handleValuesChange}
