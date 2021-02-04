@@ -9,10 +9,12 @@ export default function Draft() {
   const store = useContext(context);
   const { pageConfig, currentWidgetConfig } = store;
 
-  console.log('pageConfig', pageConfig);
 
   return (
     <WidgetsContainer
+      onDoubleClick={() => {
+        console.log('pageConfig', pageConfig);
+      }}
       className={`${styles.draft} ${currentWidgetConfig && styles.showSettingDrawer}`}
       config={pageConfig}
     />

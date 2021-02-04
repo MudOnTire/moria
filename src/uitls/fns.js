@@ -18,6 +18,74 @@ function removeTreeItem(tree, id) {
 }
 
 /**
+ * Get tree item
+ */
+function getTreeItem(tree, id) {
+
+  let result;
+
+  function traverse(subTree, id, parentId) {
+    for (let i = 0; i < subTree.length; i++) {
+      const node = subTree[i];
+      if (node.id === id) {
+        result = {
+          item: node,
+          parentId
+        }
+      } else {
+        if (node.children) {
+          traverse(node.children, id, node.id);
+        }
+      }
+    }
+  }
+
+  traverse(tree, id, 'root');
+  return result;
+}
+
+/**
+ * 移动widget到其他container
+ */
+function moveTreeItem(tree, targetId, toId) {
+
+  const treeItem = getTreeItem(tree, targetId);
+  if (!treeItem) return;
+  const { item, parentId } = treeItem;
+
+  if (parentId === toId) return;
+
+  if (parentId === 'root') {
+    tree.splice(tree.indexOf(item), 1);
+  }
+
+  if (toId === 'root') {
+    tree.push(item);
+  }
+
+  function traverse(subTree) {
+    for (let i = 0; i < subTree.length; i++) {
+      const node = subTree[i];
+      if (node.id === parentId) {
+        const targetIndex = node.children.indexOf(item);
+        node.children.splice(targetIndex, 1);
+        if (toId === 'root') {
+          return;
+        }
+      } else if (node.id === toId) {
+        node.children.push(item);
+      } else {
+        if (node.children) {
+          traverse(node.children);
+        }
+      }
+    }
+  }
+
+  traverse(tree);
+}
+
+/**
  * Get tree item index ammount siblings
  */
 function getTreeItemIndex(tree, id) {
@@ -84,4 +152,4 @@ function throttle(fn, wait) {
   }
 }
 
-export { removeTreeItem, getTreeItemIndex, updateTreeItem, throttle }
+export { removeTreeItem, getTreeItem, getTreeItemIndex, moveTreeItem, updateTreeItem, throttle }

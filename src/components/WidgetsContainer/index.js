@@ -6,7 +6,7 @@ import { SettingFilled, DeleteFilled } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import WIDGET_IDs from 'Src/config/widgetIds';
 import { queryWidget } from 'Src/config/widgets';
-import { throttle, getTreeItemIndex } from 'Src/uitls/fns';
+import { throttle, getTreeItem, moveTreeItem } from 'Src/uitls/fns';
 import Divider from 'Src/components/dnd/Divider';
 import Content from './content';
 
@@ -63,8 +63,12 @@ export default function WidgetsContainer({
     });
   }
 
+  /**
+   * Drop widget class or widget instance 
+   */
   const handleWidgetDrop = ({ type, id }) => {
     if (!type || !id) return;
+    console.log('will drop', type, id);
     setIsDragOver(false);
     if (type === 'widgetClass') {
       const widgetId = id;
@@ -85,7 +89,11 @@ export default function WidgetsContainer({
       });
     }
     if (type === 'widgetInstance') {
-
+      moveTreeItem(pageConfig.children, id, config.id);
+      dispatch({
+        type: actions.UPDATE_PAGE_CONFIG,
+        payload: pageConfig
+      });
     }
   }
 
@@ -112,7 +120,7 @@ export default function WidgetsContainer({
       });
     }
     if (type === 'widgetInstance') {
-
+      console.log('will insert', type, id);
     }
   }
 
