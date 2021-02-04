@@ -9,6 +9,7 @@ import Editor from 'Src/pages/Editor';
 
 import 'antd/dist/antd.css';
 import 'Src/common/css/normalize.css';
+import 'Src/common/scss/index.scss';
 
 function App() {
   return (
