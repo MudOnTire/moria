@@ -36,8 +36,8 @@ export default function Droppable({
   const handleDragDrop = (e) => {
     e.stopPropagation();
     setIsDragOver(false);
-    const widgetId = e.dataTransfer.getData('text');
-    onDrop(widgetId);
+    const data = e.dataTransfer.getData('text') || {};
+    onDrop(JSON.parse(data));
   }
 
   return (

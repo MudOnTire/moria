@@ -63,45 +63,57 @@ export default function WidgetsContainer({
     });
   }
 
-  const handleWidgetDrop = (widgetId) => {
+  const handleWidgetDrop = ({ type, id }) => {
+    if (!type || !id) return;
     setIsDragOver(false);
-    if (!widgetId) return;
-    const id = `${widgetId}_${new Date().valueOf()}`;
-    if (!config.children) config.children = [];
-    const child = {
-      id,
-      widgetId,
-      settings: {}
-    };
-    if (widgetId === WIDGET_IDs.WIDGET_CONTAINER) {
-      child.children = [];
+    if (type === 'widgetClass') {
+      const widgetId = id;
+      const newiId = `${widgetId}_${new Date().valueOf()}`;
+      if (!config.children) config.children = [];
+      const child = {
+        id: newiId,
+        widgetId,
+        settings: {}
+      };
+      if (widgetId === WIDGET_IDs.WIDGET_CONTAINER) {
+        child.children = [];
+      }
+      config.children.push(child);
+      dispatch({
+        type: actions.UPDATE_PAGE_CONFIG,
+        payload: pageConfig
+      });
     }
-    config.children.push(child);
-    dispatch({
-      type: actions.UPDATE_PAGE_CONFIG,
-      payload: pageConfig
-    });
+    if (type === 'widgetInstance') {
+
+    }
   }
 
   /**
    * Insert widget into children
    */
-  const handleInsertWidget = (widgetId, index) => {
-    console.log('will insert ', widgetId, index);
-    const id = `${widgetId}_${new Date().valueOf()}`;
-    const child = {
-      id,
-      widgetId,
-      settings: {}
-    };
-    if (widgetId === WIDGET_IDs.WIDGET_CONTAINER) {
-      child.children = [];
+  const handleInsertWidget = ({ type, id }, index) => {
+    if (!type || !id) return;
+    if (type === 'widgetClass') {
+      const widgetId = id;
+      const newId = `${widgetId}_${new Date().valueOf()}`;
+      const child = {
+        id: newId,
+        widgetId,
+        settings: {}
+      };
+      if (widgetId === WIDGET_IDs.WIDGET_CONTAINER) {
+        child.children = [];
+      }
+      config.children.splice(index, 0, child);
+      dispatch({
+        type: actions.UPDATE_PAGE_CONFIG,
+        payload: pageConfig
+      });
     }
-    config.children.splice(index, 0, child);
-    dispatch({
-      type: actions.UPDATE_PAGE_CONFIG,
-      payload: pageConfig
-    });
+    if (type === 'widgetInstance') {
+
+    }
   }
 
   const handleDragEnter = (e) => {
@@ -166,13 +178,13 @@ export default function WidgetsContainer({
                     index === 0 &&
                     <Divider
                       containerSettings={config.settings}
-                      onDrop={(widgetId) => { handleInsertWidget(widgetId, index) }}
+                      onDrop={data => { handleInsertWidget(data, index) }}
                     />
                   }
                   <widget.component config={c} />
                   <Divider
                     containerSettings={config.settings}
-                    onDrop={(widgetId) => { handleInsertWidget(widgetId, index + 1) }}
+                    onDrop={data => { handleInsertWidget(data, index + 1) }}
                   />
                 </Fragment>
               )

@@ -7,8 +7,11 @@ import styles from './styles.module.scss';
 function WidgetItem({ widget = {} }) {
 
   const handleDragStart = (e) => {
-    e.dataTransfer.setData('text/plain', widget.widgetId);
-    console.log('drag', widget.widgetId);
+    const data = {
+      type: 'widgetClass',
+      id: widget.widgetId,
+    }
+    e.dataTransfer.setData('text/plain', JSON.stringify(data));
   }
 
   return (
