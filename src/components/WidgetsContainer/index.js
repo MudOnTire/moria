@@ -6,7 +6,7 @@ import { SettingFilled, DeleteFilled } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import WIDGET_IDs from 'Src/config/widgetIds';
 import { queryWidget } from 'Src/config/widgets';
-import { throttle, getTreeItem, moveTreeItem } from 'Src/uitls/fns';
+import { throttle, getTreeItem, moveTreeItem, insertTreeItem } from 'Src/uitls/fns';
 import Divider from 'Src/components/dnd/Divider';
 import Content from './content';
 
@@ -102,6 +102,7 @@ export default function WidgetsContainer({
    */
   const handleInsertWidget = ({ type, id }, index) => {
     if (!type || !id) return;
+    console.log('will insert', type, id);
     if (type === 'widgetClass') {
       const widgetId = id;
       const newId = `${widgetId}_${new Date().valueOf()}`;
@@ -120,8 +121,20 @@ export default function WidgetsContainer({
       });
     }
     if (type === 'widgetInstance') {
-      console.log('will insert', type, id);
+      insertTreeItem(pageConfig.children, id, config.id, index);
+      dispatch({
+        type: actions.UPDATE_PAGE_CONFIG,
+        payload: pageConfig
+      });
     }
+  }
+
+  const handleDragStart = (e)=>{
+    const data = {
+      type: 'widgetInstance',
+      id: config.id,
+    }
+    e.dataTransfer.setData('text/plain', JSON.stringify(data));
   }
 
   const handleDragEnter = (e) => {
@@ -152,6 +165,7 @@ export default function WidgetsContainer({
       onMouseEnter={handleMouseEnter}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
+      onDragStart={handleDragStart}
       {...rest}
     >
       {

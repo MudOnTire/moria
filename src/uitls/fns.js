@@ -44,40 +44,99 @@ function getTreeItem(tree, id) {
   return result;
 }
 
-/**
- * 移动widget到其他container
- */
 function moveTreeItem(tree, targetId, toId) {
+  // 自己不能往自己移动
+  if (targetId === toId) return;
 
   const treeItem = getTreeItem(tree, targetId);
   if (!treeItem) return;
   const { item, parentId } = treeItem;
 
+  // 不能在同一个container里面移动
   if (parentId === toId) return;
+
+  let removed = false;
+  let added = false;
 
   if (parentId === 'root') {
     tree.splice(tree.indexOf(item), 1);
+    removed = true;
   }
 
   if (toId === 'root') {
     tree.push(item);
+    added = true;
   }
+
+  function traverse(subTree) {
+    if (removed && added) return;
+    for (let i = 0; i < subTree.length; i++) {
+      if (removed && added) return;
+      const node = subTree[i];
+      if (node.id === parentId) {
+        const targetIndex = node.children.indexOf(item);
+        node.children.splice(targetIndex, 1);
+        removed = true;
+      }
+      if (node.id === toId) {
+        node.children.push(item);
+        added = true;
+      }
+      if (node.children && (!removed || !added)) {
+        traverse(node.children);
+      }
+    }
+  }
+
+  traverse(tree);
+}
+
+function arrayMoveItemToIndex(array, item, toIndex) {
+  const itemCopy = { ...item }
+  array.splice(toIndex, 0, itemCopy);
+  array.splice(array.indexOf(item), 1);
+}
+
+/**
+ * 插入widget到container指定index
+ */
+function insertTreeItem(tree, targetId, toId, toIndex) {
+  const treeItem = getTreeItem(tree, targetId);
+  if (!treeItem) return;
+  const { item, parentId } = treeItem;
+
+  // 在root中平行移动
+  if (parentId === toId && parentId === 'root') {
+    arrayMoveItemToIndex(tree, item, toIndex);
+    return;
+  }
+
+  let removed = false;
+  let added = false;
 
   function traverse(subTree) {
     for (let i = 0; i < subTree.length; i++) {
       const node = subTree[i];
       if (node.id === parentId) {
-        const targetIndex = node.children.indexOf(item);
-        node.children.splice(targetIndex, 1);
-        if (toId === 'root') {
+        if (node.id === toId) {
+          arrayMoveItemToIndex(node.children, item, toIndex);
           return;
+        } else {
+          const targetIndex = node.children.indexOf(item);
+          node.children.splice(targetIndex, 1);
+          removed = true;
+          if (toId === 'root') {
+            tree.splice(toIndex, 0, item);
+            return;
+          }
         }
-      } else if (node.id === toId) {
-        node.children.push(item);
-      } else {
-        if (node.children) {
-          traverse(node.children);
-        }
+      }
+      if (node.id === toId) {
+        node.children.splice(toIndex, 0, item);
+        added = true;
+      }
+      if (node.children && (!removed || !added)) {
+        traverse(node.children);
       }
     }
   }
@@ -152,4 +211,12 @@ function throttle(fn, wait) {
   }
 }
 
-export { removeTreeItem, getTreeItem, getTreeItemIndex, moveTreeItem, updateTreeItem, throttle }
+export {
+  removeTreeItem,
+  getTreeItem,
+  getTreeItemIndex,
+  moveTreeItem,
+  insertTreeItem,
+  updateTreeItem,
+  throttle
+}
