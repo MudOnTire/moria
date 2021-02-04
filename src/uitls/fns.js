@@ -114,8 +114,20 @@ function insertTreeItem(tree, targetId, toId, toIndex) {
   let removed = false;
   let added = false;
 
+  if (parentId === 'root') {
+    tree.splice(tree.indexOf(item), 1);
+    removed = true;
+  }
+
+  if (toId === 'root') {
+    tree.splice(toIndex, 0, item);
+    added = true;
+  }
+
   function traverse(subTree) {
+    if (removed && added) return;
     for (let i = 0; i < subTree.length; i++) {
+      if (removed && added) return;
       const node = subTree[i];
       if (node.id === parentId) {
         if (node.id === toId) {
@@ -125,10 +137,6 @@ function insertTreeItem(tree, targetId, toId, toIndex) {
           const targetIndex = node.children.indexOf(item);
           node.children.splice(targetIndex, 1);
           removed = true;
-          if (toId === 'root') {
-            tree.splice(toIndex, 0, item);
-            return;
-          }
         }
       }
       if (node.id === toId) {
