@@ -169,10 +169,16 @@ export default function WidgetsContainer({
                 <Fragment key={c.id}>
                   {
                     index === 0 &&
-                    <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index) }} />
+                    <Divider
+                      containerSettings={config.settings}
+                      onDrop={(widgetId) => { handleInsertWidget(widgetId, index) }}
+                    />
                   }
                   <widget.component config={c} />
-                  <Divider onDrop={(widgetId) => { handleInsertWidget(widgetId, index + 1) }} />
+                  <Divider
+                    containerSettings={config.settings}
+                    onDrop={(widgetId) => { handleInsertWidget(widgetId, index + 1) }}
+                  />
                 </Fragment>
               )
             })

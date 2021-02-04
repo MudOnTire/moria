@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
 
-export default function Divider({ onDrop = () => { } }) {
+export default function Divider({ containerSettings = {}, onDrop = () => { } }) {
 
   const [isDragOver, setIsDragOver] = useState(false);
 
@@ -29,7 +29,7 @@ export default function Divider({ onDrop = () => { } }) {
 
   return (
     <div
-      className={`${styles.divider} ${isDragOver ? styles.dragOver : ''}`}
+      className={`${styles.divider} ${isDragOver ? styles.dragOver : ''} ${containerSettings.flexDirection === 'row' ? styles.vertical : ''}`}
       onDragEnter={handleDragEnter}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}

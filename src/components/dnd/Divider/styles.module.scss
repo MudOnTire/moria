@@ -2,10 +2,14 @@
   height: 20px;
   transition: all 0.3s;
   cursor: pointer !important;
-  margin: 0 10px;
 }
 
 .dragOver {
   height: 200px;
   border: 5px dashed #b5f5ec;
+}
+
+.vertical {
+  height: auto !important;
+  width: 20px !important;
 }
