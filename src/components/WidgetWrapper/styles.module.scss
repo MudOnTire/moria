@@ -1,6 +1,7 @@
 $borderWidth: 3px;
 
 .widgetWrapper {
+  max-width: 100%;
   border: $borderWidth dashed transparent;
 }
 
