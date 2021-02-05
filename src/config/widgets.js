@@ -1,6 +1,6 @@
 import WidgetsContainer from 'Src/components/WidgetsContainer';
 import WIDGET_IDs from 'Src/config/widgetIds';
-import { Image, Carousel } from 'Src/widgets';
+import { Image, Carousel, Table } from 'Src/widgets';
 
 const widgets = [
   {
@@ -25,6 +25,11 @@ const widgets = [
         widgetId: WIDGET_IDs.DATA_DISPLAY_CAROUSEL,
         name: "Carousel",
         component: Carousel
+      },
+      {
+        widgetId: WIDGET_IDs.DATA_DISPLAY_Table,
+        name: "Table",
+        component: Table
       },
     ]
   }
