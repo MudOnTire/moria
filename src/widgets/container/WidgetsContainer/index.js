@@ -118,6 +118,7 @@ export default function WidgetsContainer({
         onDragOver={throttle(handleDragOver, 1000)}
         onDragLeave={handleDragLeave}
         onDrop={handleWidgetDrop}
+        onMouseUp={() => { setIsDragOver(false) }}
       >
         <Content settings={config.settings}>
           {
