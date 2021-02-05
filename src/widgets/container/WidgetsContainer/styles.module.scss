@@ -1,17 +1,14 @@
 $borderWidth: 5px;
 
 .widgetsContainer {
+  border-width: $borderWidth;
   position: relative;
   min-height: 200px;
   display: flex;
-  border: $borderWidth solid #f0f2f7 !important;
+  border-style: solid;
+  border-color: #f0f2f7;
   padding: 10px;
   flex: 1;
-}
-
-.hover {
-  cursor: pointer;
-  border: $borderWidth dashed #91d5ff !important;
 }
 
 .actions {
@@ -23,5 +20,6 @@ $borderWidth: 5px;
 }
 
 .dragOver {
-  border: $borderWidth dashed #b5f5ec !important;
+  border-style: dashed !important;
+  border-color: #b5f5ec !important;
 }

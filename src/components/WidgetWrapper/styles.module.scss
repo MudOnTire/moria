@@ -1,13 +1,21 @@
 $borderWidth: 3px;
 
 .widgetWrapper {
+  border-width: $borderWidth;
+  border-style: dashed;
+  border-color: transparent;
   max-width: 100%;
-  border: $borderWidth dashed transparent;
 }
 
 .hover {
   cursor: pointer;
-  border: $borderWidth dashed #b37feb;
+  border-style: dashed !important;
+  border-color: #69c0ff !important;
+}
+
+.beingConfig {
+  border-style: dashed !important;
+  border-color: #ff85c0 !important;
 }
 
 .actions {

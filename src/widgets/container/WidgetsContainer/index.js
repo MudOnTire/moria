@@ -18,7 +18,7 @@ export default function WidgetsContainer({
 }) {
 
   const store = useContext(context);
-  const { dispatch, pageConfig, hoveringWidgetId } = store;
+  const { dispatch, pageConfig } = store;
 
   const [isDragOver, setIsDragOver] = useState(false);
 
@@ -103,10 +103,9 @@ export default function WidgetsContainer({
   const classes = useMemo(() => {
     let res = styles.widgetsContainer;
     if (isDragOver) res += ` ${styles.dragOver}`;
-    if (hoveringWidgetId === config.id) res += ` ${styles.hover}`;
     if (className) res += ` ${className}`;
     return res;
-  }, [config, className, isDragOver, hoveringWidgetId]);
+  }, [config, className, isDragOver]);
 
   return (
     <WidgetWrapper

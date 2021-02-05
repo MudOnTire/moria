@@ -14,7 +14,7 @@ export default function WidgetWrapper({
 }) {
 
   const store = useContext(context);
-  const { dispatch, pageConfig, hoveringWidgetId } = store;
+  const { dispatch, pageConfig, hoveringWidgetId, currentWidgetConfig } = store;
 
   const handleMouseEnter = (e) => {
     e.stopPropagation();
@@ -68,9 +68,10 @@ export default function WidgetWrapper({
   const classes = useMemo(() => {
     let res = styles.widgetWrapper;
     if (hoveringWidgetId === config.id) res += ` ${styles.hover}`;
+    if (currentWidgetConfig?.id === config.id) res += ` ${styles.beingConfig}`;
     if (className) res += ` ${className}`;
     return res;
-  }, [config, className, hoveringWidgetId]);
+  }, [config, className, hoveringWidgetId, currentWidgetConfig]);
 
   return (
     <Dragable
