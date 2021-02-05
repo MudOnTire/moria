@@ -1,10 +1,11 @@
-import React, { useMemo, useContext, useEffect } from 'react';
+import React, { useMemo, useContext, useEffect, use } from 'react';
 import {
   Form,
   Select,
-  input
+  Input
 } from 'antd';
-import WIDGET_IDs from 'Src/config/widgetIds';
+import defaultSettings from 'Src/config/defaultSettings';
+import settingSchemas from 'Src/config/settingSchemas';
 import { context, actions } from 'Src/store';
 
 const { Option } = Select;
@@ -16,9 +17,8 @@ const layout = {
 
 export default function SettingBuilder({
   id,
-  settings = {},
-  defaultSettings = {},
-  settingSchema = []
+  widgetId,
+  settings = {}
 }) {
 
   const store = useContext(context);
@@ -28,7 +28,7 @@ export default function SettingBuilder({
 
   const initialValues = useMemo(() => {
     return {
-      ...defaultSettings[WIDGET_IDs.WIDGET_CONTAINER],
+      ...defaultSettings[widgetId],
       ...settings
     }
   }, [settings]);
@@ -57,14 +57,30 @@ export default function SettingBuilder({
       onValuesChange={handleValuesChange}
     >
       {
-        settingSchema.map(schema => {
+        settingSchemas[widgetId].map(schema => {
           if (schema.type === 'string') {
-            <Form.Item
-              label={schema.label || schema.id}
-              name={schema.id}
-            >
-              <Input />
-            </Form.Item>
+            return (
+              <Form.Item
+                label={schema.label || schema.id}
+                name={schema.id}
+              >
+                <Input />
+              </Form.Item>
+            )
+          }
+          if (schema.type === 'enum') {
+            return (
+              <Form.Item
+                label={schema.label || schema.id}
+                name={schema.id}
+              >
+                <Select>
+                  {
+                    schema.options.map(option => <Option value={option} key={option}>{option}</Option>)
+                  }
+                </Select>
+              </Form.Item>
+            )
           }
         })
       }

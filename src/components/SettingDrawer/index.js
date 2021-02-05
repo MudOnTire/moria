@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { Button } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
-import ContainerSettings from './components/ContainerSettings'
-import WIDGET_IDs from 'Src/config/widgetIds';
+import SettingBuilder from 'Src/components/SettingBuilder';
 
 import styles from './styles.module.scss';
 
@@ -11,6 +10,8 @@ export default function SettingDrawer() {
 
   const store = useContext(context);
   const { dispatch, currentWidgetConfig } = store;
+
+  console.log('currentWidgetConfig', currentWidgetConfig);
 
   const close = () => {
     dispatch({
@@ -23,8 +24,12 @@ export default function SettingDrawer() {
     <div className={`${styles.settingDrawer} ${currentWidgetConfig ? styles.visible : styles.hidden}`}>
       <div className={styles.content}>
         {
-          currentWidgetConfig?.widgetId === WIDGET_IDs.WIDGET_CONTAINER &&
-          <ContainerSettings id={currentWidgetConfig.id} settings={currentWidgetConfig.settings} />
+          currentWidgetConfig?.id &&
+          <SettingBuilder
+            id={currentWidgetConfig.id}
+            widgetId={currentWidgetConfig.widgetId}
+            settings={currentWidgetConfig.settings}
+          />
         }
       </div>
       <Button

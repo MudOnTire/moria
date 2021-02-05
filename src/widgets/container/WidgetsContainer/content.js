@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import WIDGET_IDs from 'Src/config/widgetIds';
-import defaultSettings from 'Src/config/widgetsDefault';
+import defaultSettings from 'Src/config/defaultSettings';
 
 import styles from './content.module.scss';
 
