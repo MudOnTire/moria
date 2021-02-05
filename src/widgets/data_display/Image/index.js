@@ -4,7 +4,7 @@ import WidgetWrapper from 'Src/widgets/WidgetWrapper';
 
 export default function Image({ config }) {
   return (
-    <WidgetWrapper widgetConfig={config}>
+    <WidgetWrapper config={config}>
       <AntImage
         width={200}
         src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"

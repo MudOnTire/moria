@@ -1,0 +1,18 @@
+$borderWidth: 5px;
+
+.widgetWrapper {
+
+}
+
+.hover {
+  cursor: pointer;
+  // border: $borderWidth dashed #f0f2f7;
+}
+
+.actions {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  opacity: 0.8;
+  z-index: 10;
+}

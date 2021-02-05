@@ -1,18 +1,101 @@
-import React from 'react';
+import React, { useContext, useMemo } from 'react';
+import { Button } from 'antd';
 import Dragable from 'Src/components/dnd/Dragable';
+import { SettingFilled, DeleteFilled } from '@ant-design/icons';
+import { context, actions } from 'Src/store';
 
-export default function WidgetWrapper({ children, widgetConfig = {}, ...rest }) {
+import styles from './styles.module.scss';
+
+export default function WidgetWrapper({
+  children,
+  className,
+  config = {}, // widget config
+  ...rest
+}) {
+
+  const store = useContext(context);
+  const { dispatch, pageConfig, hoveringWidgetId } = store;
+
+  const handleMouseEnter = (e) => {
+    e.stopPropagation();
+    dispatch({
+      type: actions.SET_HOVERING_WIDGET,
+      payload: config.id
+    });
+  }
+
+  const handleMouseOver = (e) => {
+    e.stopPropagation();
+    dispatch({
+      type: actions.SET_HOVERING_WIDGET,
+      payload: config.id
+    });
+  }
+
+  const handleMouseLeave = (e) => {
+    e.stopPropagation();
+    dispatch({
+      type: actions.SET_HOVERING_WIDGET,
+      payload: null
+    });
+  }
+
+  const handleSetting = (e) => {
+    if (!config) return;
+    dispatch({
+      type: actions.SET_CURRENT_WIDGET_CONFIG,
+      payload: config
+    });
+  }
+
+  const handleDelete = (e) => {
+    dispatch({
+      type: actions.DELETE_WIDGET_CONFIG,
+      payload: config.id
+    });
+  }
 
   const handleDragStart = (e) => {
     const data = {
       type: 'widgetInstance',
-      id: widgetConfig.id,
+      id: config.id,
     }
     e.dataTransfer.setData('text/plain', JSON.stringify(data));
   }
 
+  const hovering = hoveringWidgetId === config.id;
+
+  const classes = useMemo(() => {
+    let res = styles.widgetWrapper;
+    if (hoveringWidgetId === config.id) res += ` ${styles.hover}`;
+    if (className) res += ` ${className}`;
+    return res;
+  }, [config, className, hoveringWidgetId]);
+
   return (
-    <Dragable onDragStart={handleDragStart} {...rest}>
+    <Dragable
+      className={classes}
+      onMouseEnter={handleMouseEnter}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
+      onDragStart={handleDragStart}
+      {...rest}
+    >
+      {
+        hovering &&
+        <div className={styles.actions}>
+          <Button
+            type="text"
+            icon={<SettingFilled style={{ color: "#1890ff" }} />}
+            onClick={handleSetting}
+          />
+          <Button
+            type="text"
+            icon={<DeleteFilled style={{ color: '#f5222d' }} />}
+            onClick={handleDelete}
+          />
+        </div>
+      }
       {children}
     </Dragable>
   )
