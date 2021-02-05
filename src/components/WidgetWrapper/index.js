@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 import { Button } from 'antd';
 import Dragable from 'Src/components/dnd/Dragable';
-import { SettingFilled, DeleteFilled } from '@ant-design/icons';
+import { SettingOutlined, DeleteOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 
 import styles from './styles.module.scss';
@@ -86,13 +86,15 @@ export default function WidgetWrapper({
         hovering &&
         <div className={styles.actions}>
           <Button
+            className={styles.actionBtn}
             type="text"
-            icon={<SettingFilled style={{ color: "#1890ff" }} />}
+            icon={<SettingOutlined style={{ color: "#fff" }} />}
             onClick={handleSetting}
           />
           <Button
+            className={styles.actionBtn}
             type="text"
-            icon={<DeleteFilled style={{ color: '#f5222d' }} />}
+            icon={<DeleteOutlined style={{ color: '#fff' }} />}
             onClick={handleDelete}
           />
         </div>
