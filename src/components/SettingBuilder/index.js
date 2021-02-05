@@ -57,7 +57,7 @@ export default function SettingBuilder({
       onValuesChange={handleValuesChange}
     >
       {
-        settingSchemas[widgetId].map(schema => {
+        settingSchemas[widgetId]?.map(schema => {
           if (schema.type === 'string' || (Array.isArray(schema.type) && schema.type.includes('string'))) {
             return (
               <Form.Item
@@ -76,7 +76,7 @@ export default function SettingBuilder({
               >
                 <Select>
                   {
-                    schema.options.map(option => <Option value={option} key={option}>{option}</Option>)
+                    schema.options?.map(option => <Option value={option} key={option}>{option}</Option>)
                   }
                 </Select>
               </Form.Item>
