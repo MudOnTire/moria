@@ -58,7 +58,7 @@ export default function SettingBuilder({
     >
       {
         settingSchemas[widgetId].map(schema => {
-          if (schema.type === 'string') {
+          if (schema.type === 'string' || (Array.isArray(schema.type) && schema.type.includes('string'))) {
             return (
               <Form.Item
                 label={schema.label || schema.id}
