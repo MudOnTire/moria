@@ -4,8 +4,7 @@ $borderWidth: 5px;
   position: relative;
   min-height: 200px;
   display: flex;
-  // border: 6px solid rgba(24, 144, 255, 0.3);
-  border: $borderWidth solid #f0f2f7;
+  border: $borderWidth solid #f0f2f7 !important;
   padding: 10px;
   flex: 1;
 }
