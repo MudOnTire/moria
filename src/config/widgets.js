@@ -1,6 +1,5 @@
-import WidgetsContainer from 'Src/components/WidgetsContainer';
 import WIDGET_IDs from 'Src/config/widgetIds';
-import { Image, Carousel, Table } from 'Src/widgets';
+import { WidgetsContainer, Image, Carousel, Table } from 'Src/widgets';
 
 const widgets = [
   {

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { context } from 'Src/store';
-import WidgetsContainer from 'Src/components/WidgetsContainer';
+import WidgetsContainer from 'Src/widgets/container/WidgetsContainer';
 
 import styles from './styles.module.scss';
 
