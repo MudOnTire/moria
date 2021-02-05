@@ -12,7 +12,7 @@ $borderWidth: 5px;
 
 .hover {
   cursor: pointer;
-  border: $borderWidth dashed #f0f2f7;
+  border: $borderWidth dashed #f0f2f7 !important;
 }
 
 .actions {

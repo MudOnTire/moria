@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image as AntImage } from 'antd';
-import WidgetWrapper from 'Src/widgets/WidgetWrapper';
+import WidgetWrapper from 'Src/components/WidgetWrapper';
 
 export default function Image({ config }) {
   return (

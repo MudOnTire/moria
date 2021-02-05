@@ -1,14 +1,12 @@
 import React, { useState, useContext, useMemo, Fragment } from 'react';
-import { Button } from 'antd';
 import Droppable from 'Src/components/dnd/Droppable';
-import Dragable from 'Src/components/dnd/Dragable';
-import { SettingFilled, DeleteFilled } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import WIDGET_IDs from 'Src/config/widgetIds';
 import { queryWidget } from 'Src/config/widgets';
-import { throttle, getTreeItem, moveTreeItem, insertTreeItem } from 'Src/uitls/fns';
+import { throttle, moveTreeItem, insertTreeItem } from 'Src/uitls/fns';
 import Divider from 'Src/components/dnd/Divider';
 import Content from './content';
+import WidgetWrapper from 'Src/components/WidgetWrapper';
 
 import styles from './styles.module.scss';
 
@@ -23,45 +21,6 @@ export default function WidgetsContainer({
   const { dispatch, pageConfig, hoveringWidgetId } = store;
 
   const [isDragOver, setIsDragOver] = useState(false);
-
-  const handleMouseEnter = (e) => {
-    e.stopPropagation();
-    dispatch({
-      type: actions.SET_HOVERING_WIDGET,
-      payload: config.id
-    });
-  }
-
-  const handleMouseOver = (e) => {
-    e.stopPropagation();
-    dispatch({
-      type: actions.SET_HOVERING_WIDGET,
-      payload: config.id
-    });
-  }
-
-  const handleMouseLeave = (e) => {
-    e.stopPropagation();
-    dispatch({
-      type: actions.SET_HOVERING_WIDGET,
-      payload: null
-    });
-  }
-
-  const handleSetting = (e) => {
-    if (!config) return;
-    dispatch({
-      type: actions.SET_CURRENT_WIDGET_CONFIG,
-      payload: config
-    });
-  }
-
-  const handleDelete = (e) => {
-    dispatch({
-      type: actions.DELETE_WIDGET_CONFIG,
-      payload: config.id
-    });
-  }
 
   /**
    * Drop widget class or widget instance 
@@ -129,14 +88,6 @@ export default function WidgetsContainer({
     }
   }
 
-  const handleDragStart = (e)=>{
-    const data = {
-      type: 'widgetInstance',
-      id: config.id,
-    }
-    e.dataTransfer.setData('text/plain', JSON.stringify(data));
-  }
-
   const handleDragEnter = (e) => {
     setIsDragOver(true);
   }
@@ -149,8 +100,6 @@ export default function WidgetsContainer({
     setIsDragOver(false);
   }
 
-  const hovering = hoveringWidgetId === config.id;
-
   const classes = useMemo(() => {
     let res = styles.widgetsContainer;
     if (isDragOver) res += ` ${styles.dragOver}`;
@@ -160,29 +109,11 @@ export default function WidgetsContainer({
   }, [config, className, isDragOver, hoveringWidgetId]);
 
   return (
-    <Dragable
+    <WidgetWrapper
       className={classes}
-      onMouseEnter={handleMouseEnter}
-      onMouseOver={handleMouseOver}
-      onMouseLeave={handleMouseLeave}
-      onDragStart={handleDragStart}
+      config={config}
       {...rest}
     >
-      {
-        hovering &&
-        <div className={styles.actions}>
-          <Button
-            type="text"
-            icon={<SettingFilled style={{ color: "#1890ff" }} />}
-            onClick={handleSetting}
-          />
-          <Button
-            type="text"
-            icon={<DeleteFilled style={{ color: '#f5222d' }} />}
-            onClick={handleDelete}
-          />
-        </div>
-      }
       <Droppable
         onDragEnter={handleDragEnter}
         onDragOver={throttle(handleDragOver, 1000)}
@@ -214,6 +145,6 @@ export default function WidgetsContainer({
           }
         </Content>
       </Droppable>
-    </Dragable>
+    </WidgetWrapper>
   )
 }
