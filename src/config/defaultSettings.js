@@ -1,6 +1,6 @@
 import WIDGET_IDs from './widgetIds';
 import widgetsContainer from 'Src/widgets/container/WidgetsContainer/_defaultSettings';
-import image from 'Src/widgets/container/WidgetsContainer/_defaultSettings';
+import image from 'Src/widgets/data_display/Image/_defaultSettings';
 
 export default {
   [WIDGET_IDs.WIDGET_CONTAINER]: widgetsContainer,

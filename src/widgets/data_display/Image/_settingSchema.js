@@ -1,13 +1,13 @@
 export default [
   {
     id: 'src',
-    label: 'Source',
+    label: 'Src',
     type: 'string',
     desc: 'Image path',
   },
   {
     id: 'fallback',
-    label: 'Fallback Source',
+    label: 'Fallback Src',
     type: 'string',
     desc: 'Load failure fault-tolerant src'
   },
