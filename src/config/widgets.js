@@ -1,7 +1,6 @@
-import { Input, Select, Switch, TimePicker } from 'antd';
 import WidgetsContainer from 'Src/components/WidgetsContainer';
 import WIDGET_IDs from 'Src/config/widgetIds';
-import { Image } from 'Src/widgets';
+import { Image, Carousel } from 'Src/widgets';
 
 const widgets = [
   {
@@ -21,31 +20,11 @@ const widgets = [
         widgetId: WIDGET_IDs.DATA_DISPLAY_IMAGE,
         name: "Image",
         component: Image
-      }
-    ]
-  },
-  {
-    category: "Form Widgets",
-    list: [
-      {
-        widgetId: WIDGET_IDs.FORM_INPUT,
-        name: "Input",
-        component: Input
       },
       {
-        widgetId: WIDGET_IDs.FORM_SELECT,
-        name: "Select",
-        component: Select
-      },
-      {
-        widgetId: WIDGET_IDs.FORM_SWITCH,
-        name: "Switch ",
-        component: Switch
-      },
-      {
-        widgetId: WIDGET_IDs.FORM_TIME_PICKER,
-        name: "Time Picker",
-        component: TimePicker
+        widgetId: WIDGET_IDs.DATA_DISPLAY_CAROUSEL,
+        name: "Carousel",
+        component: Carousel
       },
     ]
   }

@@ -8,7 +8,10 @@ export default function Dragable({
   style,
   onDragStart = () => { },
   onDragEnd = () => { },
-  ...rest }) {
+  ...rest
+}) {
+
+  console.log('draggable rest props', rest);
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -30,6 +33,7 @@ export default function Dragable({
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       draggable="true"
+      style={style}
       {...rest}
     >
       {children}

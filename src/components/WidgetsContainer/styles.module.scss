@@ -23,5 +23,5 @@ $borderWidth: 5px;
 }
 
 .dragOver {
-  border: $borderWidth dashed #b5f5ec;
+  border: $borderWidth dashed #b5f5ec !important;
 }
