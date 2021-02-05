@@ -13,12 +13,22 @@ export default function Content({ children, settings = {} }) {
     }
   }, [settings]);
 
-  const { flexDirection } = finalSettings;
+  const {
+    height,
+    flexDirection,
+    justifyContent,
+    alignItems,
+  } = finalSettings;
 
   return (
     <div
       className={styles.content}
-      style={{ flexDirection }}
+      style={{
+        height,
+        flexDirection,
+        justifyContent,
+        alignItems
+      }}
     >
       {children}
     </div>

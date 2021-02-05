@@ -11,8 +11,8 @@ import { context, actions } from 'Src/store';
 const { Option } = Select;
 
 const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
+  labelCol: { span: 7 },
+  wrapperCol: { span: 17 },
 };
 
 export default function SettingBuilder({

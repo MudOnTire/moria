@@ -11,8 +11,6 @@ export default function Dragable({
   ...rest
 }) {
 
-  console.log('draggable rest props', rest);
-
   const [isDragging, setIsDragging] = useState(false);
 
   const handleDragStart = (e) => {
