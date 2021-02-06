@@ -14,7 +14,7 @@ export default function WidgetWrapper({
 }) {
 
   const store = useContext(context);
-  const { dispatch, pageConfig, hoveringWidgetId, currentWidgetConfig } = store;
+  const { dispatch, pageConfig, hoveringWidgetId, configingWidgetId } = store;
 
   const handleMouseEnter = (e) => {
     e.stopPropagation();
@@ -43,8 +43,8 @@ export default function WidgetWrapper({
   const handleSetting = (e) => {
     if (!config) return;
     dispatch({
-      type: actions.SET_CURRENT_WIDGET_CONFIG,
-      payload: config
+      type: actions.SET_CONFIGING_WIDGET,
+      payload: config.id
     });
   }
 
@@ -68,10 +68,10 @@ export default function WidgetWrapper({
   const classes = useMemo(() => {
     let res = styles.widgetWrapper;
     if (hoveringWidgetId === config.id) res += ` ${styles.hover}`;
-    if (currentWidgetConfig?.id === config.id) res += ` ${styles.beingConfig}`;
+    if (configingWidgetId === config.id) res += ` ${styles.beingConfig}`;
     if (className) res += ` ${className}`;
     return res;
-  }, [config, className, hoveringWidgetId, currentWidgetConfig]);
+  }, [config, className, hoveringWidgetId, configingWidgetId]);
 
   return (
     <Dragable

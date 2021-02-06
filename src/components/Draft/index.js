@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 export default function Draft() {
 
   const store = useContext(context);
-  const { pageConfig, currentWidgetConfig } = store;
+  const { pageConfig, configingWidgetId } = store;
 
 
   return (
@@ -15,7 +15,7 @@ export default function Draft() {
       onDoubleClick={() => {
         console.log('pageConfig', pageConfig);
       }}
-      className={`${styles.draft} ${currentWidgetConfig && styles.showSettingDrawer}`}
+      className={`${styles.draft} ${configingWidgetId && styles.showSettingDrawer}`}
       config={pageConfig}
     />
   )

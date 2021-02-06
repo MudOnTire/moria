@@ -4,7 +4,7 @@ import { removeTreeItem, updateTreeItem } from 'Src/uitls/fns';
 
 const actions = {
   UPDATE_PAGE_CONFIG: 'UPDATE_PAGE_CONFIG', // 更新页面配置文件
-  SET_CURRENT_WIDGET_CONFIG: 'SET_CURRENT_WIDGET_CONFIG', // 设置正在被设置的widget的config
+  SET_CONFIGING_WIDGET: 'SET_CONFIGING_WIDGET', // 设置正在被设置的widget的config
   DELETE_WIDGET_CONFIG: 'DELETE_WIDGET_CONFIG', // 删除widget的config
   SET_HOVERING_WIDGET: 'SET_HOVERING_WIDGET', // 设置当前hover的widget
   UPDATE_WIDGET_SETTINGS: 'UPDATE_WIDGET_SETTINGS', // 设置widget的settings
@@ -17,7 +17,7 @@ const initialState = {
     children: [], // 子组件
     settings: {} // 该组件的相关配置
   }, // 页面配置文件
-  currentWidgetConfig: '', // 正在被设置的widget的config
+  configingWidgetId: '', // 正在被设置的widget id
   hoveringWidgetId: '', // 当前hover的widget id
   dispatch: () => { },
 };
@@ -28,8 +28,8 @@ function reducer(state, action) {
     case actions.UPDATE_PAGE_CONFIG: {
       return { ...state, pageConfig: payload };
     }
-    case actions.SET_CURRENT_WIDGET_CONFIG: {
-      return { ...state, currentWidgetConfig: payload };
+    case actions.SET_CONFIGING_WIDGET: {
+      return { ...state, configingWidgetId: payload };
     }
     case actions.DELETE_WIDGET_CONFIG: {
       // payload is id
