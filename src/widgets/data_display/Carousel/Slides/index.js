@@ -28,7 +28,12 @@ export default function Slides({ count = 0, value = [], onChange = () => { } }) 
     <div>
       {
         arr.map(n => (
-          <Input style={{ marginBottom: 10 }} key={n} onChange={(val) => { handleChange(n, val) }} />
+          <Input
+            value={values[n]}
+            style={{ marginBottom: 10 }}
+            key={n}
+            onChange={(e) => { handleChange(n, e.target.value) }}
+          />
         ))
       }
     </div>
