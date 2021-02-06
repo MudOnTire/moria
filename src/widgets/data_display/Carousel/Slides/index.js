@@ -19,7 +19,6 @@ export default function Slides({ count = 0, value = [], onChange = () => { } }) 
     setValues((vals) => {
       vals[n] = newVal;
       onChange(vals);
-      console.log('vals', vals);
       return vals;
     });
   }
