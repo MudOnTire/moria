@@ -1,11 +1,5 @@
 export default [
   {
-    id: 'height',
-    label: 'Height',
-    type: 'string',
-    desc: 'Height flex container',
-  },
-  {
     id: 'flexDirection',
     label: 'Flex Direction',
     type: 'enum',
@@ -45,5 +39,11 @@ export default [
       'unsafe center'
     ],
     desc: 'Align Items of flex container',
+  },
+  {
+    id: 'height',
+    label: 'Height',
+    type: 'string',
+    desc: 'Height flex container',
   },
 ]

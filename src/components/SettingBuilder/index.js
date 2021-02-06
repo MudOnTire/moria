@@ -2,7 +2,8 @@ import React, { useMemo, useContext, useEffect, use } from 'react';
 import {
   Form,
   Select,
-  Input
+  Input,
+  Switch,
 } from 'antd';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
@@ -65,6 +66,16 @@ export default function SettingBuilder({
                 name={schema.id}
               >
                 <Input />
+              </Form.Item>
+            )
+          }
+          if (schema.type === 'boolean') {
+            return (
+              <Form.Item
+                label={schema.label || schema.id}
+                name={schema.id}
+              >
+                <Switch />
               </Form.Item>
             )
           }
