@@ -64,6 +64,7 @@ export default function SettingBuilder({
               <Form.Item
                 label={schema.label || schema.id}
                 name={schema.id}
+                key={schema.id}
               >
                 <Input />
               </Form.Item>
@@ -74,6 +75,8 @@ export default function SettingBuilder({
               <Form.Item
                 label={schema.label || schema.id}
                 name={schema.id}
+                key={schema.id}
+                valuePropName="checked"
               >
                 <Switch />
               </Form.Item>
@@ -84,6 +87,7 @@ export default function SettingBuilder({
               <Form.Item
                 label={schema.label || schema.id}
                 name={schema.id}
+                key={schema.id}
               >
                 <Select>
                   {

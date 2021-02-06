@@ -9,12 +9,14 @@ export default [
     id: 'autoplay',
     label: 'Autoplay',
     type: 'boolean',
+    antSetting: true,
     desc: 'Whether to scroll automatically',
   },
   {
     id: 'dots',
     label: 'Show Dots',
     type: 'boolean',
+    antSetting: true,
     desc: 'Whether to show the dots at the bottom of the gallery',
   },
   {
@@ -22,6 +24,7 @@ export default [
     label: 'Dot Position',
     type: 'enum',
     options: ['top', 'bottom', 'left', 'right'],
+    antSetting: true,
     desc: 'The position of the dots, which can be one of top bottom left right',
   },
   {
@@ -29,6 +32,7 @@ export default [
     label: 'Easing',
     type: 'enum',
     options: ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out'],
+    antSetting: true,
     desc: 'Transition interpolation function name',
   },
   {
@@ -36,6 +40,7 @@ export default [
     label: 'Effect',
     type: 'enum',
     options: ['scrollx', 'fade'],
+    antSetting: true,
     desc: 'Transition effect	',
   }
 ]
