@@ -4,13 +4,7 @@ import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
 
-const contentStyle = {
-  height: '160px',
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  background: '#364d79',
-};
+import styles from './styles.module.scss';
 
 export default function Image({ config }) {
 
@@ -32,21 +26,22 @@ export default function Image({ config }) {
     return result;
   }, [finalSettings]);
 
+  const { count, slides } = finalSettings;
+
   return (
     <WidgetWrapper config={config}>
       <AntCarousel {...antSettings}>
-        <div>
-          <h3 style={contentStyle}>1</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>2</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>3</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>4</h3>
-        </div>
+        {
+          slides?.map((slide, i) => {
+            return (
+              <div key={i} className={styles.slide}>
+                <div className={styles.content}>
+                  <img src={slide} />
+                </div>
+              </div>
+            )
+          })
+        }
       </AntCarousel>
     </WidgetWrapper >
   )

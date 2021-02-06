@@ -4,10 +4,12 @@ import {
   Select,
   Input,
   Switch,
+  InputNumber
 } from 'antd';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
 import { context, actions } from 'Src/store';
+import WIDGET_IDs from 'Src/config/widgetIds';
 
 const { Option } = Select;
 
@@ -22,16 +24,19 @@ export default function SettingBuilder({
   settings = {}
 }) {
 
+  console.log('builder settings', settings);
+
   const store = useContext(context);
   const { dispatch } = store;
 
   const [form] = Form.useForm();
 
   const initialValues = useMemo(() => {
-    return {
+    const result = {
       ...defaultSettings[widgetId],
       ...settings
     }
+    return result;
   }, [settings]);
 
   useEffect(() => {
@@ -70,6 +75,19 @@ export default function SettingBuilder({
               </Form.Item>
             )
           }
+          if (schema.type === 'number') {
+            return (
+              <>
+                <Form.Item
+                  label={schema.label || schema.id}
+                  name={schema.id}
+                  key={schema.id}
+                >
+                  <InputNumber />
+                </Form.Item>
+              </>
+            )
+          }
           if (schema.type === 'boolean') {
             return (
               <Form.Item
@@ -96,6 +114,19 @@ export default function SettingBuilder({
                 </Select>
               </Form.Item>
             )
+          }
+          if (schema.component) {
+            if (widgetId === WIDGET_IDs.DATA_DISPLAY_CAROUSEL && schema.id === 'slides') {
+              return (
+                <Form.Item
+                  label={schema.label || schema.id}
+                  name={schema.id}
+                  key={schema.id}
+                >
+                  <schema.component count={initialValues.count} />
+                </Form.Item>
+              )
+            }
           }
         })
       }

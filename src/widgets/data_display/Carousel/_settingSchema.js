@@ -1,9 +1,18 @@
+import Slides from './Slides';
+
 export default [
   {
     id: 'count',
     label: 'Slides count',
     type: 'number',
     desc: 'Slides count',
+  },
+  {
+    id: 'slides',
+    label: 'Slides',
+    type: 'array<string>',
+    desc: 'Slide images',
+    component: Slides
   },
   {
     id: 'autoplay',

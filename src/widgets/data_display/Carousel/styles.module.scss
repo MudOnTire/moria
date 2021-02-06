@@ -1,0 +1,17 @@
+.slide {
+  height: 300px;
+  color: #fff;
+  text-align: center;
+  background: #364d79;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  img {
+    width: 100%;
+  }
+}
