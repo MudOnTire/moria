@@ -1,4 +1,4 @@
-import React, { useMemo, useContext, useEffect, use } from 'react';
+import React, { useState, useMemo, useContext, useEffect } from 'react';
 import {
   Form,
   Select,
@@ -10,6 +10,7 @@ import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
 import { context, actions } from 'Src/store';
 import WIDGET_IDs from 'Src/config/widgetIds';
+import { getTreeItem } from 'Src/uitls/fns';
 
 const { Option } = Select;
 
@@ -18,33 +19,32 @@ const layout = {
   wrapperCol: { span: 17 },
 };
 
-export default function SettingBuilder({
-  id,
-  widgetId,
-  settings = {}
-}) {
-
-  console.log('builder settings', settings);
-
+export default function SettingBuilder({ id }) {
   const store = useContext(context);
-  const { dispatch } = store;
+  const { dispatch, pageConfig } = store;
 
   const [form] = Form.useForm();
+  const [widget, setWidget] = useState(null);
+  const [renderTrigger, setRenderTrigger] = useState(null);
 
-  const initialValues = useMemo(() => {
-    const result = {
-      ...defaultSettings[widgetId],
-      ...settings
-    }
-    return result;
-  }, [settings]);
+  const getWidget = () => {
+    const treeItem = getTreeItem(pageConfig.children, id);
+    if (!treeItem?.item) return;
+    const widget = treeItem.item;
+    setWidget(widget);
+  }
 
-  useEffect(() => {
-    form.resetFields();
-  }, [settings]);
+  useEffect(getWidget, [id, renderTrigger]);
+
+  useEffect(form.resetFields, [id]);
 
   const handleValuesChange = (changedValue, allValues) => {
     console.log('value changed', changedValue, allValues);
+    if (widget.widgetId === WIDGET_IDs.DATA_DISPLAY_CAROUSEL) {
+      if (typeof changedValue.count !== 'undefined') {
+        setRenderTrigger(new Date().valueOf());
+      }
+    }
     dispatch({
       type: actions.UPDATE_WIDGET_SETTINGS,
       payload: {
@@ -52,6 +52,13 @@ export default function SettingBuilder({
         settings: allValues
       }
     });
+  }
+
+  if (!widget) return null;
+
+  const initialValues = {
+    ...defaultSettings[widget.widgetId],
+    ...widget.settings
   }
 
   return (
@@ -63,7 +70,7 @@ export default function SettingBuilder({
       onValuesChange={handleValuesChange}
     >
       {
-        settingSchemas[widgetId]?.map(schema => {
+        settingSchemas[widget.widgetId]?.map(schema => {
           if (schema.type === 'string' || (Array.isArray(schema.type) && schema.type.includes('string'))) {
             return (
               <Form.Item
@@ -116,7 +123,7 @@ export default function SettingBuilder({
             )
           }
           if (schema.component) {
-            if (widgetId === WIDGET_IDs.DATA_DISPLAY_CAROUSEL && schema.id === 'slides') {
+            if (widget.widgetId === WIDGET_IDs.DATA_DISPLAY_CAROUSEL && schema.id === 'slides') {
               return (
                 <Form.Item
                   label={schema.label || schema.id}

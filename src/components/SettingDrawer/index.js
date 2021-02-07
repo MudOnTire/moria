@@ -10,13 +10,13 @@ import styles from './styles.module.scss';
 export default function SettingDrawer() {
 
   const store = useContext(context);
-  const { dispatch, configingWidgetId, pageConfig } = store;
+  const { dispatch, configingWidgetId } = store;
 
-  const widget = useMemo(() => {
-    const treeItem = getTreeItem(pageConfig.children, configingWidgetId);
-    if (!treeItem) return;
-    return treeItem.item;
-  }, [configingWidgetId, pageConfig])
+  // const widget = useMemo(() => {
+  //   const treeItem = getTreeItem(pageConfig.children, configingWidgetId);
+  //   if (!treeItem) return;
+  //   return treeItem.item;
+  // }, [configingWidgetId, pageConfig])
 
   const close = () => {
     dispatch({
@@ -29,12 +29,8 @@ export default function SettingDrawer() {
     <div className={`${styles.settingDrawer} ${configingWidgetId ? styles.visible : styles.hidden}`}>
       <div className={styles.content}>
         {
-          widget &&
-          <SettingBuilder
-            id={configingWidgetId}
-            widgetId={widget.widgetId}
-            settings={widget.settings}
-          />
+          configingWidgetId &&
+          <SettingBuilder id={configingWidgetId}/>
         }
       </div>
       <Button

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import {
   Input
 } from 'antd';
@@ -22,6 +22,16 @@ export default function Slides({ count = 0, value = [], onChange = () => { } }) 
       return vals;
     });
   }
+
+  const handleCountChange = () => {
+    setValues((vals) => {
+      const updated = vals.slice(0, count);
+      onChange(updated);
+      return updated;
+    });
+  }
+
+  useEffect(handleCountChange, [count]);
 
   return (
     <div>
