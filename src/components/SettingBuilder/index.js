@@ -71,13 +71,15 @@ export default function SettingBuilder({ id }) {
     >
       {
         settingSchemas[widget.widgetId]?.map(schema => {
+          const formItemProps = {
+            label: schema.label || schema.id,
+            name: schema.id,
+            key: schema.id
+          }
+
           if (schema.type === 'string' || (Array.isArray(schema.type) && schema.type.includes('string'))) {
             return (
-              <Form.Item
-                label={schema.label || schema.id}
-                name={schema.id}
-                key={schema.id}
-              >
+              <Form.Item {...formItemProps}>
                 <Input />
               </Form.Item>
             )
@@ -85,11 +87,7 @@ export default function SettingBuilder({ id }) {
           if (schema.type === 'number') {
             return (
               <>
-                <Form.Item
-                  label={schema.label || schema.id}
-                  name={schema.id}
-                  key={schema.id}
-                >
+                <Form.Item {...formItemProps}>
                   <InputNumber />
                 </Form.Item>
               </>
@@ -98,9 +96,7 @@ export default function SettingBuilder({ id }) {
           if (schema.type === 'boolean') {
             return (
               <Form.Item
-                label={schema.label || schema.id}
-                name={schema.id}
-                key={schema.id}
+                {...formItemProps}
                 valuePropName="checked"
               >
                 <Switch />
@@ -109,11 +105,7 @@ export default function SettingBuilder({ id }) {
           }
           if (schema.type === 'enum') {
             return (
-              <Form.Item
-                label={schema.label || schema.id}
-                name={schema.id}
-                key={schema.id}
-              >
+              <Form.Item {...formItemProps}>
                 <Select>
                   {
                     schema.options?.map(option => <Option value={option} key={option}>{option}</Option>)
@@ -125,11 +117,7 @@ export default function SettingBuilder({ id }) {
           if (schema.component) {
             if (widget.widgetId === WIDGET_IDs.DATA_DISPLAY_CAROUSEL && schema.id === 'slides') {
               return (
-                <Form.Item
-                  label={schema.label || schema.id}
-                  name={schema.id}
-                  key={schema.id}
-                >
+                <Form.Item {...formItemProps}>
                   <schema.component count={initialValues.count} />
                 </Form.Item>
               )
