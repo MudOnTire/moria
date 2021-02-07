@@ -3,7 +3,6 @@ import { Button } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import SettingBuilder from 'Src/components/SettingBuilder';
-import { getTreeItem } from 'Src/uitls/fns';
 
 import styles from './styles.module.scss';
 
@@ -11,12 +10,6 @@ export default function SettingDrawer() {
 
   const store = useContext(context);
   const { dispatch, configingWidgetId } = store;
-
-  // const widget = useMemo(() => {
-  //   const treeItem = getTreeItem(pageConfig.children, configingWidgetId);
-  //   if (!treeItem) return;
-  //   return treeItem.item;
-  // }, [configingWidgetId, pageConfig])
 
   const close = () => {
     dispatch({

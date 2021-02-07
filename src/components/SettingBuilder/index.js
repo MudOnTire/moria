@@ -28,15 +28,18 @@ export default function SettingBuilder({ id }) {
   const [renderTrigger, setRenderTrigger] = useState(null);
 
   const getWidget = () => {
-    const treeItem = getTreeItem(pageConfig.children, id);
-    if (!treeItem?.item) return;
-    const widget = treeItem.item;
-    setWidget(widget);
+    if (id === 'root') {
+      setWidget(pageConfig);
+    } else {
+      const treeItem = getTreeItem(pageConfig.children, id);
+      if (!treeItem?.item) return;
+      setWidget(treeItem.item);
+    }
   }
 
   useEffect(getWidget, [id, renderTrigger]);
 
-  useEffect(form.resetFields, [id]);
+  useEffect(form.resetFields, [widget]);
 
   const handleValuesChange = (changedValue, allValues) => {
     console.log('value changed', changedValue, allValues);
