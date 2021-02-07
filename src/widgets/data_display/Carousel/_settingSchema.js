@@ -15,6 +15,12 @@ export default [
     component: Slides
   },
   {
+    id: 'height',
+    label: 'Height',
+    type: 'string',
+    desc: 'Height of slides'
+  },
+  {
     id: 'autoplay',
     label: 'Autoplay',
     type: 'boolean',

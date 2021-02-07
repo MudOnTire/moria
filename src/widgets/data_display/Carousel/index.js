@@ -26,7 +26,7 @@ export default function Image({ config }) {
     return result;
   }, [finalSettings]);
 
-  const { count, slides } = finalSettings;
+  const { count, slides, height } = finalSettings;
 
   return (
     <WidgetWrapper config={config}>
@@ -35,7 +35,7 @@ export default function Image({ config }) {
           slides?.map((slide, i) => {
             return (
               <div key={i} className={styles.slide}>
-                <div className={styles.content}>
+                <div className={styles.content} style={{ height }}>
                   <img src={slide} />
                 </div>
               </div>
