@@ -41,15 +41,14 @@ export default function Draft() {
       flex: deviceType === 'desktop' ? '1' : 'unset',
       alignSelf: deviceType === 'desktop' ? 'unset' : 'center',
     };
-    if (deviceType === 'desktop') {
-      result.border = 'none';
-    }
     return result;
   }, [deviceType])
 
 
   return (
-    <div className={`${styles.draftContainer} ${configingWidgetId && styles.showSettingDrawer}`}>
+    <div 
+      className={`${styles.draftContainer} ${configingWidgetId && styles.showSettingDrawer}`}
+    >
       <div className={styles.draftActions}>
         <Tooltip title="Desktop">
           <Button
