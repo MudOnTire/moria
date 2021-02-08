@@ -1,3 +1,4 @@
 export default {
-  bordered: true
+  bordered: true,
+  sticky: true
 }

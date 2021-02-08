@@ -14,10 +14,10 @@ import { getTreeItem } from 'Src/uitls/fns';
 
 const { Option } = Select;
 
-const layout = {
-  labelCol: { span: 7 },
-  wrapperCol: { span: 17 },
-};
+// const layout = {
+//   labelCol: { span: 6 },
+//   wrapperCol: { span: 18 },
+// };
 
 export default function SettingBuilder({ id }) {
   const store = useContext(context);
@@ -66,7 +66,7 @@ export default function SettingBuilder({ id }) {
 
   return (
     <Form
-      {...layout}
+      layout='vertical'
       form={form}
       name="basic"
       initialValues={initialValues}
@@ -75,7 +75,7 @@ export default function SettingBuilder({ id }) {
       {
         settingSchemas[widget.widgetId]?.map(schema => {
           const formItemProps = {
-            label: schema.label || schema.id,
+            label: (schema.label || schema.id) + ':',
             name: schema.id,
             key: schema.id
           }
