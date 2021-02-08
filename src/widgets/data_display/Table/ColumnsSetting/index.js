@@ -8,16 +8,12 @@ import { PlusCircleOutlined, MinusCircleOutlined, UpCircleOutlined, DownCircleOu
 import styles from './styles.module.scss';
 
 export default function ColumnsSetting({ value = [], onChange = () => { } }) {
-  const [values, setValues] = useState(null);
+  const [values, setValues] = useState(value);
   const [expanded, setExpanded] = useState(true);
 
-  useEffect(() => {
-    setValues(value);
-  }, [])
-
-  const handleValueChange = (key, value, index) => {
+  const handleValueChange = (key, val, index) => {
     setValues((vals) => {
-      vals[index][key] = value;
+      vals[index][key] = val;
       onChange(vals);
       return vals;
     });

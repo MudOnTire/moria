@@ -43,6 +43,12 @@ export default function Image({ config }) {
           })
         }
       </AntCarousel>
+      {/* {
+        <>
+          <h1>Config:{JSON.stringify(config)}</h1>
+          <h1>FinalSettings:{JSON.stringify(finalSettings)}</h1>
+        </>
+      } */}
     </WidgetWrapper >
   )
 }

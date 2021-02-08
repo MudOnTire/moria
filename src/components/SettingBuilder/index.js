@@ -42,8 +42,7 @@ export default function SettingBuilder({ id }) {
   useEffect(form.resetFields, [widget]);
 
   const handleValuesChange = (changedValue, allValues) => {
-    // debugger
-    console.log('value changed', changedValue, allValues);
+    console.log('value changed', id, changedValue, allValues);
     if (widget.widgetId === WIDGET_IDs.DATA_DISPLAY_CAROUSEL) {
       if (typeof changedValue.count !== 'undefined') {
         setRenderTrigger(new Date().valueOf());
@@ -61,7 +60,7 @@ export default function SettingBuilder({ id }) {
   if (!widget) return null;
 
   const initialValues = {
-    ...defaultSettings[widget.widgetId],
+    ...JSON.parse(JSON.stringify(defaultSettings[widget.widgetId])),
     ...widget.settings
   }
 
@@ -124,12 +123,13 @@ export default function SettingBuilder({ id }) {
                   <schema.component count={initialValues.count} />
                 </Form.Item>
               )
+            } else {
+              return (
+                <Form.Item {...formItemProps}>
+                  <schema.component />
+                </Form.Item>
+              )
             }
-            return (
-              <Form.Item {...formItemProps}>
-                <schema.component />
-              </Form.Item>
-            )
           }
         })
       }
