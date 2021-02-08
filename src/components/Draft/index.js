@@ -7,13 +7,13 @@ import WidgetsContainer from 'Src/widgets/container/WidgetsContainer';
 import styles from './styles.module.scss';
 
 const SCREEN_WIDTHs = {
-  desktop: 'auto',
+  desktop: '100%',
   tablet: '768px',
   mobile: '375px'
 }
 
 const SCREEN_HEIGHTs = {
-  desktop: 'auto',
+  desktop: '100%',
   tablet: '1024px',
   mobile: '800px'
 }
