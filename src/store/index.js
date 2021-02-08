@@ -8,6 +8,7 @@ const actions = {
   DELETE_WIDGET_CONFIG: 'DELETE_WIDGET_CONFIG', // 删除widget的config
   SET_HOVERING_WIDGET: 'SET_HOVERING_WIDGET', // 设置当前hover的widget
   UPDATE_WIDGET_SETTINGS: 'UPDATE_WIDGET_SETTINGS', // 设置widget的settings
+  SET_DEVICE_TYPE: 'SET_DEVICE_TYPE' // Draft 的屏幕宽度
 }
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   }, // 页面配置文件
   configingWidgetId: '', // 正在被设置的widget id
   hoveringWidgetId: '', // 当前hover的widget id
+  deviceType: 'desktop', // desktop, tablet, mobile
   dispatch: () => { },
 };
 
@@ -64,6 +66,12 @@ function reducer(state, action) {
           ...state.pageConfig,
           children: updated
         }
+      }
+    }
+    case actions.SET_DEVICE_TYPE: {
+      return {
+        ...state,
+        deviceType: payload
       }
     }
     default:
