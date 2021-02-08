@@ -5,30 +5,7 @@ import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
 import request from 'Src/uitls/request';
 
-const columns = [
-  {
-    title: 'Id',
-    dataIndex: 'id',
-    key: 'id'
-  },
-  {
-    title: 'User Id',
-    dataIndex: 'userId',
-    key: 'userId'
-  },
-  {
-    title: 'Title',
-    dataIndex: 'title',
-    key: 'title',
-  },
-  {
-    title: 'Body',
-    dataIndex: 'body',
-    key: 'body',
-  }
-];
-
-export default function Image({ config }) {
+export default function Table({ config }) {
 
   const [data, setData] = useState([]);
 
@@ -51,23 +28,25 @@ export default function Image({ config }) {
   }, [finalSettings]);
 
   // api start
-  const fetchData = async () => {
-    const res = await request.get(finalSettings.api);
-    console.log('table res', res);
-    if (res?.data) {
-      setData(res.data);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await request.get(finalSettings.api);
+      console.log('table res', res);
+      if (res?.data) {
+        setData(res.data);
+      }
     }
-  }
-
-  useEffect(fetchData, [finalSettings.api]);
+    fetchData();
+  }, [finalSettings.api]);
   // api end
 
   return (
     <WidgetWrapper config={config}>
       <AntTable
-        columns={columns}
-        dataSource={data}
         {...antSettings}
+        columns={finalSettings.columns}
+        dataSource={data}
+        rowKey={finalSettings.rowKey}
       />
     </WidgetWrapper >
   )

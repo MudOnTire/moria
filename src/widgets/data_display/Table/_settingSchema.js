@@ -1,3 +1,5 @@
+import ColumnsSetting from './ColumnsSetting';
+
 export default [
   {
     id: 'bordered',
@@ -18,5 +20,18 @@ export default [
     label: 'Source API',
     type: 'string',
     desc: 'API to fetch source data',
+  },
+  {
+    id: 'columns',
+    label: 'Columns',
+    type: 'array<Object>',
+    desc: 'Columns of table',
+    component: ColumnsSetting
+  },
+  {
+    id: 'rowKey',
+    label: 'Row Key',
+    type: 'string',
+    desc: `Row's unique key, could be a string`
   },
 ]

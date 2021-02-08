@@ -68,7 +68,6 @@ export default function SettingBuilder({ id }) {
     <Form
       layout='vertical'
       form={form}
-      name="basic"
       initialValues={initialValues}
       onValuesChange={handleValuesChange}
     >
@@ -125,6 +124,11 @@ export default function SettingBuilder({ id }) {
                 </Form.Item>
               )
             }
+            return (
+              <Form.Item {...formItemProps}>
+                <schema.component />
+              </Form.Item>
+            )
           }
         })
       }
