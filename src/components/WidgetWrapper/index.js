@@ -14,9 +14,12 @@ export default function WidgetWrapper({
 }) {
 
   const store = useContext(context);
-  const { dispatch, pageConfig, hoveringWidgetId, configingWidgetId } = store;
+  const { dispatch, pageConfig, hoveringWidgetId, configingWidgetId, editMode } = store;
+
+  const preview = editMode === 'preview';
 
   const handleMouseEnter = (e) => {
+    if (preview) return;
     e.stopPropagation();
     dispatch({
       type: actions.SET_HOVERING_WIDGET,
@@ -25,6 +28,7 @@ export default function WidgetWrapper({
   }
 
   const handleMouseOver = (e) => {
+    if (preview) return;
     e.stopPropagation();
     dispatch({
       type: actions.SET_HOVERING_WIDGET,
@@ -33,6 +37,7 @@ export default function WidgetWrapper({
   }
 
   const handleMouseLeave = (e) => {
+    if (preview) return;
     e.stopPropagation();
     dispatch({
       type: actions.SET_HOVERING_WIDGET,
@@ -56,6 +61,7 @@ export default function WidgetWrapper({
   }
 
   const handleDragStart = (e) => {
+    if (preview) return;
     const data = {
       type: 'widgetInstance',
       id: config.id,
@@ -67,15 +73,18 @@ export default function WidgetWrapper({
 
   const classes = useMemo(() => {
     let res = styles.widgetWrapper;
-    if (hoveringWidgetId === config.id) res += ` ${styles.hover}`;
-    if (configingWidgetId === config.id) res += ` ${styles.beingConfig}`;
+    if (editMode === 'edit') {
+      if (hoveringWidgetId === config.id) res += ` ${styles.hover}`;
+      if (configingWidgetId === config.id) res += ` ${styles.beingConfig}`;
+    }
     if (className) res += ` ${className}`;
     return res;
-  }, [config, className, hoveringWidgetId, configingWidgetId]);
+  }, [config, className, hoveringWidgetId, configingWidgetId, editMode]);
 
   return (
     <Dragable
       className={classes}
+      dragEnabled={editMode === 'edit'}
       onMouseEnter={handleMouseEnter}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
@@ -83,7 +92,7 @@ export default function WidgetWrapper({
       {...rest}
     >
       {
-        hovering &&
+        hovering && editMode === 'edit' &&
         <div className={styles.actions}>
           <Button
             className={styles.actionBtn}

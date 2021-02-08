@@ -18,7 +18,7 @@ export default function WidgetsContainer({
 }) {
 
   const store = useContext(context);
-  const { dispatch, pageConfig } = store;
+  const { dispatch, pageConfig, editMode } = store;
 
   const [isDragOver, setIsDragOver] = useState(false);
 
@@ -61,7 +61,6 @@ export default function WidgetsContainer({
    */
   const handleInsertWidget = ({ type, id }, index) => {
     if (!type || !id) return;
-    console.log('will insert', type, id);
     if (type === 'widgetClass') {
       const widgetId = id;
       const newId = `${widgetId}_${new Date().valueOf()}`;
@@ -103,9 +102,10 @@ export default function WidgetsContainer({
   const classes = useMemo(() => {
     let res = styles.widgetsContainer;
     if (isDragOver) res += ` ${styles.dragOver}`;
+    if (editMode === 'preview') res += ` ${styles.preview}`;
     if (className) res += ` ${className}`;
     return res;
-  }, [config, className, isDragOver]);
+  }, [config, className, isDragOver, editMode]);
 
   return (
     <WidgetWrapper
@@ -128,17 +128,20 @@ export default function WidgetsContainer({
               return (
                 <Fragment key={c.id}>
                   {
-                    index === 0 &&
+                    index === 0 && editMode === 'edit' &&
                     <Divider
                       containerSettings={config.settings}
                       onDrop={data => { handleInsertWidget(data, index) }}
                     />
                   }
                   <widget.component config={c} />
-                  <Divider
-                    containerSettings={config.settings}
-                    onDrop={data => { handleInsertWidget(data, index + 1) }}
-                  />
+                  {
+                    editMode === 'edit' &&
+                    <Divider
+                      containerSettings={config.settings}
+                      onDrop={data => { handleInsertWidget(data, index + 1) }}
+                    />
+                  }
                 </Fragment>
               )
             })

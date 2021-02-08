@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import styles from './styles.module.scss';
 
 export default function Dragable({
+  dragEnabled = true,
   children,
   className,
   style,
@@ -30,7 +31,7 @@ export default function Dragable({
       className={`${styles.draggable} ${isDragging ? styles.dragging : ''} ${className}`}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      draggable="true"
+      draggable={dragEnabled ? "true" : "false"}
       style={style}
       {...rest}
     >

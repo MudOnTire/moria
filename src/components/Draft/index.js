@@ -1,4 +1,5 @@
 import React, { useContext, useMemo } from 'react';
+import { useHistory } from 'react-router';
 import { Button, Tooltip } from 'antd';
 import { DesktopOutlined, TabletOutlined, MobileOutlined, FundViewOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
@@ -20,6 +21,7 @@ const SCREEN_HEIGHTs = {
 
 export default function Draft() {
 
+  const history = useHistory();
   const store = useContext(context);
   const { dispatch, pageConfig, configingWidgetId, deviceType } = store;
 
@@ -31,7 +33,7 @@ export default function Draft() {
   }
 
   const goPreview = () => {
-
+    history.push('/preview');
   }
 
   const style = useMemo(() => {

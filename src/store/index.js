@@ -8,7 +8,8 @@ const actions = {
   DELETE_WIDGET_CONFIG: 'DELETE_WIDGET_CONFIG', // 删除widget的config
   SET_HOVERING_WIDGET: 'SET_HOVERING_WIDGET', // 设置当前hover的widget
   UPDATE_WIDGET_SETTINGS: 'UPDATE_WIDGET_SETTINGS', // 设置widget的settings
-  SET_DEVICE_TYPE: 'SET_DEVICE_TYPE' // Draft 的屏幕宽度
+  SET_DEVICE_TYPE: 'SET_DEVICE_TYPE', // Draft 的屏幕宽度
+  SET_EDIT_MODE: 'SET_EDIT_MODE' // 设置是否是edit还是preview模式
 }
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   configingWidgetId: '', // 正在被设置的widget id
   hoveringWidgetId: '', // 当前hover的widget id
   deviceType: 'desktop', // desktop, tablet, mobile
+  editMode: 'edit', // edit, preview
   dispatch: () => { },
 };
 
@@ -72,6 +74,12 @@ function reducer(state, action) {
       return {
         ...state,
         deviceType: payload
+      }
+    }
+    case actions.SET_EDIT_MODE: {
+      return {
+        ...state,
+        editMode: payload
       }
     }
     default:
