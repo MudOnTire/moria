@@ -40,11 +40,17 @@ export default function Table({ config }) {
   }, [finalSettings.api]);
   // api end
 
+  // useEffect(() => {
+  //   const columns = finalSettings.columns; 
+  //   debugger
+  //   setData([...data]);
+  // }, [finalSettings.columns.length])
+
   return (
     <WidgetWrapper config={config}>
       <AntTable
         {...antSettings}
-        columns={finalSettings.columns}
+        columns={[...finalSettings.columns]}
         dataSource={data}
         rowKey={finalSettings.rowKey}
       />

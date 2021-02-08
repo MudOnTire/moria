@@ -42,6 +42,7 @@ export default function SettingBuilder({ id }) {
   useEffect(form.resetFields, [widget]);
 
   const handleValuesChange = (changedValue, allValues) => {
+    // debugger
     console.log('value changed', changedValue, allValues);
     if (widget.widgetId === WIDGET_IDs.DATA_DISPLAY_CAROUSEL) {
       if (typeof changedValue.count !== 'undefined') {

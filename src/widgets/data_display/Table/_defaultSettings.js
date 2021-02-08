@@ -4,24 +4,24 @@ export default {
   api: 'https://jsonplaceholder.typicode.com/posts',
   columns: [
     {
+      id: 1,
       title: 'Id',
-      dataIndex: 'id',
-      key: 'id'
+      dataIndex: 'id'
     },
     {
+      id: 2,
       title: 'User Id',
-      dataIndex: 'userId',
-      key: 'userId'
+      dataIndex: 'userId'
     },
     {
+      id: 3,
       title: 'Title',
-      dataIndex: 'title',
-      key: 'title',
+      dataIndex: 'title'
     },
     {
+      id: 4,
       title: 'Body',
-      dataIndex: 'body',
-      key: 'body',
+      dataIndex: 'body'
     }
   ],
   rowKey: 'id',
