@@ -46,7 +46,7 @@ export default function Draft() {
 
 
   return (
-    <div 
+    <div
       className={`${styles.draftContainer} ${configingWidgetId && styles.showSettingDrawer}`}
     >
       <div className={styles.draftActions}>
@@ -54,6 +54,7 @@ export default function Draft() {
           <Button
             type="text"
             icon={<DesktopOutlined />}
+            className={deviceType === 'desktop' ? styles.activeDevice : ''}
             onClick={() => { changeScreenSize('desktop') }}
           />
         </Tooltip>
@@ -61,6 +62,7 @@ export default function Draft() {
           <Button
             type="text"
             icon={<TabletOutlined />}
+            className={deviceType === 'tablet' ? styles.activeDevice : ''}
             onClick={() => { changeScreenSize('tablet') }}
           />
         </Tooltip>
@@ -68,6 +70,7 @@ export default function Draft() {
           <Button
             type="text"
             icon={<MobileOutlined />}
+            className={deviceType === 'mobile' ? styles.activeDevice : ''}
             onClick={() => { changeScreenSize('mobile') }}
           />
         </Tooltip>
