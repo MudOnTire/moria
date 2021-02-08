@@ -25,4 +25,5 @@ export default {
     }
   ],
   rowKey: 'id',
+  width: null,
 }

@@ -3,12 +3,13 @@ import {
   Input,
   Button
 } from 'antd';
-import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, MinusCircleOutlined, UpCircleOutlined, DownCircleOutlined } from '@ant-design/icons';
 
 import styles from './styles.module.scss';
 
 export default function ColumnsSetting({ value = [], onChange = () => { } }) {
   const [values, setValues] = useState(null);
+  const [expanded, setExpanded] = useState(true);
 
   useEffect(() => {
     setValues(value);
@@ -42,8 +43,17 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
     });
   }
 
+  const toggle = () => {
+    setExpanded(!expanded);
+  }
+
   return (
-    <div className={styles.columns}>
+    <div className={`${styles.columns} ${expanded ? styles.expanded : styles.folded}`}>
+      <Button
+        type="text"
+        icon={expanded ? <UpCircleOutlined /> : <DownCircleOutlined />}
+        onClick={toggle}
+      />
       {
         values?.map((val, index) => {
           return (
@@ -61,6 +71,13 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
                   <Input
                     value={val.dataIndex}
                     onChange={(e) => handleValueChange('dataIndex', e.target.value, index)}
+                  />
+                </div>
+                <div className={styles.formItem}>
+                  <label>Width:</label>
+                  <Input
+                    value={val.width}
+                    onChange={(e) => handleValueChange('width', e.target.value, index)}
                   />
                 </div>
               </div>

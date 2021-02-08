@@ -34,4 +34,10 @@ export default [
     type: 'string',
     desc: `Row's unique key, could be a string`
   },
+  {
+    id: 'width',
+    label: 'Width',
+    type: 'string',
+    desc: `Width of this column`
+  },
 ]
