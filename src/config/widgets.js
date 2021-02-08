@@ -26,7 +26,7 @@ const widgets = [
         component: Carousel
       },
       {
-        widgetId: WIDGET_IDs.DATA_DISPLAY_Table,
+        widgetId: WIDGET_IDs.DATA_DISPLAY_TABLE,
         name: "Table",
         component: Table
       },

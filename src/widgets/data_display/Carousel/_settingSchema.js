@@ -1,4 +1,4 @@
-import Slides from './Slides';
+import SlidesSetting from './SlidesSetting';
 
 export default [
   {
@@ -12,7 +12,7 @@ export default [
     label: 'Slides',
     type: 'array<string>',
     desc: 'Slide images',
-    component: Slides
+    component: SlidesSetting
   },
   {
     id: 'height',

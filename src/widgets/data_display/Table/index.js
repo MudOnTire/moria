@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Table as AntTable, Tag, Space } from 'antd';
 import WidgetWrapper from 'Src/components/WidgetWrapper';
+import defaultSettings from 'Src/config/defaultSettings';
+import settingSchemas from 'Src/config/settingSchemas';
 
 const columns = [
   {
@@ -76,9 +78,32 @@ const data = [
 ];
 
 export default function Image({ config }) {
+
+  const finalSettings = useMemo(() => {
+    return {
+      ...defaultSettings[config.widgetId],
+      ...config.settings
+    }
+  }, [config]);
+
+  const antSettings = useMemo(() => {
+    const antSettingIds = settingSchemas[config.widgetId].filter(s => s.antSetting).map(s => s.id);
+    const result = {};
+    for (const key in finalSettings) {
+      if (antSettingIds.includes(key)) {
+        result[key] = finalSettings[key]
+      }
+    }
+    return result;
+  }, [finalSettings]);
+
   return (
     <WidgetWrapper config={config}>
-      <AntTable columns={columns} dataSource={data} />
+      <AntTable
+        columns={columns}
+        dataSource={data}
+        {...antSettings}
+      />
     </WidgetWrapper >
   )
 }
