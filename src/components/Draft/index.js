@@ -20,7 +20,7 @@ export default function Draft() {
   }
 
   return (
-    <div className={styles.draftContainer}>
+    <div className={`${styles.draftContainer} ${configingWidgetId && styles.showSettingDrawer}`}>
       <div className={styles.draftActions}>
         <Button
           className={styles.actionBtn}
@@ -51,7 +51,7 @@ export default function Draft() {
         onDoubleClick={() => {
           console.log('pageConfig', pageConfig);
         }}
-        className={`${styles.draft} ${configingWidgetId && styles.showSettingDrawer}`}
+        className={styles.draft}
         config={pageConfig}
       />
     </div>
