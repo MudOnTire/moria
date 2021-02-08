@@ -1,8 +1,9 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { Table as AntTable, Tag, Space } from 'antd';
 import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
+import request from 'Src/uitls/request';
 
 const columns = [
   {
@@ -96,6 +97,15 @@ export default function Image({ config }) {
     }
     return result;
   }, [finalSettings]);
+
+  // api start
+  const fetchData = async () => {
+    const res = await axios.get(finalSettings.api);
+    console.log('table res', res);
+  }
+
+  useEffect(fetchData, [finalSettings.api]);
+  // api end
 
   return (
     <WidgetWrapper config={config}>

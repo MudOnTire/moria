@@ -13,4 +13,10 @@ export default [
     antSetting: true,
     desc: 'Set sticky header and scroll bar',
   },
+  {
+    id: 'api',
+    label: 'Source API',
+    type: 'string',
+    desc: 'API to fetch source data',
+  },
 ]
