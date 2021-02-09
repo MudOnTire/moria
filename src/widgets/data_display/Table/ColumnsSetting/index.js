@@ -13,6 +13,11 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
 
   const handleValueChange = (key, val, index) => {
     setValues((vals) => {
+      if (key === 'dataIndex') {
+        if (val?.indexOf('.') > 0) {
+          val = val.split('.');
+        }
+      }
       vals[index][key] = val;
       onChange(vals);
       return vals;

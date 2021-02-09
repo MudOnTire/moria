@@ -1,7 +1,7 @@
 export default {
   bordered: true,
   sticky: true,
-  api: 'https://jsonplaceholder.typicode.com/posts',
+  api: 'https://jsonplaceholder.typicode.com/users',
   columns: [
     {
       id: 1,
@@ -10,18 +10,23 @@ export default {
     },
     {
       id: 2,
-      title: 'User Id',
-      dataIndex: 'userId'
+      title: 'Name',
+      dataIndex: 'name'
     },
     {
       id: 3,
-      title: 'Title',
-      dataIndex: 'title'
+      title: 'Email',
+      dataIndex: 'email'
     },
     {
       id: 4,
-      title: 'Body',
-      dataIndex: 'body'
+      title: 'Phone',
+      dataIndex: 'phone'
+    },
+    {
+      id: 5,
+      title: 'Website',
+      dataIndex: 'website'
     }
   ],
   rowKey: 'id',
