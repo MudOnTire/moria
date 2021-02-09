@@ -12,6 +12,7 @@
     "codemirror": "^5.59.2",
     "nanoid": "^3.1.20",
     "react": "^17.0.1",
+    "react-codemirror2": "^7.2.1",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
