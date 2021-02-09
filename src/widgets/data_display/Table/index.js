@@ -41,8 +41,10 @@ export default function Table({ config }) {
     const fetchData = async () => {
       const res = await request.get(finalSettings.api);
       console.log('table res', res);
-      if (res?.data) {
+      if (res?.data && Array.isArray(res.data)) {
         setData(res.data);
+      } else {
+        setData([]);
       }
     }
     fetchData();

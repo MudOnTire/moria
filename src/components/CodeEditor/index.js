@@ -22,7 +22,6 @@ export default function CodeEditor({ value, onChange }) {
           lineNumbers: true
         }}
         onChange={(editor, data, value) => {
-          console.log('code editor change', editor, data, value);
           onChange(value);
         }}
       />

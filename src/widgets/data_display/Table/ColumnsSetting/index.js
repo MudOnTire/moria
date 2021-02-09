@@ -146,6 +146,7 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
             ...codeEditorInfo,
             visible: false
           });
+          setCodeEditorDraft('');
         }}
       >
         <CodeEditor

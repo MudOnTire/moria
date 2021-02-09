@@ -48,6 +48,14 @@ export default function SettingBuilder({ id }) {
         setRenderTrigger(new Date().valueOf());
       }
     }
+    if (widget.widgetId === WIDGET_IDs.DATA_DISPLAY_TABLE) {
+      if (typeof changedValue.api !== 'undefined') {
+        allValues.columns?.forEach(column => {
+          column.render = null;
+          column.renderStr = null;
+        });
+      }
+    }
     dispatch({
       type: actions.UPDATE_WIDGET_SETTINGS,
       payload: {
