@@ -20,6 +20,7 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
     colValue: null,
     colIndex: null
   });
+  const [codeEditorDraft, setCodeEditorDraft] = useState('');
 
   const handleValueChange = (key, val, index) => {
     setValues((vals) => {
@@ -97,7 +98,9 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
                   <label>Render:</label>
                   <TextArea
                     value={val.renderStr}
-                    onFocus={() => { showCodeEditor('renderStr', val.renderStr, index) }}
+                    onClick={(e) => {
+                      showCodeEditor('renderStr', val.renderStr, index);
+                    }}
                   />
                 </div>
                 <div className={styles.formItem}>
@@ -125,16 +128,27 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
         onClick={addCol}
       />
       <Modal
+        width={600}
         title="Code Editor"
         visible={codeEditorInfo.visible}
-        onOk={() => { }}
-        onCancel={() => { }}
+        onOk={() => {
+          setCodeEditorInfo({
+            ...codeEditorInfo,
+            visible: false
+          });
+          handleValueChange(codeEditorInfo.colKey, codeEditorDraft || codeEditorInfo.colValue, codeEditorInfo.colIndex);
+        }}
+        onCancel={() => {
+          setCodeEditorInfo({
+            ...codeEditorInfo,
+            visible: false
+          });
+        }}
       >
         <CodeEditor
           value={codeEditorInfo.colValue}
-          onChange={(value) => {
-            handleValueChange(codeEditorInfo.colKey, value, codeEditorInfo.colIndex)
-          }} />
+          onChange={setCodeEditorDraft}
+        />
       </Modal>
     </div >
   )

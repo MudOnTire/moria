@@ -23,6 +23,7 @@ export default function CodeEditor({ value, onChange }) {
         }}
         onChange={(editor, data, value) => {
           console.log('code editor change', editor, data, value);
+          onChange(value);
         }}
       />
     </div>
