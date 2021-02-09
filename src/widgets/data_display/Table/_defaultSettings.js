@@ -33,7 +33,13 @@ export default {
       id: 6,
       title: 'Address',
       dataIndex: 'address',
-      renderStr: `()=>{console.log('render function')}`
+      renderStr: '(address) => `${address.city}, ${address.street}`'
+    },
+    {
+      id: 7,
+      title: 'Company',
+      dataIndex: 'company',
+      renderStr: '(company) => company.name'
     }
   ],
   rowKey: 'id',

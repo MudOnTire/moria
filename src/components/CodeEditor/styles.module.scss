@@ -1,5 +1,11 @@
+.editor :global(.CodeMirror) {
+  height: 500px;
+}
+
 .editor {
-  & > div {
-    height: 600px;
+  :global {
+    .CodeMirror-scroll {
+      margin-right: 0;
+    }
   }
 }

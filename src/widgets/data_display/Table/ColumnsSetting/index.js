@@ -18,7 +18,8 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
     visible: false,
     colKey: null,
     colValue: null,
-    colIndex: null
+    colIndex: null,
+    colLabel: null,
   });
   const [codeEditorDraft, setCodeEditorDraft] = useState('');
 
@@ -35,12 +36,13 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
     });
   }
 
-  const showCodeEditor = (key, val, index) => {
+  const showCodeEditor = (key, val, index, label) => {
     setCodeEditorInfo({
       visible: true,
       colKey: key,
       colValue: val,
-      colIndex: index
+      colIndex: index,
+      colLabel: label
     });
   }
 
@@ -99,7 +101,7 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
                   <TextArea
                     value={val.renderStr}
                     onClick={(e) => {
-                      showCodeEditor('renderStr', val.renderStr, index);
+                      showCodeEditor('renderStr', val.renderStr, index, 'Render');
                     }}
                   />
                 </div>
@@ -129,8 +131,9 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
       />
       <Modal
         width={600}
-        title="Code Editor"
+        title={`Editing: columns[${codeEditorInfo.colIndex}].${codeEditorInfo.colLabel}`}
         visible={codeEditorInfo.visible}
+        centered={true}
         onOk={() => {
           setCodeEditorInfo({
             ...codeEditorInfo,
