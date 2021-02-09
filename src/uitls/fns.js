@@ -219,6 +219,10 @@ function throttle(fn, wait) {
   }
 }
 
+function createFunction(str) {
+  return Function(`"use strict";return (${str})`)();
+}
+
 export {
   removeTreeItem,
   getTreeItem,
@@ -226,5 +230,6 @@ export {
   moveTreeItem,
   insertTreeItem,
   updateTreeItem,
-  throttle
+  throttle,
+  createFunction,
 }

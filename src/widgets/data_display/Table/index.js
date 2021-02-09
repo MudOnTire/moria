@@ -4,6 +4,7 @@ import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
 import request from 'Src/uitls/request';
+import { createFunction } from 'Src/uitls/fns';
 
 export default function Table({ config }) {
 
@@ -16,7 +17,9 @@ export default function Table({ config }) {
     }
     result.columns?.forEach(column => {
       if (column.renderStr) {
-        column.render = eval(column.renderStr); 
+        column.render = createFunction(column.renderStr);
+      } else {
+        column.render = null;
       }
     });
     return result;

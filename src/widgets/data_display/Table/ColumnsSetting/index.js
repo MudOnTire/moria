@@ -139,7 +139,7 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
             ...codeEditorInfo,
             visible: false
           });
-          handleValueChange(codeEditorInfo.colKey, codeEditorDraft || codeEditorInfo.colValue, codeEditorInfo.colIndex);
+          handleValueChange(codeEditorInfo.colKey, codeEditorDraft, codeEditorInfo.colIndex);
         }}
         onCancel={() => {
           setCodeEditorInfo({
