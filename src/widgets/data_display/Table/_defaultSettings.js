@@ -33,10 +33,7 @@ export default {
       id: 6,
       title: 'Address',
       dataIndex: 'address',
-      render: function (address, record, index) {
-        const { suite, street, city } = address;
-        return `${suite}, ${street}, ${city}`;
-      }
+      renderStr: `()=>{console.log('render function')}`
     }
   ],
   rowKey: 'id',

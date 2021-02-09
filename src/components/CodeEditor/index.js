@@ -5,7 +5,7 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 
-import styles from './styles.module.scss'; 
+import styles from './styles.module.scss';
 
 export default function CodeEditor({ value, onChange }) {
 
@@ -22,6 +22,7 @@ export default function CodeEditor({ value, onChange }) {
           lineNumbers: true
         }}
         onChange={(editor, data, value) => {
+          console.log('code editor change', editor, data, value);
         }}
       />
     </div>

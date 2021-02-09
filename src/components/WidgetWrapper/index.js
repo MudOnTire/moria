@@ -21,6 +21,7 @@ export default function WidgetWrapper({
   const handleMouseEnter = (e) => {
     if (preview) return;
     e.stopPropagation();
+    if (hoveringWidgetId === config.id) return;
     dispatch({
       type: actions.SET_HOVERING_WIDGET,
       payload: config.id
@@ -30,6 +31,7 @@ export default function WidgetWrapper({
   const handleMouseOver = (e) => {
     if (preview) return;
     e.stopPropagation();
+    if (hoveringWidgetId === config.id) return;
     dispatch({
       type: actions.SET_HOVERING_WIDGET,
       payload: config.id

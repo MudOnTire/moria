@@ -10,10 +10,16 @@ export default function Table({ config }) {
   const [data, setData] = useState([]);
 
   const finalSettings = useMemo(() => {
-    return {
+    const result = {
       ...defaultSettings[config.widgetId],
       ...config.settings
     }
+    result.columns?.forEach(column => {
+      if (column.renderStr) {
+        column.render = eval(column.renderStr); 
+      }
+    });
+    return result;
   }, [config]);
 
   const antSettings = useMemo(() => {
@@ -48,13 +54,13 @@ export default function Table({ config }) {
         dataSource={data}
         rowKey={finalSettings.rowKey}
       />
-      {
+      {/* {
         <>
-          {/* <h3>Config:{JSON.stringify(config)}</h3>
-          <h3>defaultSettings:{JSON.stringify(defaultSettings[config.widgetId])}</h3> */}
+          <h3>Config:{JSON.stringify(config)}</h3>
+          <h3>defaultSettings:{JSON.stringify(defaultSettings[config.widgetId])}</h3>
           <h3>FinalSettings:{JSON.stringify(finalSettings)}</h3>
         </>
-      }
+      } */}
     </WidgetWrapper >
   )
 }

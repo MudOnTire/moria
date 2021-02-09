@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import {
   Input,
-  Button
+  Button,
+  Modal
 } from 'antd';
 import { PlusCircleOutlined, MinusCircleOutlined, UpCircleOutlined, DownCircleOutlined } from '@ant-design/icons';
+import CodeEditor from 'Src/components/CodeEditor';
 
 import styles from './styles.module.scss';
+
+const { TextArea } = Input;
 
 export default function ColumnsSetting({ value = [], onChange = () => { } }) {
   const [values, setValues] = useState(value);
   const [expanded, setExpanded] = useState(true);
+  const [codeEditorInfo, setCodeEditorInfo] = useState({
+    visible: false,
+    colKey: null,
+    colValue: null,
+    colIndex: null
+  });
 
   const handleValueChange = (key, val, index) => {
     setValues((vals) => {
@@ -21,6 +31,15 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
       vals[index][key] = val;
       onChange(vals);
       return vals;
+    });
+  }
+
+  const showCodeEditor = (key, val, index) => {
+    setCodeEditorInfo({
+      visible: true,
+      colKey: key,
+      colValue: val,
+      colIndex: index
     });
   }
 
@@ -75,6 +94,13 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
                   />
                 </div>
                 <div className={styles.formItem}>
+                  <label>Render:</label>
+                  <TextArea
+                    value={val.renderStr}
+                    onFocus={() => { showCodeEditor('renderStr', val.renderStr, index) }}
+                  />
+                </div>
+                <div className={styles.formItem}>
                   <label>Width:</label>
                   <Input
                     value={val.width}
@@ -98,6 +124,18 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
         icon={<PlusCircleOutlined />}
         onClick={addCol}
       />
-    </div>
+      <Modal
+        title="Code Editor"
+        visible={codeEditorInfo.visible}
+        onOk={() => { }}
+        onCancel={() => { }}
+      >
+        <CodeEditor
+          value={codeEditorInfo.colValue}
+          onChange={(value) => {
+            handleValueChange(codeEditorInfo.colKey, value, codeEditorInfo.colIndex)
+          }} />
+      </Modal>
+    </div >
   )
 }
