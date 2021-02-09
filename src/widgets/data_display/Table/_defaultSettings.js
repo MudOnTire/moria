@@ -6,7 +6,8 @@ export default {
     {
       id: 1,
       title: 'Id',
-      dataIndex: 'id'
+      dataIndex: 'id',
+      width: '60px'
     },
     {
       id: 2,
@@ -27,6 +28,15 @@ export default {
       id: 5,
       title: 'Website',
       dataIndex: 'website'
+    },
+    {
+      id: 6,
+      title: 'Address',
+      dataIndex: 'address',
+      render: function (address, record, index) {
+        const { suite, street, city } = address;
+        return `${suite}, ${street}, ${city}`;
+      }
     }
   ],
   rowKey: 'id',
