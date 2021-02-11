@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Tree, Button } from 'antd';
-import { PlusCircleOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, EditOutlined } from '@ant-design/icons';
 import EditModal from './EditModal';
+import { getStorePages, setStorePages } from 'Src/uitls/fns';
 
 import styles from './styles.module.scss';
 
 export default function PageList() {
 
   const [pages, setPages] = useState([]);
-  const [seletedPage, setSeletedPage] = useState(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(null);
+  const [selectedPage, setSelectedPage] = useState(null);
+  const [editPage, setEditPage] = useState(null);
   const [editModalVisible, setEditModalVisible] = useState(false);
 
   // api start
   const fetchPages = () => {
-    let pages = JSON.parse(localStorage.getItem('moria-pages'));
+    let pages = getStorePages();
     if (!pages) {
       pages = [{
         title: 'Home',
@@ -24,15 +27,21 @@ export default function PageList() {
         key: 'test',
         description: 'Test page'
       }];
-      localStorage.setItem('moria-pages', JSON.stringify(pages));
+      setStorePages(pages);
     }
     setPages(pages);
   }
 
-  useEffect(fetchPages, []);
+  useEffect(fetchPages, [refreshTrigger]);
   // api end
 
   const onAdd = () => {
+    setEditPage(null);
+    setEditModalVisible(true);
+  }
+
+  const onEdit = () => {
+    setEditPage(selectedPage);
     setEditModalVisible(true);
   }
 
@@ -40,7 +49,7 @@ export default function PageList() {
     console.log('selectedKeys', selectedKeys);
     const key = selectedKeys[0];
     const page = pages.find(p => p.key === key);
-    setSeletedPage(page);
+    setSelectedPage(page);
   }
 
   const onCheck = (checkedKeys) => {
@@ -50,6 +59,15 @@ export default function PageList() {
   return (
     <div className={styles.pageList}>
       <div className={styles.actions}>
+        {
+          selectedPage &&
+          <Button
+            className={styles.addBtn}
+            type="text"
+            icon={<EditOutlined />}
+            onClick={onEdit}
+          />
+        }
         <Button
           className={styles.addBtn}
           type="text"
@@ -68,7 +86,12 @@ export default function PageList() {
           :
           <p>No papes found!</p>
       }
-      <EditModal visible={editModalVisible} onClose={() => { setEditModalVisible(false) }} />
+      <EditModal
+        page={editPage}
+        visible={editModalVisible}
+        onClose={() => { setEditModalVisible(false) }}
+        onSaved={() => { setRefreshTrigger(new Date().valueOf()) }}
+      />
     </div>
   )
 }

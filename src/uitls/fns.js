@@ -1,3 +1,5 @@
+import { PAGES_STORE_KEY } from 'Src/common/constants';
+
 function removeTreeItem(tree, id) {
   function traverse(tree, id) {
     for (let i = 0; i < tree.length; i++) {
@@ -223,6 +225,15 @@ function createFunction(str) {
   return Function(`"use strict";return (${str})`)();
 }
 
+function getStorePages() {
+  let pages = JSON.parse(localStorage.getItem(PAGES_STORE_KEY));
+  return pages;
+}
+
+function setStorePages(pages) {
+  localStorage.setItem(PAGES_STORE_KEY, JSON.stringify(pages));
+}
+
 export {
   removeTreeItem,
   getTreeItem,
@@ -232,4 +243,6 @@ export {
   updateTreeItem,
   throttle,
   createFunction,
+  getStorePages,
+  setStorePages
 }
