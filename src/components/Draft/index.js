@@ -1,8 +1,9 @@
-import React, { useContext, useMemo } from 'react';
-import { context } from 'Src/store';
+import React, { useContext, useMemo, useEffect } from 'react';
+import { context, getInitialState, actions } from 'Src/store';
 import { Empty } from 'antd';
 import WidgetsContainer from 'Src/widgets/container/WidgetsContainer';
 import TopBar from './TopBar';
+import { getStorePage } from 'Src/uitls/fns';
 
 import styles from './styles.module.scss';
 
@@ -21,7 +22,7 @@ const SCREEN_HEIGHTs = {
 export default function Draft() {
 
   const store = useContext(context);
-  const { pageConfig, configingWidgetId, deviceType, currentPage } = store;
+  const { dispatch, pageConfig, configingWidgetId, deviceType, currentPage } = store;
 
   const style = useMemo(() => {
     const result = {
@@ -32,6 +33,14 @@ export default function Draft() {
     };
     return result;
   }, [deviceType])
+
+  useEffect(() => {
+    const page = getStorePage(currentPage);
+    dispatch({
+      type: actions.UPDATE_PAGE_CONFIG,
+      payload: page?.config || getInitialState().pageConfig
+    });
+  }, [currentPage]);
 
   return (
     <div className={`${styles.draftContainer} ${configingWidgetId && styles.showSettingDrawer}`}>

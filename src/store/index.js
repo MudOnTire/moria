@@ -13,20 +13,24 @@ const actions = {
   SET_EDIT_MODE: 'SET_EDIT_MODE' // 设置是否是edit还是preview模式
 }
 
-const initialState = {
-  currentPage: null, // current editing page's key
-  pageConfig: {
-    id: 'root',
-    widgetId: WIDGET_IDs.WIDGET_CONTAINER, // 组件类型Id
-    children: [], // 子组件
-    settings: {} // 该组件的相关配置
-  }, // 页面配置文件
-  configingWidgetId: '', // 正在被设置的widget id
-  hoveringWidgetId: '', // 当前hover的widget id
-  deviceType: 'desktop', // desktop, tablet, mobile
-  editMode: 'edit', // edit, preview
-  dispatch: () => { },
-};
+function getInitialState() {
+  return {
+    currentPage: null, // current editing page's key
+    pageConfig: {
+      id: 'root',
+      widgetId: WIDGET_IDs.WIDGET_CONTAINER, // 组件类型Id
+      children: [], // 子组件
+      settings: {} // 该组件的相关配置
+    }, // 页面配置文件
+    configingWidgetId: '', // 正在被设置的widget id
+    hoveringWidgetId: '', // 当前hover的widget id
+    deviceType: 'desktop', // desktop, tablet, mobile
+    editMode: 'edit', // edit, preview
+    dispatch: () => { }
+  }
+}
+
+const initialState = getInitialState();
 
 function reducer(state, action) {
   const { type, payload } = action;
@@ -101,4 +105,4 @@ function StoreProvider(props) {
   return <context.Provider value={state}>{children}</context.Provider>;
 }
 
-export { context, StoreProvider, actions };
+export { context, StoreProvider, actions, getInitialState };
