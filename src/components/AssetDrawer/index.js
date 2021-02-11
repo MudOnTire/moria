@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tabs } from 'antd';
+import PageList from '../PageList';
 import WidgetList from '../WidgetList';
 
 import styles from './styles.module.scss';
@@ -11,7 +12,7 @@ export default function AssetDrawer() {
     <div className={styles.assetDrawer}>
       <Tabs defaultActiveKey="1">
         <TabPane tab="Pages" key="1">
-          Pages        
+          <PageList />
         </TabPane>
         <TabPane tab="Widgets" key="2">
           <WidgetList />

@@ -1,0 +1,12 @@
+.pageList {
+  :global {
+    .ant-tree {
+      background-color: transparent;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
