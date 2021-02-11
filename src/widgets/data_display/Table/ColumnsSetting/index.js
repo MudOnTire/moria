@@ -82,6 +82,7 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
           return (
             <div className={styles.colItem} key={val.id}>
               <div className={styles.colForm}>
+                <h3 className={styles.colIndex}>{index + 1}</h3>
                 <div className={styles.formItem}>
                   <label>Title:</label>
                   <Input

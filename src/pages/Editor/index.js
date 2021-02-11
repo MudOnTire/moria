@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { context, actions } from 'Src/store';
-import WidgetList from 'Src/components/WidgetList';
+import AssetDrawer from 'Src/components/AssetDrawer';
 import Draft from 'Src/components/Draft';
 import SettingDrawer from 'Src/components/SettingDrawer';
 
@@ -20,7 +20,7 @@ export default function Editor() {
 
   return (
     <div className={styles.editor}>
-      <WidgetList />
+      <AssetDrawer />
       <Draft />
       <SettingDrawer />
     </div>
