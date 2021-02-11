@@ -43,7 +43,7 @@ export default function EditModal({
         }
         setStorePages(pages);
         onSaved();
-        onClose();
+        handleClose();
       })
       .catch(err => {
         console.log('validate err', err);

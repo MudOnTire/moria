@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Tree, Button } from 'antd';
-import { PlusCircleOutlined, EditOutlined } from '@ant-design/icons';
+import { Tree, Button, Popconfirm, message } from 'antd';
+import { PlusCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EditModal from './EditModal';
 import { getStorePages, setStorePages } from 'Src/uitls/fns';
 
@@ -11,6 +11,7 @@ export default function PageList() {
   const [pages, setPages] = useState([]);
   const [refreshTrigger, setRefreshTrigger] = useState(null);
   const [selectedPage, setSelectedPage] = useState(null);
+  const [checkedPages, setCheckedPages] = useState(null);
   const [editPage, setEditPage] = useState(null);
   const [editModalVisible, setEditModalVisible] = useState(false);
 
@@ -53,27 +54,46 @@ export default function PageList() {
   }
 
   const onCheck = (checkedKeys) => {
-    console.log('checkedKeys', checkedKeys);
+    setCheckedPages(checkedKeys)
+  }
+
+  const onDelele = () => {
+    const updated = pages.filter(p => !checkedPages.includes(p.key));
+    setStorePages(updated);
+    setPages(updated);
+    message.success('Page deleted successfully!');
   }
 
   return (
     <div className={styles.pageList}>
       <div className={styles.actions}>
+        <Button
+          type="text"
+          icon={<PlusCircleOutlined />}
+          onClick={onAdd}
+        />
         {
           selectedPage &&
           <Button
-            className={styles.addBtn}
             type="text"
             icon={<EditOutlined />}
             onClick={onEdit}
           />
         }
-        <Button
-          className={styles.addBtn}
-          type="text"
-          icon={<PlusCircleOutlined />}
-          onClick={onAdd}
-        />
+        {
+          checkedPages?.length > 0 &&
+          <Popconfirm
+            title="Are you sure to delete seleted page(s)?"
+            onConfirm={onDelele}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button
+              type="text"
+              icon={<DeleteOutlined />}
+            />
+          </Popconfirm>
+        }
       </div>
       {
         pages ?
