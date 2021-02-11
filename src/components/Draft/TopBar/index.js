@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { Button, Tooltip } from 'antd';
+import { Button, Tooltip, message } from 'antd';
 import { DesktopOutlined, TabletOutlined, MobileOutlined, FundViewOutlined, FilePptOutlined, SaveOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
-import { getStorePage } from 'Src/uitls/fns';
+import { getStorePage, getStorePages, setStorePages } from 'Src/uitls/fns';
 
 import styles from './styles.module.scss';
 
@@ -12,7 +12,7 @@ export default function TopBar() {
   const history = useHistory();
 
   const store = useContext(context);
-  const { dispatch, deviceType, currentPage } = store;
+  const { dispatch, deviceType, currentPage, pageConfig } = store;
 
   const [page, setPage] = useState(null);
 
@@ -31,7 +31,14 @@ export default function TopBar() {
     history.push('/preview');
   }
 
-  const save = () => { }
+  const save = () => {
+    const pages = getStorePages();
+    const index = pages.findIndex(p => p.key === currentPage);
+    if (index < 0) return;
+    pages[index].config = pageConfig;
+    setStorePages(pages);
+    message.success('Page config saved successfully!');
+  }
 
   return (
     <div className={styles.topBar}>
