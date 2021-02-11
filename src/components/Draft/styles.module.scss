@@ -28,18 +28,3 @@ $actionHeight: 38px;
 .header {
   min-height: 120px;
 }
-
-.draftActions {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: $actionHeight;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.activeDevice {
-  color: #1890ff !important;
-}

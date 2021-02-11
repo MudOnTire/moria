@@ -3,6 +3,7 @@ import WIDGET_IDs from 'Src/config/widgetIds';
 import { removeTreeItem, updateTreeItem } from 'Src/uitls/fns';
 
 const actions = {
+  SET_CURRENT_PAGE: 'SET_CURRENT_PAGE', // 设置当前页面
   UPDATE_PAGE_CONFIG: 'UPDATE_PAGE_CONFIG', // 更新页面配置文件
   SET_CONFIGING_WIDGET: 'SET_CONFIGING_WIDGET', // 设置正在被设置的widget的config
   DELETE_WIDGET_CONFIG: 'DELETE_WIDGET_CONFIG', // 删除widget的config
@@ -13,6 +14,7 @@ const actions = {
 }
 
 const initialState = {
+  currentPage: null, // current editing page's key
   pageConfig: {
     id: 'root',
     widgetId: WIDGET_IDs.WIDGET_CONTAINER, // 组件类型Id
@@ -29,6 +31,9 @@ const initialState = {
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
+    case actions.SET_CURRENT_PAGE: {
+      return { ...state, currentPage: payload };
+    }
     case actions.UPDATE_PAGE_CONFIG: {
       return { ...state, pageConfig: payload };
     }

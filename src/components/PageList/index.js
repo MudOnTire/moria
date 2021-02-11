@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Tree, Button, Popconfirm, message } from 'antd';
 import { PlusCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EditModal from './EditModal';
 import { getStorePages, setStorePages } from 'Src/uitls/fns';
+import { context, actions } from 'Src/store';
 
 import styles from './styles.module.scss';
 
 export default function PageList() {
+
+  const store = useContext(context);
+  const { dispatch, currentPage } = store;
 
   const [pages, setPages] = useState([]);
   const [refreshTrigger, setRefreshTrigger] = useState(null);
@@ -50,7 +54,12 @@ export default function PageList() {
     console.log('selectedKeys', selectedKeys);
     const key = selectedKeys[0];
     const page = pages.find(p => p.key === key);
+    if (!page) return;
     setSelectedPage(page);
+    dispatch({
+      type: actions.SET_CURRENT_PAGE,
+      payload: key
+    });
   }
 
   const onCheck = (checkedKeys) => {
