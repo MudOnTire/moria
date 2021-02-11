@@ -1,5 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import { context } from 'Src/store';
+import { Empty } from 'antd';
 import WidgetsContainer from 'Src/widgets/container/WidgetsContainer';
 import TopBar from './TopBar';
 
@@ -20,10 +21,7 @@ const SCREEN_HEIGHTs = {
 export default function Draft() {
 
   const store = useContext(context);
-  const { pageConfig, configingWidgetId, deviceType } = store;
-
-  console.log('configingWidgetId', configingWidgetId);
-
+  const { pageConfig, configingWidgetId, deviceType, currentPage } = store;
 
   const style = useMemo(() => {
     const result = {
@@ -38,14 +36,19 @@ export default function Draft() {
   return (
     <div className={`${styles.draftContainer} ${configingWidgetId && styles.showSettingDrawer}`}>
       <TopBar />
-      <WidgetsContainer
-        onDoubleClick={() => {
-          console.log('pageConfig', pageConfig);
-        }}
-        className={styles.draft}
-        config={pageConfig}
-        style={style}
-      />
+      {
+        currentPage ?
+          <WidgetsContainer
+            onDoubleClick={() => {
+              console.log('pageConfig', pageConfig);
+            }}
+            className={styles.draft}
+            config={pageConfig}
+            style={style}
+          />
+          :
+          <Empty description="Please select a page first" />
+      }
     </div>
   )
 }

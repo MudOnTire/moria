@@ -9,12 +9,6 @@ $actionHeight: 38px;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  :global {
-    .anticon {
-      margin-right: 8px;
-    }
-  }
 }
 
 .pageTitle {
@@ -24,6 +18,12 @@ $actionHeight: 38px;
   bottom: 0;
   line-height: $actionHeight;
   font-size: 22px;
+
+  :global {
+    .anticon {
+      margin-right: 8px;
+    }
+  }
 }
 
 .draftActions {
@@ -31,4 +31,14 @@ $actionHeight: 38px;
 
 .activeDevice {
   color: #1890ff !important;
+}
+
+.rightActions {
+  position: absolute;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

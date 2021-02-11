@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Button, Tooltip } from 'antd';
-import { DesktopOutlined, TabletOutlined, MobileOutlined, FundViewOutlined, FilePptOutlined } from '@ant-design/icons';
+import { DesktopOutlined, TabletOutlined, MobileOutlined, FundViewOutlined, FilePptOutlined, SaveOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import { getStorePage } from 'Src/uitls/fns';
 
@@ -30,6 +30,8 @@ export default function TopBar() {
   const goPreview = () => {
     history.push('/preview');
   }
+
+  const save = () => { }
 
   return (
     <div className={styles.topBar}>
@@ -64,6 +66,15 @@ export default function TopBar() {
             type="text"
             icon={<FundViewOutlined />}
             onClick={goPreview}
+          />
+        </Tooltip>
+      </div>
+      <div className={styles.rightActions}>
+        <Tooltip title="Save">
+          <Button
+            type="text"
+            icon={<SaveOutlined />}
+            onClick={save}
           />
         </Tooltip>
       </div>

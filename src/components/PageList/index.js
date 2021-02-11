@@ -52,13 +52,17 @@ export default function PageList() {
 
   const onSelect = (selectedKeys) => {
     console.log('selectedKeys', selectedKeys);
-    const key = selectedKeys[0];
-    const page = pages.find(p => p.key === key);
-    if (!page) return;
+    let page;
+    if (selectedKeys.length <= 0) {
+      page = null;
+    } else {
+      const key = selectedKeys[0];
+      page = pages.find(p => p.key === key);
+    }
     setSelectedPage(page);
     dispatch({
       type: actions.SET_CURRENT_PAGE,
-      payload: key
+      payload: page?.key
     });
   }
 
