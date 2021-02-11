@@ -230,6 +230,12 @@ function getStorePages() {
   return pages;
 }
 
+function getStorePage(key) {
+  if (!key) return;
+  let pages = JSON.parse(localStorage.getItem(PAGES_STORE_KEY));
+  return pages?.find(p => p.key === key);
+}
+
 function setStorePages(pages) {
   localStorage.setItem(PAGES_STORE_KEY, JSON.stringify(pages));
 }
@@ -244,5 +250,6 @@ export {
   throttle,
   createFunction,
   getStorePages,
+  getStorePage,
   setStorePages
 }

@@ -1,6 +1,6 @@
 $actionHeight: 38px;
 
-.draftActions {
+.topBar {
   position: absolute;
   top: 0;
   left: 0;
@@ -9,6 +9,24 @@ $actionHeight: 38px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  :global {
+    .anticon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.pageTitle {
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  line-height: $actionHeight;
+  font-size: 22px;
+}
+
+.draftActions {
 }
 
 .activeDevice {
