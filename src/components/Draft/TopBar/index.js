@@ -88,14 +88,14 @@ export default function TopBar() {
         </Tooltip>
       </div>
       <div className={styles.rightActions}>
-        <Tooltip title="Save">
+        <Tooltip title="Save current page config">
           <Button
             type="text"
             icon={<SaveOutlined />}
             onClick={save}
           />
         </Tooltip>
-        <Tooltip title="Download config file">
+        <Tooltip title="Download pages' config">
           <Button
             type="text"
             icon={<DownloadOutlined />}

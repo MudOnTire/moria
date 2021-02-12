@@ -1,5 +1,5 @@
 import WIDGET_IDs from 'Src/config/widgetIds';
-import { WidgetsContainer, Image, Carousel, Table } from 'Src/widgets';
+import { WidgetsContainer, Image, Carousel, Table, Description } from 'Src/widgets';
 
 const widgets = [
   {
@@ -29,6 +29,11 @@ const widgets = [
         widgetId: WIDGET_IDs.DATA_DISPLAY_TABLE,
         name: "Table",
         component: Table
+      },
+      {
+        widgetId: WIDGET_IDs.DATA_DISPLAY_DESCRIPTION,
+        name: "Description",
+        component: Description
       },
     ]
   }
