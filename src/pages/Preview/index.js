@@ -1,15 +1,18 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { context, actions } from 'Src/store';
 import WidgetsContainer from 'Src/widgets/container/WidgetsContainer';
 
 import styles from './styles.module.scss';
 
-export default function Preview() {
+export default function Preview({ page }) {
 
   const store = useContext(context);
   const { dispatch, pageConfig } = store;
 
+  const [config, setConfig] = useState(null)
+
   useEffect(() => {
+    setConfig(page ? page?.config : pageConfig);
     dispatch({
       type: actions.SET_EDIT_MODE,
       payload: 'preview'
@@ -17,12 +20,17 @@ export default function Preview() {
   }, []);
 
   return (
-    <WidgetsContainer
-      className={styles.preview}
-      config={pageConfig}
-      onDoubleClick={() => {
-        console.log('pageConfig', pageConfig);
-      }}
-    />
+    <>
+      {
+        config &&
+        <WidgetsContainer
+          className={styles.preview}
+          config={config}
+          onDoubleClick={() => {
+            console.log('pageConfig', config);
+          }}
+        />
+      }
+    </>
   )
 }
