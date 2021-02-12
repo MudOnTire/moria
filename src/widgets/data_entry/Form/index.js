@@ -1,10 +1,12 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect, useState, Fragment } from 'react';
 import { Form as AntForm, Input, InputNumber, Select, Switch, DatePicker } from 'antd';
 import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
 import request from 'Src/uitls/request';
 import { createFunction } from 'Src/uitls/fns';
+
+const FormItem = AntForm.Item;
 
 export default function Form({ config }) {
 
@@ -38,39 +40,57 @@ export default function Form({ config }) {
       >
         {
           finalSettings?.items?.map(item => {
+            const { label, name } = item;
+            const formItemProps = {
+              label,
+              name
+            }
+
             return (
-              <AntForm.Item label={item.label} name={item.name} key={item.key}>
+              <Fragment key={name}>
                 {
                   item.type === 'input' &&
-                  <Input />
+                  <FormItem {...formItemProps}>
+                    <Input />
+                  </FormItem>
                 }
                 {
                   item.type === 'inputNumber' &&
-                  <InputNumber />
+                  <FormItem {...formItemProps}>
+                    <InputNumber />
+                  </FormItem>
                 }
                 {
                   item.type === 'select' &&
-                  <Select>
-                    {
-                      item.options?.map(option => {
-                        return <Select.Option key={option.value}>{option.label}</Select.Option>
-                      })
-                    }
-                  </Select>
+                  <FormItem {...formItemProps}>
+                    <Select>
+                      {
+                        item.options?.map(option => {
+                          return <Select.Option key={option.value}>{option.label}</Select.Option>
+                        })
+                      }
+                    </Select>
+                  </FormItem>
                 }
                 {
                   item.type === 'datepicker' &&
-                  <DatePicker />
+                  <FormItem {...formItemProps}>
+                    <DatePicker />
+                  </FormItem>
                 }
                 {
                   item.type === 'switch' &&
-                  <Switch />
+                  <FormItem {...formItemProps} valuePropName='checked'>
+                    <Switch />
+                  </FormItem>
                 }
                 {
                   item.type === 'textarea' &&
-                  <Input.TextArea />
+                  <FormItem {...formItemProps}>
+                    <Input.TextArea />
+                  </FormItem>
                 }
-              </AntForm.Item>
+              </Fragment>
             )
           })
         }

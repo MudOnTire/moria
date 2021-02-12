@@ -5,6 +5,7 @@ import {
   Select
 } from 'antd';
 import { PlusCircleOutlined, MinusCircleOutlined, UpCircleOutlined, DownCircleOutlined } from '@ant-design/icons';
+import OptionsInput from 'Src/components/OptionsInput';
 
 import styles from './styles.module.scss';
 
@@ -61,7 +62,7 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
       {
         values?.map((val, index) => {
           return (
-            <div className={styles.item} key={val.id}>
+            <div className={styles.item} key={val.name}>
               <div className={styles.itemForm}>
                 <div className={styles.formItem}>
                   <label>Label:</label>
@@ -89,8 +90,19 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
                     <Option value='select'>Select</Option>
                     <Option value='switch'>Switch</Option>
                     <Option value='radio'>Radio</Option>
+                    <Option value='datepicker'>Datepicker</Option>
                   </Select>
                 </div>
+                {
+                  val.type === 'select' &&
+                  <div className={styles.formItem}>
+                    <label>Options:</label>
+                    <OptionsInput
+                      value={val.options}
+                      onChange={(value) => handleValueChange('options', value, index)}
+                    />
+                  </div>
+                }
               </div>
               <Button
                 className={styles.removeBtn}

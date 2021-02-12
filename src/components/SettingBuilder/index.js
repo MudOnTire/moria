@@ -96,11 +96,9 @@ export default function SettingBuilder({ id }) {
           }
           if (schema.type === 'number') {
             return (
-              <>
-                <Form.Item {...formItemProps}>
-                  <InputNumber />
-                </Form.Item>
-              </>
+              <Form.Item {...formItemProps}>
+                <InputNumber />
+              </Form.Item>
             )
           }
           if (schema.type === 'boolean') {
