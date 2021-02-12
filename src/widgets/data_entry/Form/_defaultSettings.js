@@ -1,7 +1,7 @@
 export default {
-  padding: '10px',
+  padding: '10px 20px',
   layout: 'horizontal',
-  labelCol: 6,
+  labelCol: 3,
   api: 'https://jsonplaceholder.typicode.com/users',
   items: [
     {
@@ -20,10 +20,10 @@ export default {
       type: 'select',
       options: [
         {
-          key: 'Male',
+          label: 'Male',
           value: 'male',
         }, {
-          key: 'Female',
+          label: 'Female',
           value: 'female',
         }
       ]
@@ -31,12 +31,17 @@ export default {
     {
       label: 'Birthday',
       name: 'birthday',
-      type: 'timepicker'
+      type: 'datepicker'
     },
     {
       label: 'Is VIP',
       name: 'vip',
       type: 'switch'
-    }
+    },
+    {
+      label: 'Introduce',
+      name: 'introduce',
+      type: 'textarea'
+    },
   ],
 }

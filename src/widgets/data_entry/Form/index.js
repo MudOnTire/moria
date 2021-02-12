@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useState } from 'react';
-import { Form as AntForm, Input, InputNumber, Select, Switch } from 'antd';
+import { Form as AntForm, Input, InputNumber, Select, Switch, DatePicker } from 'antd';
 import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
@@ -47,6 +47,28 @@ export default function Form({ config }) {
                 {
                   item.type === 'inputNumber' &&
                   <InputNumber />
+                }
+                {
+                  item.type === 'select' &&
+                  <Select>
+                    {
+                      item.options?.map(option => {
+                        return <Select.Option key={option.value}>{option.label}</Select.Option>
+                      })
+                    }
+                  </Select>
+                }
+                {
+                  item.type === 'datepicker' &&
+                  <DatePicker />
+                }
+                {
+                  item.type === 'switch' &&
+                  <Switch />
+                }
+                {
+                  item.type === 'textarea' &&
+                  <Input.TextArea />
                 }
               </AntForm.Item>
             )

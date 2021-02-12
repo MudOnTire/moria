@@ -2,26 +2,17 @@ import React, { useEffect, useState } from 'react';
 import {
   Input,
   Button,
-  Modal
+  Select
 } from 'antd';
 import { PlusCircleOutlined, MinusCircleOutlined, UpCircleOutlined, DownCircleOutlined } from '@ant-design/icons';
-import CodeEditor from 'Src/components/CodeEditor';
 
 import styles from './styles.module.scss';
 
-const { TextArea } = Input;
+const { Option } = Select;
 
 export default function ItemsSetting({ value = [], onChange = () => { } }) {
   const [values, setValues] = useState(value);
   const [expanded, setExpanded] = useState(true);
-  const [codeEditorInfo, setCodeEditorInfo] = useState({
-    visible: false,
-    itemKey: null,
-    itemValue: null,
-    itemIndex: null,
-    itemLabel: null,
-  });
-  const [codeEditorDraft, setCodeEditorDraft] = useState('');
 
   const handleValueChange = (key, val, index) => {
     setValues((vals) => {
@@ -33,16 +24,6 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
       vals[index][key] = val;
       onChange(vals);
       return vals;
-    });
-  }
-
-  const showCodeEditor = (key, val, index, label) => {
-    setCodeEditorInfo({
-      visible: true,
-      itemKey: key,
-      itemValue: val,
-      itemIndex: index,
-      itemLabel: label
     });
   }
 
@@ -90,20 +71,25 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
                   />
                 </div>
                 <div className={styles.formItem}>
-                  <label>Property:</label>
+                  <label>Property Name:</label>
                   <Input
-                    value={val.property}
-                    onChange={(e) => handleValueChange('property', e.target.value, index)}
+                    value={val.name}
+                    onChange={(e) => handleValueChange('name', e.target.value, index)}
                   />
                 </div>
                 <div className={styles.formItem}>
-                  <label>Render:</label>
-                  <TextArea
-                    value={val.renderStr}
-                    onClick={(e) => {
-                      showCodeEditor('renderStr', val.renderStr, index, 'Render');
-                    }}
-                  />
+                  <label>Type:</label>
+                  <Select
+                    value={val.type}
+                    onChange={(value) => handleValueChange('type', value, index)}
+                  >
+                    <Option value='input'>Input</Option>
+                    <Option value='number'>Number</Option>
+                    <Option value='textarea'>Textarea</Option>
+                    <Option value='select'>Select</Option>
+                    <Option value='switch'>Switch</Option>
+                    <Option value='radio'>Radio</Option>
+                  </Select>
                 </div>
               </div>
               <Button
@@ -122,31 +108,6 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
         icon={<PlusCircleOutlined />}
         onClick={addCol}
       />
-      <Modal
-        width={600}
-        title={`Editing: ${codeEditorInfo.itemLabel}`}
-        visible={codeEditorInfo.visible}
-        centered={true}
-        onOk={() => {
-          setCodeEditorInfo({
-            ...codeEditorInfo,
-            visible: false
-          });
-          handleValueChange(codeEditorInfo.itemKey, codeEditorDraft, codeEditorInfo.itemIndex);
-        }}
-        onCancel={() => {
-          setCodeEditorInfo({
-            ...codeEditorInfo,
-            visible: false
-          });
-          setCodeEditorDraft('');
-        }}
-      >
-        <CodeEditor
-          value={codeEditorInfo.itemValue}
-          onChange={setCodeEditorDraft}
-        />
-      </Modal>
     </div >
   )
 }
