@@ -30,7 +30,7 @@ export default [
   {
     id: 'items',
     label: 'Form Items',
-    type: 'Array<object>',
+    type: 'Array<Object>',
     desc: 'Form Items',
     component: ItemsSetting
   }

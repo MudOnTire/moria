@@ -12,28 +12,24 @@ import styles from './styles.module.scss';
 const { Option } = Select;
 
 export default function ItemsSetting({ value = [], onChange = () => { } }) {
-  const [values, setValues] = useState(value);
+  const [values, setValues] = useState(value || []);
   const [expanded, setExpanded] = useState(true);
 
   const handleValueChange = (key, val, index) => {
     setValues((vals) => {
-      if (key === 'dataIndex') {
-        if (val?.indexOf('.') > 0) {
-          val = val.split('.');
-        }
-      }
       vals[index][key] = val;
       onChange(vals);
       return vals;
     });
   }
 
-  const addCol = () => {
+  const addItem = () => {
     setValues((vals) => {
       vals.push({
         id: new Date().valueOf(),
-        title: '',
-        dataIndex: '',
+        label: '',
+        value: '',
+        type: ''
       });
       onChange(vals);
       return vals;
@@ -62,7 +58,7 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
       {
         values?.map((val, index) => {
           return (
-            <div className={styles.item} key={val.name}>
+            <div className={styles.item} key={val.id}>
               <div className={styles.itemForm}>
                 <div className={styles.formItem}>
                   <label>Label:</label>
@@ -99,7 +95,9 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
                     <label>Options:</label>
                     <OptionsInput
                       value={val.options}
-                      onChange={(value) => handleValueChange('options', value, index)}
+                      onChange={(value) => {
+                        handleValueChange('options', value, index);
+                      }}
                     />
                   </div>
                 }
@@ -118,7 +116,7 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
         className={styles.addBtn}
         type="text"
         icon={<PlusCircleOutlined />}
-        onClick={addCol}
+        onClick={addItem}
       />
     </div >
   )

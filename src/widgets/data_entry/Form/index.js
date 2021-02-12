@@ -95,6 +95,9 @@ export default function Form({ config }) {
           })
         }
       </AntForm>
+      {
+        // JSON.stringify(finalSettings)
+      }
     </WidgetWrapper >
   )
 }

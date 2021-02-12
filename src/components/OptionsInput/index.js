@@ -19,6 +19,7 @@ export default function OptionsInput({ value = [], onChange = () => { } }) {
   const addItem = () => {
     setOptions((vals) => {
       vals.push({
+        id: new Date().valueOf(),
         label: '',
         value: ''
       });
@@ -36,7 +37,6 @@ export default function OptionsInput({ value = [], onChange = () => { } }) {
   }
 
   const handleValueChange = (value, index) => {
-    debugger
     setOptions((vals) => {
       vals[index].value = value;
       onChange(vals);
@@ -49,7 +49,7 @@ export default function OptionsInput({ value = [], onChange = () => { } }) {
       {
         options?.map((option, index) => {
           return (
-            <div className={styles.option} key={option.value}>
+            <div className={styles.option} key={option.id}>
               <Input
                 value={option.label}
                 placeholder='Input label'

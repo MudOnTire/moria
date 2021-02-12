@@ -17,7 +17,7 @@ export default [
   {
     id: 'items',
     label: 'Items',
-    type: 'array<Object>',
+    type: 'Array<Object>',
     desc: 'Description items',
     component: ItemsSetting
   }
