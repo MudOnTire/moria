@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useState } from 'react';
-import { Form as AntForm } from 'antd';
+import { Form as AntForm, Input, InputNumber, Select, Switch } from 'antd';
 import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
@@ -27,9 +27,32 @@ export default function Form({ config }) {
     return result;
   }, [finalSettings]);
 
+  const { padding, labelCol } = finalSettings;
+
   return (
     <WidgetWrapper config={config}>
-      <AntForm {...antSettings} />
+      <AntForm
+        {...antSettings}
+        labelCol={{ span: labelCol }}
+        style={{ padding }}
+      >
+        {
+          finalSettings?.items?.map(item => {
+            return (
+              <AntForm.Item label={item.label} name={item.name} key={item.key}>
+                {
+                  item.type === 'input' &&
+                  <Input />
+                }
+                {
+                  item.type === 'inputNumber' &&
+                  <InputNumber />
+                }
+              </AntForm.Item>
+            )
+          })
+        }
+      </AntForm>
     </WidgetWrapper >
   )
 }
