@@ -1,5 +1,5 @@
 import WIDGET_IDs from 'Src/config/widgetIds';
-import { WidgetsContainer, Image, Carousel, Table, Description } from 'Src/widgets';
+import { WidgetsContainer, Image, Carousel, Table, Description, Form } from 'Src/widgets';
 
 const widgets = [
   {
@@ -35,6 +35,16 @@ const widgets = [
         name: "Description",
         component: Description
       },
+    ]
+  },
+  {
+    category: 'Data Entry',
+    list: [
+      {
+        widgetId: WIDGET_IDs.DATA_ENTRY_FORM,
+        name: "Form",
+        component: Form
+      }
     ]
   }
 ]

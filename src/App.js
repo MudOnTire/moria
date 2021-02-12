@@ -32,7 +32,7 @@ function App() {
             {
               pages?.map(page => {
                 return (
-                  <Route path={`/${page.key}`}>
+                  <Route path={`/${page.key}`} key={page.key}>
                     <Preview page={page} />
                   </Route>
                 )
