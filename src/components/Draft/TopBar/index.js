@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Button, Tooltip, message } from 'antd';
-import { DesktopOutlined, TabletOutlined, MobileOutlined, FundViewOutlined, FilePptOutlined, SaveOutlined } from '@ant-design/icons';
+import { DownloadOutlined, DesktopOutlined, TabletOutlined, MobileOutlined, FundViewOutlined, FilePptOutlined, SaveOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import { getStorePage, getStorePages, setStorePages } from 'Src/uitls/fns';
 
@@ -38,6 +38,17 @@ export default function TopBar() {
     pages[index].config = pageConfig;
     setStorePages(pages);
     message.success('Page config saved successfully!');
+  }
+
+  const download = () => {
+    const pages = getStorePages();
+    const encoded =
+      `data:application/json;charset=utf-8,` + encodeURIComponent(JSON.stringify(pages));
+    const link = document.createElement("a");
+    link.setAttribute("href", encoded);
+    link.setAttribute("download", `moria pages.json`);
+    document.body.appendChild(link);
+    link.click();
   }
 
   return (
@@ -82,6 +93,13 @@ export default function TopBar() {
             type="text"
             icon={<SaveOutlined />}
             onClick={save}
+          />
+        </Tooltip>
+        <Tooltip title="Download config file">
+          <Button
+            type="text"
+            icon={<DownloadOutlined />}
+            onClick={download}
           />
         </Tooltip>
       </div>
