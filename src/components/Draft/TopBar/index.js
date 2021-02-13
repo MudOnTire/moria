@@ -52,7 +52,9 @@ export default function TopBar() {
   }
 
   // 触发页面保存
-  useEffect(save, [saveTrigger])
+  useEffect(() => {
+    if (saveTrigger) save();
+  }, [saveTrigger])
 
   return (
     <div className={styles.topBar}>
