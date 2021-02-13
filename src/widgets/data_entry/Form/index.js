@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useState, Fragment } from 'react';
-import { Form as AntForm, Input, InputNumber, Select, Switch, DatePicker, TimePicker, Button } from 'antd';
+import { Form as AntForm, Input, InputNumber, Select, Switch, DatePicker, TimePicker, Button, message } from 'antd';
 import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
@@ -11,6 +11,7 @@ const FormItem = AntForm.Item;
 export default function Form({ config }) {
 
   const [form] = AntForm.useForm();
+  const [submitting, setSubmitting] = useState(false);
 
   const finalSettings = useMemo(() => {
     const result = {
@@ -36,10 +37,17 @@ export default function Form({ config }) {
   const onFinish = async (values) => {
     console.log('form will submit', values);
     if (!api) return;
-    const res = await request.post(api, {
-      data: values
-    });
-    console.log('submit res', res);
+    setSubmitting(true);
+    try {
+      const res = await request.post(api, { data: values });
+      console.log('submit res', res);
+      message.success('Submit succeeded!');
+    } catch (err) {
+      console.log('submit err', err);
+      message.error('Submit failed!');
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const onReset = () => {
@@ -118,7 +126,7 @@ export default function Form({ config }) {
           })
         }
         <FormItem wrapperCol={{ offset: labelCol }}>
-          <Button type="primary" htmlType="submit" style={{ marginRight: 8 }}>
+          <Button type="primary" htmlType="submit" style={{ marginRight: 8 }} loading={submitting}>
             Submit
           </Button>
           <Button htmlType="button" onClick={onReset}>
