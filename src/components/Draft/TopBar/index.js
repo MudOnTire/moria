@@ -12,7 +12,7 @@ export default function TopBar() {
   const history = useHistory();
 
   const store = useContext(context);
-  const { dispatch, deviceType, currentPage, pageConfig } = store;
+  const { dispatch, deviceType, currentPage, pageConfig, saveTrigger } = store;
 
   const [page, setPage] = useState(null);
 
@@ -37,7 +37,7 @@ export default function TopBar() {
     if (index < 0) return;
     pages[index].config = pageConfig;
     setStorePages(pages);
-    message.success('Page config saved successfully!');
+    message.success('Page config saved.');
   }
 
   const download = () => {
@@ -50,6 +50,9 @@ export default function TopBar() {
     document.body.appendChild(link);
     link.click();
   }
+
+  // 触发页面保存
+  useEffect(save, [saveTrigger])
 
   return (
     <div className={styles.topBar}>

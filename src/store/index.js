@@ -10,7 +10,8 @@ const actions = {
   SET_HOVERING_WIDGET: 'SET_HOVERING_WIDGET', // 设置当前hover的widget
   UPDATE_WIDGET_SETTINGS: 'UPDATE_WIDGET_SETTINGS', // 设置widget的settings
   SET_DEVICE_TYPE: 'SET_DEVICE_TYPE', // Draft 的屏幕宽度
-  SET_EDIT_MODE: 'SET_EDIT_MODE' // 设置是否是edit还是preview模式
+  SET_EDIT_MODE: 'SET_EDIT_MODE', // 设置是否是edit还是preview模式
+  SET_SAVE_TRIGGER: 'SET_SAVE_TRIGGER' // 设置这个以触发页面保持
 }
 
 function getInitialState() {
@@ -26,6 +27,7 @@ function getInitialState() {
     hoveringWidgetId: '', // 当前hover的widget id
     deviceType: 'desktop', // desktop, tablet, mobile
     editMode: 'edit', // edit, preview
+    saveTrigger: null, // 触发页面保存
     dispatch: () => { }
   }
 }
@@ -89,6 +91,12 @@ function reducer(state, action) {
       return {
         ...state,
         editMode: payload
+      }
+    }
+    case actions.SET_SAVE_TRIGGER: {
+      return {
+        ...state,
+        saveTrigger: payload
       }
     }
     default:

@@ -18,6 +18,26 @@ export default function Editor() {
     });
   }, []);
 
+  const handleKeyDown = (e) => {
+    e.preventDefault();
+    console.log('keydown', e);
+    if (e.key === 's' && e.ctrlKey) {
+      dispatch({
+        type: actions.SET_SAVE_TRIGGER,
+        payload: new Date().valueOf()
+      });
+    }
+  }
+
+  // listen events start
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, []);
+  // listen events end
+
   return (
     <div className={styles.editor}>
       <AssetDrawer />
