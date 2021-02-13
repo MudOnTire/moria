@@ -19,9 +19,8 @@ export default function Editor() {
   }, []);
 
   const handleKeyDown = (e) => {
-    e.preventDefault();
-    console.log('keydown', e);
-    if (e.key === 's' && e.ctrlKey) {
+    if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
       dispatch({
         type: actions.SET_SAVE_TRIGGER,
         payload: new Date().valueOf()
