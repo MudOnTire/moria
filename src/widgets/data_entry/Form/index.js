@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useState, Fragment } from 'react';
-import { Form as AntForm, Input, InputNumber, Select, Switch, DatePicker } from 'antd';
+import { Form as AntForm, Input, InputNumber, Select, Switch, DatePicker, TimePicker } from 'antd';
 import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
@@ -76,6 +76,12 @@ export default function Form({ config }) {
                   item.type === 'datepicker' &&
                   <FormItem {...formItemProps}>
                     <DatePicker />
+                  </FormItem>
+                }
+                {
+                  item.type === 'timepicker' &&
+                  <FormItem {...formItemProps}>
+                    <TimePicker />
                   </FormItem>
                 }
                 {

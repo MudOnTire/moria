@@ -22,6 +22,13 @@ export default [
     desc: 'The column span for labels'
   },
   {
+    id: 'colon',
+    label: 'Colon',
+    type: 'boolean',
+    antSetting: true,
+    desc: 'Configure the default value of colon for Form.Item. Indicates whether the colon after the label is displayed (only effective when prop layout is horizontal)'
+  },
+  {
     id: 'api',
     label: 'API',
     type: 'string',

@@ -87,6 +87,7 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
                     <Option value='switch'>Switch</Option>
                     <Option value='radio'>Radio</Option>
                     <Option value='datepicker'>Datepicker</Option>
+                    <Option value='timepicker'>Timepicker</Option>
                   </Select>
                 </div>
                 {
