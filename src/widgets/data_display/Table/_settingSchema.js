@@ -22,13 +22,6 @@ export default [
     desc: 'API to fetch source data',
   },
   {
-    id: 'columns',
-    label: 'Columns',
-    type: 'array<Object>',
-    desc: 'Columns of table',
-    component: ColumnsSetting
-  },
-  {
     id: 'rowKey',
     label: 'Row Key',
     type: 'string',
@@ -40,4 +33,11 @@ export default [
     type: 'string',
     desc: `Width of this column`
   },
+  {
+    id: 'columns',
+    label: 'Columns',
+    type: 'array<Object>',
+    desc: 'Columns of table',
+    component: ColumnsSetting
+  }
 ]
