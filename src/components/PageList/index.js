@@ -64,6 +64,10 @@ export default function PageList() {
       type: actions.SET_CURRENT_PAGE,
       payload: page?.key
     });
+    dispatch({
+      type: actions.SET_CONFIGING_WIDGET,
+      payload: null
+    });
   }
 
   const onCheck = (checkedKeys) => {

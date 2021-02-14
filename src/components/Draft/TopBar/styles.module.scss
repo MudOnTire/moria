@@ -1,11 +1,11 @@
-$actionHeight: 38px;
+$topBarHeight: 44px;
 
 .topBar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: $actionHeight;
+  height: $topBarHeight;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +16,7 @@ $actionHeight: 38px;
   left: 8px;
   top: 0;
   bottom: 0;
-  line-height: $actionHeight;
+  line-height: $topBarHeight;
   font-size: 20px;
 
   :global {
