@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Table as AntTable } from 'antd';
+import { Table as AntTable, message } from 'antd';
 import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
@@ -10,6 +10,8 @@ import { createFunction, parseLink } from 'Src/uitls/fns';
 export default function Table({ config }) {
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [reload, setReload] = useState(null);
 
   const finalSettings = useMemo(() => {
     const result = {
@@ -58,15 +60,23 @@ export default function Table({ config }) {
   // api start
   useEffect(() => {
     const fetchData = async () => {
-      const res = await request.get(finalSettings.api);
-      console.log('table res', res);
-      if (res?.data && Array.isArray(res.data)) {
-        setData(res.data);
-      } else {
-        setData([]);
+      setLoading(true);
+      try {
+        const res = await request.get(finalSettings.api);
+        console.log('table res', res);
+        if (res?.data && Array.isArray(res.data)) {
+          setData(res.data);
+        } else {
+          setData([]);
+        }
+      } catch (err) {
+        message.error(`Fetch data error: ${err.message}`);
+      } finally {
+        setLoading(false);
       }
     }
     fetchData();
+    setReload(fetchData);
   }, [finalSettings.api]);
   // api end
 
@@ -74,17 +84,11 @@ export default function Table({ config }) {
     <WidgetWrapper config={config}>
       <AntTable
         {...antSettings}
+        loading={loading}
         columns={[...(finalSettings.columns || [])]}
         dataSource={data}
         rowKey={finalSettings.rowKey}
       />
-      {/* {
-        <>
-          <h3>Config:{JSON.stringify(config)}</h3>
-          <h3>defaultSettings:{JSON.stringify(defaultSettings[config.widgetId])}</h3>
-          <h3>FinalSettings:{JSON.stringify(finalSettings)}</h3>
-        </>
-      } */}
     </WidgetWrapper >
   )
 }
