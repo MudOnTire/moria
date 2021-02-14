@@ -5,6 +5,7 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
+import { message } from 'antd';
 import { StoreProvider } from 'Src/store';
 import Editor from 'Src/pages/Editor';
 import Preview from 'Src/pages/Preview';
@@ -15,6 +16,7 @@ import 'Src/common/css/normalize.css';
 import 'Src/common/scss/index.scss';
 
 window.React = React;
+window.message = message;
 
 function App() {
 

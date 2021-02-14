@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { PAGES_STORE_KEY } from 'Src/common/constants';
 
 function removeTreeItem(tree, id) {
@@ -222,7 +223,11 @@ function throttle(fn, wait) {
 }
 
 function createFunction(str) {
-  return Function(`"use strict";return (${str})`)();
+  try {
+    return Function(`"use strict";return (${str})`)();
+  } catch (err) {
+    message.error(`Parse function error: ${err.message}`)
+  }
 }
 
 function getStorePages() {

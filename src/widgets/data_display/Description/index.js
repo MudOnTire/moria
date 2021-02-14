@@ -61,10 +61,10 @@ export default function Description({ config }) {
 
   const renderItem = (item) => {
     if (!data) return null;
-    if (item.render) {
-      return item.render(data);
-    }
     const value = data[item.property];
+    if (item.render) {
+      return item.render(value, data);
+    }
     const type = typeof value;
     if (['string', 'number', 'boolean'].includes(type)) {
       return value;

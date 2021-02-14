@@ -14,10 +14,9 @@ const { TextArea } = Input;
 export default function ColumnsSetting({ value = [], onChange = () => { } }) {
   const [values, setValues] = useState(value);
   const [expanded, setExpanded] = useState(true);
+  const [codeEditorVisible, setCodeEditorVisible] = useState(false);
   const [codeEditorInfo, setCodeEditorInfo] = useState({
-    visible: false,
     colKey: null,
-    colValue: null,
     colIndex: null,
     colLabel: null,
   });
@@ -37,10 +36,10 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
   }
 
   const showCodeEditor = (key, val, index, label) => {
+    setCodeEditorVisible(true);
+    setCodeEditorDraft(val);
     setCodeEditorInfo({
-      visible: true,
       colKey: key,
-      colValue: val,
       colIndex: index,
       colLabel: label
     });
@@ -141,25 +140,20 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
       <Modal
         width={1000}
         title={`Editing: columns[${codeEditorInfo.colIndex}].${codeEditorInfo.colLabel}`}
-        visible={codeEditorInfo.visible}
+        visible={codeEditorVisible}
         centered={true}
+        destroyOnClose={true}
         onOk={() => {
-          setCodeEditorInfo({
-            ...codeEditorInfo,
-            visible: false
-          });
           handleValueChange(codeEditorInfo.colKey, codeEditorDraft, codeEditorInfo.colIndex);
+          setCodeEditorVisible(false);
         }}
         onCancel={() => {
-          setCodeEditorInfo({
-            ...codeEditorInfo,
-            visible: false
-          });
+          setCodeEditorVisible(false);
           setCodeEditorDraft('');
         }}
       >
         <CodeEditor
-          value={codeEditorInfo.colValue}
+          value={codeEditorDraft}
           onChange={setCodeEditorDraft}
         />
       </Modal>

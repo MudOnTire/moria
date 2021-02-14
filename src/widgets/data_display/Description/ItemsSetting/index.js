@@ -17,7 +17,6 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
   const [codeEditorInfo, setCodeEditorInfo] = useState({
     visible: false,
     itemKey: null,
-    itemValue: null,
     itemIndex: null,
     itemLabel: null,
   });
@@ -37,10 +36,10 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
   }
 
   const showCodeEditor = (key, val, index, label) => {
+    setCodeEditorDraft(val);
     setCodeEditorInfo({
       visible: true,
       itemKey: key,
-      itemValue: val,
       itemIndex: index,
       itemLabel: label
     });
@@ -123,10 +122,11 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
         onClick={addCol}
       />
       <Modal
-        width={600}
+        width={1000}
         title={`Editing: ${codeEditorInfo.itemLabel}`}
         visible={codeEditorInfo.visible}
         centered={true}
+        destroyOnClose={true}
         onOk={() => {
           setCodeEditorInfo({
             ...codeEditorInfo,
@@ -143,7 +143,7 @@ export default function ItemsSetting({ value = [], onChange = () => { } }) {
         }}
       >
         <CodeEditor
-          value={codeEditorInfo.itemValue}
+          value={codeEditorDraft}
           onChange={setCodeEditorDraft}
         />
       </Modal>
