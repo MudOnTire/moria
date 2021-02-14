@@ -6,4 +6,19 @@
   padding: 0 12px;
   width: 320px;
   background-color: #fafafa;
+  transition: all 0.5s;
+}
+
+.toggleBtn {
+  position: absolute !important;
+  top: 7px;
+  right: 4px;
+}
+
+.collapsed {
+  width: 40px;
+
+  .tabs {
+    display: none;
+  }
 }

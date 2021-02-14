@@ -52,6 +52,7 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
         id: new Date().valueOf(),
         title: '',
         dataIndex: '',
+        link: ''
       });
       onChange(vals);
       return vals;
@@ -104,6 +105,13 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
                     onClick={(e) => {
                       showCodeEditor('renderStr', val.renderStr, index, 'Render');
                     }}
+                  />
+                </div>
+                <div className={styles.formItem}>
+                  <label>Link:</label>
+                  <Input
+                    value={val.link}
+                    onChange={(e) => handleValueChange('link', e.target.value, index)}
                   />
                 </div>
                 <div className={styles.formItem}>

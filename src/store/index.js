@@ -11,7 +11,8 @@ const actions = {
   UPDATE_WIDGET_SETTINGS: 'UPDATE_WIDGET_SETTINGS', // 设置widget的settings
   SET_DEVICE_TYPE: 'SET_DEVICE_TYPE', // Draft 的屏幕宽度
   SET_EDIT_MODE: 'SET_EDIT_MODE', // 设置是否是edit还是preview模式
-  SET_SAVE_TRIGGER: 'SET_SAVE_TRIGGER' // 设置这个以触发页面保持
+  SET_SAVE_TRIGGER: 'SET_SAVE_TRIGGER', // 设置这个以触发页面保持
+  SHOW_ASSET_DRAWER: 'SHOW_ASSET_DRAWER' // 设置是否展示AssetDrawer
 }
 
 function getInitialState() {
@@ -28,6 +29,7 @@ function getInitialState() {
     deviceType: 'desktop', // desktop, tablet, mobile
     editMode: 'edit', // edit, preview
     saveTrigger: null, // 触发页面保存
+    showAssetDrawer: true, // 是否展示assetsDrawer
     dispatch: () => { }
   }
 }
@@ -97,6 +99,12 @@ function reducer(state, action) {
       return {
         ...state,
         saveTrigger: payload
+      }
+    }
+    case actions.SHOW_ASSET_DRAWER: {
+      return {
+        ...state,
+        showAssetDrawer: payload
       }
     }
     default:

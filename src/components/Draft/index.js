@@ -22,7 +22,7 @@ const SCREEN_HEIGHTs = {
 export default function Draft() {
 
   const store = useContext(context);
-  const { dispatch, pageConfig, configingWidgetId, deviceType, currentPage } = store;
+  const { dispatch, pageConfig, configingWidgetId, deviceType, currentPage, showAssetDrawer } = store;
 
   const style = useMemo(() => {
     const result = {
@@ -43,7 +43,7 @@ export default function Draft() {
   }, [currentPage]);
 
   return (
-    <div className={`${styles.draftContainer} ${configingWidgetId && styles.showSettingDrawer}`}>
+    <div className={`${styles.draftContainer} ${configingWidgetId && styles.showSettingDrawer} ${showAssetDrawer && styles.showAssetDrawer}`}>
       <TopBar />
       {
         currentPage ?

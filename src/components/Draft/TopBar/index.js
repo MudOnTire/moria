@@ -37,7 +37,7 @@ export default function TopBar() {
     if (index < 0) return;
     pages[index].config = pageConfig;
     setStorePages(pages);
-    message.success('Page config saved.');
+    message.success('Page saved');
   }
 
   const download = () => {
