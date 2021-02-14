@@ -240,6 +240,40 @@ function setStorePages(pages) {
   localStorage.setItem(PAGES_STORE_KEY, JSON.stringify(pages));
 }
 
+function parseLink(link, data) {
+  if (!link) return '';
+  let parsed = '';
+  let cursor = 0;
+  while (cursor < link.length) {
+    const char = link[cursor];
+    if (char === ':') {
+      if (cursor > 0 && link[cursor - 1] === '/') {
+        const match = link.slice(cursor + 1).match(/[^\/\?]*/);
+        if (match) {
+          const param = match[0];
+          const value = data[param] || '';
+          parsed += value;
+          cursor += param.length;
+        }
+      }
+    } else if (char === '{') {
+      const match = link.slice(cursor + 1).match(/[^}]*/);
+      if (match) {
+        const param = match[0];
+        const value = data[param] || '';
+        parsed += value;
+        cursor += param.length;
+      }
+    } else if (char === '}') {
+
+    } else {
+      parsed += char;
+    }
+    cursor++;
+  }
+  return parsed;
+}
+
 export {
   removeTreeItem,
   getTreeItem,
@@ -251,5 +285,6 @@ export {
   createFunction,
   getStorePages,
   getStorePage,
-  setStorePages
+  setStorePages,
+  parseLink
 }

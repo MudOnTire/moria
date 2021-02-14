@@ -5,7 +5,7 @@ import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
 import request from 'Src/uitls/request';
-import { createFunction } from 'Src/uitls/fns';
+import { createFunction, parseLink } from 'Src/uitls/fns';
 
 export default function Table({ config }) {
 
@@ -20,8 +20,9 @@ export default function Table({ config }) {
       if (column.renderStr) {
         if (column.link) {
           column.render = (value, record) => {
+            const link = parseLink(column.link, record);
             return (
-              <Link to={column.link}>{createFunction(column.renderStr)(value, record)}</Link>
+              <Link to={link}>{createFunction(column.renderStr)(value, record)}</Link>
             )
           }
         } else {
@@ -30,8 +31,9 @@ export default function Table({ config }) {
       } else {
         if (column.link) {
           column.render = (value, record) => {
+            const link = parseLink(column.link, record);
             return (
-              <Link to={column.link}>{value}</Link>
+              <Link to={link}>{value}</Link>
             )
           }
         } else {
