@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Button, Tooltip, message } from 'antd';
-import { DownloadOutlined, DesktopOutlined, TabletOutlined, MobileOutlined, FundViewOutlined, FilePptOutlined, SaveOutlined } from '@ant-design/icons';
+import { DownloadOutlined, DesktopOutlined, TabletOutlined, MobileOutlined, FundViewOutlined, FilePptOutlined, SaveOutlined, ImportOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
 import { getStorePage, getStorePages, setStorePages } from 'Src/uitls/fns';
 
@@ -51,6 +51,10 @@ export default function TopBar() {
     link.click();
   }
 
+  const importConfig = () => {
+
+  }
+
   // 触发页面保存
   useEffect(() => {
     if (saveTrigger) save();
@@ -93,7 +97,7 @@ export default function TopBar() {
         </Tooltip>
       </div>
       <div className={styles.rightActions}>
-        <Tooltip title="Save current page config">
+        <Tooltip title="Save page config">
           <Button
             type="text"
             icon={<SaveOutlined />}
@@ -105,6 +109,13 @@ export default function TopBar() {
             type="text"
             icon={<DownloadOutlined />}
             onClick={download}
+          />
+        </Tooltip>
+        <Tooltip title="Import config file">
+          <Button
+            type="text"
+            icon={<ImportOutlined />}
+            onClick={importConfig}
           />
         </Tooltip>
       </div>
