@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Table as AntTable } from 'antd';
 import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
@@ -17,9 +18,25 @@ export default function Table({ config }) {
     }
     result.columns?.forEach(column => {
       if (column.renderStr) {
-        column.render = createFunction(column.renderStr);
+        if (column.link) {
+          column.render = (value, record) => {
+            return (
+              <Link to={column.link}>{createFunction(column.renderStr)(value, record)}</Link>
+            )
+          }
+        } else {
+          column.render = createFunction(column.renderStr);
+        }
       } else {
-        column.render = null;
+        if (column.link) {
+          column.render = (value, record) => {
+            return (
+              <Link to={column.link}>{value}</Link>
+            )
+          }
+        } else {
+          column.render = null;
+        }
       }
     });
     return result;
