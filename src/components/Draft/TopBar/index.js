@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router';
 import { Button, Tooltip, message } from 'antd';
 import { DownloadOutlined, DesktopOutlined, TabletOutlined, MobileOutlined, FundViewOutlined, FilePptOutlined, SaveOutlined, ImportOutlined } from '@ant-design/icons';
@@ -14,6 +14,7 @@ export default function TopBar() {
   const store = useContext(context);
   const { dispatch, deviceType, currentPage, pageConfig, saveTrigger } = store;
 
+  const fileInput = useRef(null);
   const [page, setPage] = useState(null);
 
   useEffect(() => {
@@ -52,7 +53,28 @@ export default function TopBar() {
   }
 
   const importConfig = () => {
+    fileInput.current.click();
+  }
 
+  const chooseFile = (e) => {
+    const { files } = fileInput.current;
+    if (!files || !files[0]) return;
+    const file = files[0];
+    const { name, type, size } = file;
+    if (type !== 'application/json') {
+      message.warn('Config should be a JSON file!');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        setStorePages(JSON.parse(reader.result));
+        window.location.reload();
+      } catch (err) {
+        message.error(`Parse config file error: ${err.message}`);
+      }
+    }
+    reader.readAsText(file);
   }
 
   // 触发页面保存
@@ -116,6 +138,12 @@ export default function TopBar() {
             type="text"
             icon={<ImportOutlined />}
             onClick={importConfig}
+          />
+          <input
+            onChange={chooseFile}
+            ref={fileInput}
+            type="file"
+            style={{ display: "none" }}
           />
         </Tooltip>
       </div>

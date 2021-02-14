@@ -26,11 +26,7 @@ export default function PageList() {
       pages = [{
         title: 'Home',
         key: 'home',
-        description: 'The default page'
-      }, {
-        title: 'Test',
-        key: 'test',
-        description: 'Test page'
+        description: 'The home page'
       }];
       setStorePages(pages);
     }
