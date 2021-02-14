@@ -100,7 +100,7 @@ export default function TopBar() {
             onClick={save}
           />
         </Tooltip>
-        <Tooltip title="Download pages' config">
+        <Tooltip title="Download config file">
           <Button
             type="text"
             icon={<DownloadOutlined />}

@@ -42,7 +42,6 @@ export default function Description({ config }) {
   useEffect(() => {
     const fetchData = async () => {
       if (!finalSettings.api) return;
-      console.log('location', location);
       const query = qs.parse(location.search);
       const api = parseLink(finalSettings.api, query);
       try {
