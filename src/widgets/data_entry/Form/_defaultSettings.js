@@ -2,6 +2,7 @@ export default {
   padding: '10px 20px',
   layout: 'horizontal',
   labelCol: 3,
+  footerLayout: 'flex-start',
   colon: true,
   api: 'https://jsonplaceholder.typicode.com/users',
   items: [

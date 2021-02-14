@@ -22,6 +22,13 @@ export default [
     desc: 'The column span for labels'
   },
   {
+    id: 'footerLayout',
+    label: 'Footer Layout',
+    type: 'enum',
+    options: ['flex-start', 'center', 'flex-end'],
+    desc: 'Footer layout',
+  },
+  {
     id: 'colon',
     label: 'Colon',
     type: 'boolean',

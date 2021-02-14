@@ -4,7 +4,6 @@ import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
 import settingSchemas from 'Src/config/settingSchemas';
 import request from 'Src/uitls/request';
-import { createFunction } from 'Src/uitls/fns';
 
 const FormItem = AntForm.Item;
 
@@ -32,7 +31,7 @@ export default function Form({ config }) {
     return result;
   }, [finalSettings]);
 
-  const { padding, labelCol, api } = finalSettings;
+  const { padding, labelCol, api, footerLayout } = finalSettings;
 
   const onFinish = async (values) => {
     console.log('form will submit', values);
@@ -126,17 +125,16 @@ export default function Form({ config }) {
           })
         }
         <FormItem wrapperCol={{ offset: labelCol }}>
-          <Button type="primary" htmlType="submit" style={{ marginRight: 8 }} loading={submitting}>
-            Submit
-          </Button>
-          <Button htmlType="button" onClick={onReset}>
-            Reset
-          </Button>
+          <div style={{ display: 'flex', justifyContent: footerLayout }}>
+            <Button type="primary" htmlType="submit" style={{ marginRight: 8 }} loading={submitting}>
+              Submit
+            </Button>
+            <Button htmlType="button" onClick={onReset}>
+              Reset
+            </Button>
+          </div>
         </FormItem>
       </AntForm>
-      {
-        // JSON.stringify(finalSettings)
-      }
     </WidgetWrapper >
   )
 }
