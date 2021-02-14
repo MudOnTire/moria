@@ -13,6 +13,8 @@ function parseLink(link, data) {
           parsed += value;
           cursor += param.length;
         }
+      } else {
+        parsed += char;
       }
     } else if (char === '{') {
       const match = link.slice(cursor + 1).match(/[^}]*/);
