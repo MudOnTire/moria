@@ -14,6 +14,8 @@ import 'antd/dist/antd.css';
 import 'Src/common/css/normalize.css';
 import 'Src/common/scss/index.scss';
 
+window.React = React;
+
 function App() {
 
   let pages = getStorePages();

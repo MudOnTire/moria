@@ -139,7 +139,7 @@ export default function ColumnsSetting({ value = [], onChange = () => { } }) {
         onClick={addCol}
       />
       <Modal
-        width={600}
+        width={1000}
         title={`Editing: columns[${codeEditorInfo.colIndex}].${codeEditorInfo.colLabel}`}
         visible={codeEditorInfo.visible}
         centered={true}
