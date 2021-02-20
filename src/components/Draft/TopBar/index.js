@@ -30,6 +30,10 @@ export default function TopBar() {
 
   const goPreview = () => {
     history.push('/preview');
+    dispatch({
+      type: actions.SET_SAVE_TRIGGER,
+      payload: null
+    });
   }
 
   const save = () => {
