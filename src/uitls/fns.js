@@ -1,6 +1,15 @@
 import { message } from 'antd';
 import { PAGES_STORE_KEY } from 'Src/common/constants';
 
+/**
+ * 交换数组中的两个元素
+ */
+function swap(array, indexA, indexB) {
+  const temp = array[indexA];
+  array[indexA] = array[indexB];
+  array[indexB] = temp;
+}
+
 function removeTreeItem(tree, id) {
   function traverse(tree, id) {
     for (let i = 0; i < tree.length; i++) {
@@ -210,6 +219,41 @@ function updateTreeItem(tree, id, payload) {
   return tree;
 }
 
+/**
+ * 在同级移动元素
+ */
+function moveTreeItemInSiblings(tree, id, steps = 0) {
+  if (!steps) return;
+
+  function traverse(subTree, id) {
+    for (let i = 0; i < subTree.length; i++) {
+      const node = subTree[i];
+      if (node.id === id) {
+        for (let j = 0; j < Math.abs(steps); j++) {
+          if (steps < 0) {
+            // 往左
+            if (i - j - 1 < 0) return;
+            console.log('move left', i - j, i - j - 1);
+            swap(subTree, i - j, i - j - 1);
+          } else {
+            // 往右
+            if (i + j + 1 > subTree.length - 1) return;
+            console.log('move right', i + j, i + j + 1);
+            swap(subTree, i + j, i + j + 1);
+          }
+        }
+        return;
+      } else {
+        if (node.children) {
+          traverse(node.children, id, node.id);
+        }
+      }
+    }
+  }
+
+  traverse(tree, id);
+}
+
 
 function throttle(fn, wait) {
   let lastCall = 0;
@@ -293,5 +337,6 @@ export {
   getStorePages,
   getStorePage,
   setStorePages,
-  parseLink
+  parseLink,
+  moveTreeItemInSiblings
 }

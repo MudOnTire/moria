@@ -134,7 +134,7 @@ export default function WidgetsContainer({
                       onDrop={data => { handleInsertWidget(data, index) }}
                     />
                   }
-                  <widget.component config={c} />
+                  <widget.component config={c} containerSettings={config.settings} />
                   {
                     editMode === 'edit' &&
                     <Divider

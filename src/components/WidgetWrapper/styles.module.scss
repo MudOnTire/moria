@@ -32,6 +32,8 @@ $borderWidth: 3px;
 
 .actionBtn {
   transition: all 0.5s;
+  color: #fff !important;
+
   &:hover {
     opacity: 0.6;
   }

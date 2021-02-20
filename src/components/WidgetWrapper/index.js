@@ -1,8 +1,9 @@
 import React, { useContext, useMemo } from 'react';
 import { Button } from 'antd';
 import Dragable from 'Src/components/dnd/Dragable';
-import { SettingOutlined, DeleteOutlined } from '@ant-design/icons';
+import { SettingOutlined, DeleteOutlined, CaretUpOutlined, CaretDownOutlined, CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
+import { moveTreeItemInSiblings } from 'Src/uitls/fns';
 
 import styles from './styles.module.scss';
 
@@ -10,6 +11,7 @@ export default function WidgetWrapper({
   children,
   className,
   config = {}, // widget config
+  containerSettings = {}, // parent container's settings
   ...rest
 }) {
 
@@ -71,6 +73,14 @@ export default function WidgetWrapper({
     e.dataTransfer.setData('text/plain', JSON.stringify(data));
   }
 
+  const moveWidget = (steps) => {
+    moveTreeItemInSiblings(pageConfig.children, config.id, steps);
+    dispatch({
+      type: actions.UPDATE_PAGE_CONFIG,
+      payload: pageConfig
+    });
+  }
+
   const hovering = hoveringWidgetId === config.id;
 
   const classes = useMemo(() => {
@@ -82,6 +92,9 @@ export default function WidgetWrapper({
     if (className) res += ` ${className}`;
     return res;
   }, [config, className, hoveringWidgetId, configingWidgetId, editMode]);
+
+
+  const { flexDirection } = containerSettings;
 
   return (
     <Dragable
@@ -99,13 +112,25 @@ export default function WidgetWrapper({
           <Button
             className={styles.actionBtn}
             type="text"
-            icon={<SettingOutlined style={{ color: "#fff" }} />}
+            icon={flexDirection === 'row' ? <CaretLeftOutlined /> : <CaretUpOutlined />}
+            onClick={() => { moveWidget(-1) }}
+          />
+          <Button
+            className={styles.actionBtn}
+            type="text"
+            icon={flexDirection === 'row' ? <CaretRightOutlined /> : <CaretDownOutlined />}
+            onClick={() => { moveWidget(1) }}
+          />
+          <Button
+            className={styles.actionBtn}
+            type="text"
+            icon={<SettingOutlined />}
             onClick={handleSetting}
           />
           <Button
             className={styles.actionBtn}
             type="text"
-            icon={<DeleteOutlined style={{ color: '#fff' }} />}
+            icon={<DeleteOutlined />}
             onClick={handleDelete}
           />
         </div>

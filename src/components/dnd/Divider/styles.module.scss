@@ -2,6 +2,7 @@
   height: 20px;
   transition: all 0.3s;
   cursor: pointer !important;
+  flex-shrink: 0;
 }
 
 .dragOver {
