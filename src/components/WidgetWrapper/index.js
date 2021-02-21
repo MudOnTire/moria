@@ -21,18 +21,20 @@ export default function WidgetWrapper({
   const preview = editMode === 'preview';
 
   const handleMouseEnter = (e) => {
-    if (preview) return;
-    e.stopPropagation();
-    if (hoveringWidgetId === config.id) return;
-    dispatch({
-      type: actions.SET_HOVERING_WIDGET,
-      payload: config.id
-    });
+    // if (preview) return;
+    // e.stopPropagation();
+    // if (hoveringWidgetId === config.id) return;
+    // console.log('mouse enter', hoveringWidgetId, config.id)
+    // dispatch({
+    //   type: actions.SET_HOVERING_WIDGET,
+    //   payload: config.id
+    // });
   }
 
   const handleMouseOver = (e) => {
     if (preview) return;
     e.stopPropagation();
+    e.preventDefault();
     if (hoveringWidgetId === config.id) return;
     dispatch({
       type: actions.SET_HOVERING_WIDGET,

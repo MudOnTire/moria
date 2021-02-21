@@ -1,3 +1,3 @@
 export default {
-  Title: 'Basic Line',
+  title: 'Basic Line',
 }

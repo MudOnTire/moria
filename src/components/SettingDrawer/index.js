@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 import { Button } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { context, actions } from 'Src/store';
@@ -23,7 +23,7 @@ export default function SettingDrawer() {
       <div className={styles.content}>
         {
           configingWidgetId &&
-          <SettingBuilder id={configingWidgetId}/>
+          <SettingBuilder id={configingWidgetId} />
         }
       </div>
       <Button

@@ -2,7 +2,7 @@ export default [
   {
     id: 'title',
     label: 'Title',
-    type: 'String',
+    type: 'string',
     desc: 'Title',
   }
 ]

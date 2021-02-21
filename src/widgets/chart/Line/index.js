@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react';
-import Highcharts from 'react-highcharts';
+import React, { useState, useEffect, useRef } from 'react';
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 import WidgetWrapper from 'Src/components/WidgetWrapper';
 import defaultSettings from 'Src/config/defaultSettings';
-import settingSchemas from 'Src/config/settingSchemas';
 
 import styles from './styles.module.scss';
 
-const initialConfig = {
+const initOptions = {
   title: {
     text: 'Solar Employment Growth by Sector, 2010-2016'
   },
@@ -76,19 +76,40 @@ const initialConfig = {
 };
 
 export default function Line({ config }) {
+  const container = useRef(null);
+  const chartRef = useRef(null);
 
-  const [chartConfig, setChartConfig] = useState(initialConfig);
+  const [chartOptions, setChartOptions] = useState(initOptions);
 
-  const finalSettings = useMemo(() => {
-    return {
+  useEffect(() => {
+    const finalSettings = {
       ...defaultSettings[config.widgetId],
       ...config.settings
     }
-  }, [config]);
+    const { title } = finalSettings;
+    setChartOptions({
+      title: {
+        text: title
+      }
+    });
+  }, [config.settings]);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      chartRef.current.chart.reflow();
+    });
+    resizeObserver.observe(container.current);
+  }, []);
 
   return (
     <WidgetWrapper config={config}>
-      <Highcharts config={chartConfig} />
+      <div ref={container}>
+        <HighchartsReact
+          ref={chartRef}
+          options={chartOptions}
+          highcharts={Highcharts}
+        />
+      </div>
     </WidgetWrapper >
   )
 }
