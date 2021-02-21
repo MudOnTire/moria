@@ -6,7 +6,7 @@ import settingSchemas from 'Src/config/settingSchemas';
 
 import styles from './styles.module.scss';
 
-export default function Image({ config }) {
+export default function Carousel({ config }) {
 
   const finalSettings = useMemo(() => {
     return {

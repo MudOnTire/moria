@@ -7,4 +7,6 @@ export default {
   DATA_DISPLAY_DESCRIPTION: 'DATA_DISPLAY_DESCRIPTION',
   // data entry
   DATA_ENTRY_FORM: 'DATA_ENTRY_FORM',
+  // chart
+  CHART_LINE: 'CHART_LINE'
 }

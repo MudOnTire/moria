@@ -1,5 +1,5 @@
 import WIDGET_IDs from 'Src/config/widgetIds';
-import { WidgetsContainer, Image, Carousel, Table, Description, Form } from 'Src/widgets';
+import { WidgetsContainer, Image, Carousel, Table, Description, Form, Line } from 'Src/widgets';
 
 const widgets = [
   {
@@ -44,6 +44,16 @@ const widgets = [
         widgetId: WIDGET_IDs.DATA_ENTRY_FORM,
         name: "Form",
         component: Form
+      }
+    ]
+  },
+  {
+    category: 'Chart',
+    list: [
+      {
+        widgetId: WIDGET_IDs.CHART_LINE,
+        name: "Line",
+        component: Line
       }
     ]
   }
