@@ -21,17 +21,6 @@ export default function WidgetWrapper({
 
   const preview = editMode === 'preview';
 
-  const handleMouseEnter = (e) => {
-    // if (preview) return;
-    // e.stopPropagation();
-    // if (hoveringWidgetId === config.id) return;
-    // console.log('mouse enter', hoveringWidgetId, config.id)
-    // dispatch({
-    //   type: actions.SET_HOVERING_WIDGET,
-    //   payload: config.id
-    // });
-  }
-
   const handleMouseOver = (e) => {
     if (preview) return;
     e.stopPropagation();
@@ -103,7 +92,6 @@ export default function WidgetWrapper({
     <Dragable
       className={classes}
       dragEnabled={editMode === 'edit' || draggable}
-      onMouseEnter={handleMouseEnter}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
       onDragStart={handleDragStart}
