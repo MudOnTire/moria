@@ -7,26 +7,16 @@ import defaultSettings from 'Src/config/defaultSettings';
 import styles from './styles.module.scss';
 
 const initOptions = {
-  title: {
-    text: 'Solar Employment Growth by Sector, 2010-2016'
-  },
-
-  subtitle: {
-    text: 'Source: thesolarfoundation.com'
-  },
-
   yAxis: {
     title: {
       text: 'Number of Employees'
     }
   },
-
   xAxis: {
     accessibility: {
       rangeDescription: 'Range: 2010 to 2017'
     }
   },
-
   legend: {
     layout: 'vertical',
     align: 'right',
@@ -86,17 +76,23 @@ export default function Line({ config }) {
       ...defaultSettings[config.widgetId],
       ...config.settings
     }
-    const { title } = finalSettings;
+    const { title, subtitle, backgroundColor } = finalSettings;
     setChartOptions({
+      chart: {
+        backgroundColor
+      },
       title: {
         text: title
-      }
+      },
+      subtitle: {
+        text: subtitle
+      },
     });
   }, [config.settings]);
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
-      chartRef.current.chart.reflow();
+      chartRef?.current?.chart?.reflow();
     });
     resizeObserver.observe(container.current);
   }, []);
