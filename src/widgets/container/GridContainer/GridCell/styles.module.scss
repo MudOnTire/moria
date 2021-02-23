@@ -1,0 +1,10 @@
+.gridCell {
+  display: flex;
+  cursor: pointer !important;
+  min-height: 200px;
+  background-color: #fff;
+}
+
+.dragOver {
+  border: 5px dashed #b5f5ec;
+}

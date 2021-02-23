@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import WidgetWrapper from 'Src/components/WidgetWrapper';
-import WidgetContainer from 'Src/widgets/container/WidgetsContainer';
+import GridCell from './GridCell';
 import defaultSettings from 'Src/config/defaultSettings';
 
 import styles from './styles.module.scss';
@@ -14,7 +14,11 @@ export default function Grid({ config }) {
     }
   }, [config]);
 
-  const { rows, cols } = finalSettings;
+  const { rows, cols, children } = finalSettings;
+
+  const handleDrop = (data) => {
+    console.log('handle drop', data);
+  }
 
   return (
     <WidgetWrapper config={config}>
@@ -24,8 +28,12 @@ export default function Grid({ config }) {
           gridTemplateColumns: `repeat(${rows}, 1fr)`,
         }}>
         {
-          [...Array(rows * cols).keys()].map(() => {
-            return <WidgetContainer draggable={false} />
+          [...Array(rows * cols).keys()].map((index) => {
+            return (
+              <GridCell onDrop={handleDrop} key={index}>
+                {children?.length > index && children[index]}
+              </GridCell>
+            )
           })
         }
       </div>

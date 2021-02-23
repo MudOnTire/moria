@@ -10,11 +10,11 @@ const widgets = [
         name: "Widget Container",
         component: WidgetsContainer
       },
-      // {
-      //   widgetId: WIDGET_IDs.GRID_CONTAINER,
-      //   name: "Grid Container",
-      //   component: GridContainer
-      // }
+      {
+        widgetId: WIDGET_IDs.GRID_CONTAINER,
+        name: "Grid Container",
+        component: GridContainer
+      }
     ]
   },
   {
