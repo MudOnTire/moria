@@ -73,6 +73,7 @@ export default function WidgetsContainer({
       if (widgetId === WIDGET_IDs.WIDGET_CONTAINER) {
         child.children = [];
       }
+      if (!config.children) config.children = [];
       config.children.splice(index, 0, child);
       dispatch({
         type: actions.UPDATE_PAGE_CONFIG,

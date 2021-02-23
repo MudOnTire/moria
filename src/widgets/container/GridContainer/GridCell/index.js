@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
 
-export default function GridCell({ onDrop = () => { } }) {
+export default function GridCell({ onDrop = () => { }, children }) {
 
   const [isDragOver, setIsDragOver] = useState(false);
 
@@ -34,6 +34,8 @@ export default function GridCell({ onDrop = () => { } }) {
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-    />
+    >
+      {children}
+    </div>
   )
 }
