@@ -14,6 +14,7 @@ function removeTreeItem(tree, id) {
   function traverse(tree, id) {
     for (let i = 0; i < tree.length; i++) {
       const node = tree[i];
+      if (!node) continue;
       if (node.id === id) {
         tree.splice(i, 1);
         break;
@@ -39,6 +40,7 @@ function getTreeItem(tree, id) {
   function traverse(subTree, id, parentId) {
     for (let i = 0; i < subTree.length; i++) {
       const node = subTree[i];
+      if (!node) continue;
       if (node.id === id) {
         result = {
           item: node,
@@ -85,6 +87,7 @@ function moveTreeItem(tree, targetId, toId) {
     for (let i = 0; i < subTree.length; i++) {
       if (removed && added) return;
       const node = subTree[i];
+      if (!node) continue;
       if (node.id === parentId) {
         const targetIndex = node.children.indexOf(item);
         node.children.splice(targetIndex, 1);
@@ -141,6 +144,7 @@ function insertTreeItem(tree, targetId, toId, toIndex) {
     for (let i = 0; i < subTree.length; i++) {
       if (removed && added) return;
       const node = subTree[i];
+      if (!node) continue;
       if (node.id === parentId) {
         if (node.id === toId) {
           arrayMoveItemToIndex(node.children, item, toIndex);
@@ -177,6 +181,7 @@ function getTreeItemIndex(tree, id) {
   function traverse(subTree, id) {
     for (let i = 0; i < subTree.length; i++) {
       const node = subTree[i];
+      if (!node) continue;
       if (node.id === id) {
         result.siblingCount = subTree.length;
         result.index = i;
@@ -201,6 +206,7 @@ function updateTreeItem(tree, id, payload) {
   function traverse(subTree, id) {
     for (let i = 0; i < subTree.length; i++) {
       let node = subTree[i];
+      if (!node) continue;
       if (node.id === id) {
         subTree[i] = {
           ...node,
@@ -228,6 +234,7 @@ function moveTreeItemInSiblings(tree, id, steps = 0) {
   function traverse(subTree, id) {
     for (let i = 0; i < subTree.length; i++) {
       const node = subTree[i];
+      if (!node) continue;
       if (node.id === id) {
         for (let j = 0; j < Math.abs(steps); j++) {
           if (steps < 0) {

@@ -58,7 +58,7 @@ export default function Grid({ config }) {
       <div
         className={styles.grid}
         style={{
-          gridTemplateColumns: `repeat(${cols}, 1fr)`,
+          gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
         }}>
         {
           [...Array(rows * cols).keys()].map((index) => {
