@@ -28,6 +28,13 @@ export default function Editor() {
     }
   }
 
+  const handleMouseUp = (e) => {
+    dispatch({
+      type: actions.SET_HOVERING_WIDGET,
+      payload: null
+    });
+  }
+
   // listen events start
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -40,7 +47,7 @@ export default function Editor() {
   return (
     <div className={styles.editor}>
       <AssetDrawer />
-      <Draft />
+      <Draft onMouseUp={handleMouseUp} />
       <SettingDrawer />
     </div>
   )
