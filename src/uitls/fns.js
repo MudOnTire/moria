@@ -106,16 +106,26 @@ function moveTreeItem(tree, targetId, toId) {
   traverse(tree);
 }
 
-function arrayMoveItemToIndex(array, item, toIndex) {
+function arrayMoveItemToIndex(array, item, toIndex, insert = true) {
   const itemCopy = { ...item }
-  array.splice(toIndex, 0, itemCopy);
-  array.splice(array.indexOf(item), 1);
+  if (insert) {
+    array.splice(toIndex, 0, itemCopy);
+    array.splice(array.indexOf(item), 1);
+  } else {
+    array[toIndex] = itemCopy;
+    array[array.indexOf(item)] = null;
+  }
 }
 
 /**
  * 插入widget到container指定index
+ * @param {array} tree 
+ * @param {string} targetId // 被移动的对象Id 
+ * @param {string} toId // 移动到的对象Id
+ * @param {number} toIndex // 移动到的对象的index
+ * @param {boolean} insert // 是否插入还是替换
  */
-function insertTreeItem(tree, targetId, toId, toIndex) {
+function insertTreeItem(tree, targetId, toId, toIndex, insert = true) {
   const treeItem = getTreeItem(tree, targetId);
   if (!treeItem) return;
   const { item, parentId } = treeItem;
@@ -147,7 +157,7 @@ function insertTreeItem(tree, targetId, toId, toIndex) {
       if (!node) continue;
       if (node.id === parentId) {
         if (node.id === toId) {
-          arrayMoveItemToIndex(node.children, item, toIndex);
+          arrayMoveItemToIndex(node.children, item, toIndex, insert);
           return;
         } else {
           const targetIndex = node.children.indexOf(item);

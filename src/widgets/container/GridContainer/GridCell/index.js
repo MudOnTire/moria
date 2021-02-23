@@ -6,6 +6,7 @@ export default function GridCell({ onDrop = () => { }, children }) {
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleDragEnter = (e) => {
+    e.stopPropagation();
     e.preventDefault();
   }
 
