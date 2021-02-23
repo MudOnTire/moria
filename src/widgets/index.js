@@ -1,4 +1,5 @@
 import WidgetsContainer from './container/WidgetsContainer';
+import GridContainer from './container/GridContainer';
 import Image from './data_display/Image';
 import Carousel from './data_display/Carousel';
 import Table from './data_display/Table';
@@ -7,10 +8,11 @@ import Form from './data_entry/Form';
 import Line from './chart/Line';
 
 export {
+  WidgetsContainer,
+  GridContainer,
   Image,
   Carousel,
   Table,
-  WidgetsContainer,
   Description,
   Form,
   Line

@@ -1,5 +1,6 @@
 import WIDGET_IDs from './widgetIds';
 import widgetsContainer from 'Src/widgets/container/WidgetsContainer/_settingSchema';
+import gridContainer from 'Src/widgets/container/GridContainer/_settingSchema';
 import image from 'Src/widgets/data_display/Image/_settingSchema';
 import carousel from 'Src/widgets/data_display/Carousel/_settingSchema';
 import table from 'Src/widgets/data_display/Table/_settingSchema';
@@ -9,6 +10,7 @@ import line from 'Src/widgets/chart/Line/_settingSchema';
 
 export default {
   [WIDGET_IDs.WIDGET_CONTAINER]: widgetsContainer,
+  [WIDGET_IDs.GRID_CONTAINER]: gridContainer,
   [WIDGET_IDs.DATA_DISPLAY_IMAGE]: image,
   [WIDGET_IDs.DATA_DISPLAY_CAROUSEL]: carousel,
   [WIDGET_IDs.DATA_DISPLAY_TABLE]: table,

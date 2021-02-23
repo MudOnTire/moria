@@ -14,6 +14,7 @@ export default function WidgetsContainer({
   className = '',
   config = {},
   children,
+  draggable = true,
   ...rest
 }) {
 
@@ -111,6 +112,7 @@ export default function WidgetsContainer({
     <WidgetWrapper
       className={classes}
       config={config}
+      draggable={draggable}
       {...rest}
     >
       <Droppable

@@ -12,6 +12,7 @@ export default function WidgetWrapper({
   className,
   config = {}, // widget config
   containerSettings = {}, // parent container's settings
+  draggable = true,
   ...rest
 }) {
 
@@ -101,7 +102,7 @@ export default function WidgetWrapper({
   return (
     <Dragable
       className={classes}
-      dragEnabled={editMode === 'edit'}
+      dragEnabled={editMode === 'edit' || draggable}
       onMouseEnter={handleMouseEnter}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}

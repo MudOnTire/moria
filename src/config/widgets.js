@@ -1,5 +1,5 @@
 import WIDGET_IDs from 'Src/config/widgetIds';
-import { WidgetsContainer, Image, Carousel, Table, Description, Form, Line } from 'Src/widgets';
+import { WidgetsContainer, GridContainer, Image, Carousel, Table, Description, Form, Line } from 'Src/widgets';
 
 const widgets = [
   {
@@ -9,7 +9,12 @@ const widgets = [
         widgetId: WIDGET_IDs.WIDGET_CONTAINER,
         name: "Widget Container",
         component: WidgetsContainer
-      }
+      },
+      // {
+      //   widgetId: WIDGET_IDs.GRID_CONTAINER,
+      //   name: "Grid Container",
+      //   component: GridContainer
+      // }
     ]
   },
   {
