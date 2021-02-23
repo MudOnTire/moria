@@ -10,5 +10,6 @@ export default {
   // data entry
   DATA_ENTRY_FORM: 'DATA_ENTRY_FORM',
   // chart
+  CHART_RAW: 'CHART_RAW',
   CHART_LINE: 'CHART_LINE'
 }

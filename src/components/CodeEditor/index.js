@@ -7,7 +7,7 @@ import 'codemirror/theme/material.css';
 
 import styles from './styles.module.scss';
 
-export default function CodeEditor({ value, onChange }) {
+export default function CodeEditor({ value, onChange, options = {}, ...rest }) {
 
   return (
     <div>
@@ -19,11 +19,13 @@ export default function CodeEditor({ value, onChange }) {
             name: "javascript"
           },
           theme: 'material',
-          lineNumbers: true
+          lineNumbers: true,
+          ...options
         }}
         onBeforeChange={(editor, data, value) => {
           onChange(value);
         }}
+        {...rest}
       />
     </div>
   )

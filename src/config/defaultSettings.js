@@ -6,6 +6,7 @@ import carousel from 'Src/widgets/data_display/Carousel/_defaultSettings';
 import table from 'Src/widgets/data_display/Table/_defaultSettings';
 import description from 'Src/widgets/data_display/Description/_defaultSettings';
 import form from 'Src/widgets/data_entry/Form/_defaultSettings';
+import raw from 'Src/widgets/chart/Raw/_defaultSettings';
 import line from 'Src/widgets/chart/Line/_defaultSettings';
 
 export default {
@@ -16,5 +17,6 @@ export default {
   [WIDGET_IDs.DATA_DISPLAY_TABLE]: table,
   [WIDGET_IDs.DATA_DISPLAY_DESCRIPTION]: description,
   [WIDGET_IDs.DATA_ENTRY_FORM]: form,
+  [WIDGET_IDs.CHART_RAW]: raw,
   [WIDGET_IDs.CHART_LINE]: line,
 };

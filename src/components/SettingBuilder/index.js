@@ -11,6 +11,7 @@ import settingSchemas from 'Src/config/settingSchemas';
 import { context, actions } from 'Src/store';
 import WIDGET_IDs from 'Src/config/widgetIds';
 import { getTreeItem } from 'Src/uitls/fns';
+import CodeEditor from 'Src/components/CodeEditor';
 
 const { Option } = Select;
 
@@ -119,6 +120,13 @@ export default function SettingBuilder({ id }) {
                     schema.options?.map(option => <Option value={option} key={option}>{option}</Option>)
                   }
                 </Select>
+              </Form.Item>
+            )
+          }
+          if (schema.type === 'json') {
+            return (
+              <Form.Item {...formItemProps}>
+                <CodeEditor />
               </Form.Item>
             )
           }
