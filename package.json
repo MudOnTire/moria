@@ -12,7 +12,6 @@
     "codemirror": "^5.59.2",
     "highcharts": "^9.0.1",
     "highcharts-react-official": "^3.0.0",
-    "parse-json": "^5.2.0",
     "query-string": "^6.14.0",
     "react": "^17.0.1",
     "react-codemirror2": "^7.2.1",

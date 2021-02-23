@@ -1,5 +1,5 @@
 import React from 'react';
-import { Controlled as CodeMirror } from 'react-codemirror2';
+import { Controlled } from 'react-codemirror2';
 import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
@@ -11,7 +11,7 @@ export default function CodeEditor({ value, onChange, options = {}, ...rest }) {
 
   return (
     <div>
-      <CodeMirror
+      <Controlled
         value={value}
         className={styles.editor}
         options={{
@@ -20,6 +20,8 @@ export default function CodeEditor({ value, onChange, options = {}, ...rest }) {
           },
           theme: 'material',
           lineNumbers: true,
+          lineWrapping: true,
+          lint: true,
           ...options
         }}
         onBeforeChange={(editor, data, value) => {
