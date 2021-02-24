@@ -123,7 +123,7 @@ export default function SettingBuilder({ id }) {
               </Form.Item>
             )
           }
-          if (schema.type === 'json') {
+          if (schema.type === 'code') {
             return (
               <Form.Item {...formItemProps}>
                 <CodeEditor />

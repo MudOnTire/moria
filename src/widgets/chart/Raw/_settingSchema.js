@@ -2,7 +2,7 @@ export default [
   {
     id: 'options',
     label: 'Options',
-    type: 'json',
+    type: 'code',
     desc: 'Highcharts options',
   }
 ]

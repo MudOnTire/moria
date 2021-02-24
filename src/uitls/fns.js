@@ -283,11 +283,11 @@ function throttle(fn, wait) {
   }
 }
 
-function createFunction(str) {
+function createFunction(str, showError = true) {
   try {
     return Function(`"use strict";return (${str})`)();
   } catch (err) {
-    message.error(`Parse function error: ${err.message}`)
+    showError && message.error(`Parse function error: ${err.message}`)
   }
 }
 

@@ -18,7 +18,7 @@ export default function Raw({ config }) {
     }
     let result = {};
     try {
-      const fn = createFunction(settings.options);
+      const fn = createFunction(settings.options, false);
       if (fn) result = fn();
     } catch (err) {
       console.log('JSON parse error', err);

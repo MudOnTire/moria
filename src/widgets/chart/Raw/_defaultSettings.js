@@ -1,3 +1,7 @@
 export default {
-  options: '{}'
+  options: `function options() {
+  return {
+    // put options here
+  }
+}`
 }
