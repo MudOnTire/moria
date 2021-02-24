@@ -17,6 +17,7 @@ export default function Editor() {
   const [mouseX, setMouseX] = useState(null);
   const [resizerRight, setResizerRight] = useState(0);
 
+  // set edit mode
   useEffect(() => {
     dispatch({
       type: actions.SET_EDIT_MODE,
@@ -24,11 +25,13 @@ export default function Editor() {
     });
   }, []);
 
+  // update resizer's right
   useEffect(() => {
     if (mouseX === null) return;
     setResizerRight(window.innerWidth - mouseX);
   }, [mouseX])
 
+  // set init resizer's right
   useEffect(() => {
     if (!configingWidgetId) {
       setResizerRight(0)
@@ -79,10 +82,13 @@ export default function Editor() {
     >
       <AssetDrawer />
       <Draft style={{ right: resizerRight + resizerWidth }} />
-      {
-        configingWidgetId &&
-        <Resizer right={resizerRight} onActive={onResizeActive} />
-      }
+      <Resizer
+        right={resizerRight}
+        onActive={onResizeActive}
+        style={{
+          opacity: configingWidgetId ? 1 : 0
+        }}
+      />
       <SettingDrawer style={{ width: resizerRight }} />
     </div>
   )

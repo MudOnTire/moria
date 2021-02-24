@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 
 export default function Resizer({
   right,
+  style = {},
   onActive = () => { },
 }) {
 
@@ -12,7 +13,8 @@ export default function Resizer({
       className={styles.resizer}
       onMouseDown={onActive}
       style={{
-        right
+        right,
+        ...style,
       }}
     />
   )

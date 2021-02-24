@@ -4,7 +4,10 @@
   top: 0;
   bottom: 0;
   width: 4px;
-  background-color: #eee;
+  border-left: 1px solid #d6e4ff;
+  border-right: 1px solid #d6e4ff;
   cursor: e-resize;
   z-index: 10;
+
+  transition: opacity 2s;
 }
