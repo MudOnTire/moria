@@ -9,3 +9,7 @@
     }
   }
 }
+
+.autoHeight :global(.CodeMirror) {
+  height: auto !important;
+}

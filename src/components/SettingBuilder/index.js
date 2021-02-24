@@ -13,6 +13,8 @@ import WIDGET_IDs from 'Src/config/widgetIds';
 import { getTreeItem } from 'Src/uitls/fns';
 import CodeEditor from 'Src/components/CodeEditor';
 
+import styles from './styles.module.scss';
+
 const { Option } = Select;
 
 // const layout = {
@@ -126,7 +128,7 @@ export default function SettingBuilder({ id }) {
           if (schema.type === 'code') {
             return (
               <Form.Item {...formItemProps}>
-                <CodeEditor />
+                <CodeEditor className={styles.codeEditor} />
               </Form.Item>
             )
           }

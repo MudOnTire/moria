@@ -7,13 +7,13 @@ import 'codemirror/theme/material.css';
 
 import styles from './styles.module.scss';
 
-export default function CodeEditor({ value, onChange, options = {}, ...rest }) {
+export default function CodeEditor({ value, onChange, options = {}, autoHeight = false, className = '', ...rest }) {
 
   return (
     <div>
       <Controlled
         value={value}
-        className={styles.editor}
+        className={`${styles.editor} ${autoHeight ? styles.autoHeight : ''} ${className}`}
         options={{
           mode: {
             name: "javascript"
