@@ -6,7 +6,7 @@ import SettingBuilder from 'Src/components/SettingBuilder';
 
 import styles from './styles.module.scss';
 
-export default function SettingDrawer() {
+export default function SettingDrawer({ style = {} }) {
 
   const store = useContext(context);
   const { dispatch, configingWidgetId } = store;
@@ -19,7 +19,10 @@ export default function SettingDrawer() {
   }
 
   return (
-    <div className={`${styles.settingDrawer} ${configingWidgetId ? styles.visible : styles.hidden}`}>
+    <div
+      className={`${styles.settingDrawer} ${configingWidgetId ? styles.visible : styles.hidden}`}
+      style={style}
+    >
       <div className={styles.content}>
         {
           configingWidgetId &&

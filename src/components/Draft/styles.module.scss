@@ -13,20 +13,20 @@ $topBarHeight: 44px;
   justify-content: center;
   align-items: center;
   padding-top: $topBarHeight;
+
+  &.showSettingDrawer {
+    right: 320px;
+  }
+
+  &.showAssetDrawer {
+    left: 320px !important;
+  }
 }
 
 .draft {
   flex: 1;
   overflow: auto;
   transition: all 0.5s;
-}
-
-.showSettingDrawer {
-  right: 320px !important;
-}
-
-.showAssetDrawer {
-  left: 320px !important;
 }
 
 .header {

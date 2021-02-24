@@ -1,0 +1,10 @@
+.resizer {
+  position: absolute;
+  right: 320px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #eee;
+  cursor: e-resize;
+  z-index: 10;
+}

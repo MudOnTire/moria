@@ -19,12 +19,12 @@ const SCREEN_HEIGHTs = {
   mobile: '800px'
 }
 
-export default function Draft() {
+export default function Draft({ style = {} }) {
 
   const store = useContext(context);
   const { dispatch, pageConfig, configingWidgetId, deviceType, currentPage, showAssetDrawer } = store;
 
-  const style = useMemo(() => {
+  const deviceStyle = useMemo(() => {
     const result = {
       width: SCREEN_WIDTHs[deviceType],
       height: SCREEN_HEIGHTs[deviceType],
@@ -43,7 +43,10 @@ export default function Draft() {
   }, [currentPage]);
 
   return (
-    <div className={`${styles.draftContainer} ${configingWidgetId && styles.showSettingDrawer} ${showAssetDrawer && styles.showAssetDrawer}`}>
+    <div
+      className={`${styles.draftContainer} ${configingWidgetId && styles.showSettingDrawer} ${showAssetDrawer && styles.showAssetDrawer}`}
+      style={style}
+    >
       <TopBar />
       {
         currentPage ?
@@ -53,7 +56,7 @@ export default function Draft() {
             }}
             className={styles.draft}
             config={pageConfig}
-            style={style}
+            style={deviceStyle}
           />
           :
           <Empty description="Please select a page first" />
