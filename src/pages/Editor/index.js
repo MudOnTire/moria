@@ -84,7 +84,7 @@ export default function Editor() {
       <Draft
         style={{
           right: resizerRight + resizerWidth,
-          pointerEvent: resizerActive ? 'none' : 'inherit'
+          pointerEvents: resizerActive ? 'none' : 'inherit'
         }}
       />
       <Resizer
@@ -97,7 +97,7 @@ export default function Editor() {
       <SettingDrawer
         style={{
           width: resizerRight,
-          pointerEvent: resizerActive ? 'none' : 'inherit'
+          pointerEvents: resizerActive ? 'none' : 'inherit'
         }}
       />
     </div>
