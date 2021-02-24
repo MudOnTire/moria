@@ -81,7 +81,12 @@ export default function Editor() {
       onMouseUp={onResizeDeactive}
     >
       <AssetDrawer />
-      <Draft style={{ right: resizerRight + resizerWidth }} />
+      <Draft
+        style={{
+          right: resizerRight + resizerWidth,
+          pointerEvent: resizerActive ? 'none' : 'inherit'
+        }}
+      />
       <Resizer
         right={resizerRight}
         onActive={onResizeActive}
@@ -89,7 +94,12 @@ export default function Editor() {
           opacity: configingWidgetId ? 1 : 0
         }}
       />
-      <SettingDrawer style={{ width: resizerRight }} />
+      <SettingDrawer
+        style={{
+          width: resizerRight,
+          pointerEvent: resizerActive ? 'none' : 'inherit'
+        }}
+      />
     </div>
   )
 }
