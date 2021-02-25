@@ -11,5 +11,7 @@ export default {
   DATA_ENTRY_FORM: 'DATA_ENTRY_FORM',
   // chart
   CHART_RAW: 'CHART_RAW',
-  CHART_LINE: 'CHART_LINE'
+  CHART_LINE: 'CHART_LINE',
+  // rich text
+  CUSTOM_RICH_TEXT: 'CUSTOM_RICH_TEXT'
 }

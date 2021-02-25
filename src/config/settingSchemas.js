@@ -8,6 +8,7 @@ import description from 'Src/widgets/data_display/Description/_settingSchema';
 import form from 'Src/widgets/data_entry/Form/_settingSchema';
 import raw from 'Src/widgets/chart/Raw/_settingSchema';
 import line from 'Src/widgets/chart/Line/_settingSchema';
+import richText from 'Src/widgets/custom/RichText/_settingSchema';
 
 export default {
   [WIDGET_IDs.WIDGET_CONTAINER]: widgetsContainer,
@@ -18,5 +19,6 @@ export default {
   [WIDGET_IDs.DATA_DISPLAY_DESCRIPTION]: description,
   [WIDGET_IDs.DATA_ENTRY_FORM]: form,
   [WIDGET_IDs.CHART_RAW]: raw,
-  [WIDGET_IDs.CHART_LINE]: line
+  [WIDGET_IDs.CHART_LINE]: line,
+  [WIDGET_IDs.CUSTOM_RICH_TEXT]: richText,
 }

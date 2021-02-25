@@ -7,6 +7,7 @@ import Description from './data_display/Description';
 import Form from './data_entry/Form';
 import Raw from './chart/Raw';
 import Line from './chart/Line';
+import RichText from './custom/RichText';
 
 export {
   WidgetsContainer,
@@ -17,5 +18,6 @@ export {
   Description,
   Form,
   Raw,
-  Line
+  Line,
+  RichText
 }

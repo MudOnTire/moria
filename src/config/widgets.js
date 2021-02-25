@@ -1,5 +1,5 @@
 import WIDGET_IDs from 'Src/config/widgetIds';
-import { WidgetsContainer, GridContainer, Image, Carousel, Table, Description, Form, Raw, Line } from 'Src/widgets';
+import { WidgetsContainer, GridContainer, Image, Carousel, Table, Description, Form, Raw, Line, RichText } from 'Src/widgets';
 
 const widgets = [
   {
@@ -66,7 +66,18 @@ const widgets = [
         component: Line
       },
     ]
-  }
+  },
+  {
+    category: 'Custom',
+    list: [
+      {
+        widgetId: WIDGET_IDs.CUSTOM_RICH_TEXT,
+        name: "Rich Text",
+        component: RichText
+      }
+    ]
+  },
+
 ]
 
 const cache = {}
