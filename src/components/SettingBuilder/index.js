@@ -12,6 +12,7 @@ import { context, actions } from 'Src/store';
 import WIDGET_IDs from 'Src/config/widgetIds';
 import { getTreeItem } from 'Src/uitls/fns';
 import CodeEditor from 'Src/components/CodeEditor';
+import RichTextEditor from 'Src/components/RichTextEditor';
 
 import styles from './styles.module.scss';
 
@@ -129,6 +130,13 @@ export default function SettingBuilder({ id }) {
             return (
               <Form.Item {...formItemProps}>
                 <CodeEditor className={styles.codeEditor} />
+              </Form.Item>
+            )
+          }
+          if (schema.type === 'richText') {
+            return (
+              <Form.Item {...formItemProps}>
+                <RichTextEditor />
               </Form.Item>
             )
           }

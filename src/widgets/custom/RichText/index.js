@@ -17,7 +17,7 @@ export default function RichText({ config }) {
 
   return (
     <WidgetWrapper config={config}>
-      <div dangerouslySetInnerHTML={{ __html: content }} />
+      <div className={styles.richText} dangerouslySetInnerHTML={{ __html: content }} />
     </WidgetWrapper>
   )
 }
