@@ -46,7 +46,8 @@ export default function Grid({ config }) {
     }
     if (type === 'widgetInstance') {
       // 只能移到空cell
-      if (children[index]) return;
+      if (!config.children) config.children = [];
+      if (config.children[index]) return;
       insertTreeItem(pageConfig.children, id, config.id, index, false);
       dispatch({
         type: actions.UPDATE_PAGE_CONFIG,
