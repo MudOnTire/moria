@@ -89,6 +89,7 @@ export default function Editor() {
       />
       <Resizer
         right={resizerRight}
+        active={resizerActive}
         onActive={onResizeActive}
         style={{
           opacity: configingWidgetId ? 1 : 0

@@ -1,0 +1,7 @@
+.richTextEditor {
+  :global {
+    .bf-content {
+      height: calc(100vh - 220px);
+    }
+  }
+}

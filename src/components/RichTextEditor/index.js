@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import BraftEditor from 'braft-editor'
 import 'braft-editor/dist/index.css'
 
+import styles from './styles.module.scss';
+
 export default function RichTextEditor({ value = '', onChange = () => { } }) {
 
   const [editorState, setEditorState] = useState(BraftEditor.createEditorState(value));
@@ -17,6 +19,7 @@ export default function RichTextEditor({ value = '', onChange = () => { } }) {
 
   return (
     <BraftEditor
+      className={styles.richTextEditor}
       value={editorState}
       onChange={handleChange}
       onSave={handleSave}
