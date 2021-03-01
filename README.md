@@ -1,3 +1,20 @@
-# Build Issues fix
+<h1 align="center">Moria - Lowcode development platform</h1>
 
-1. Python2 not found: https://stackoverflow.com/questions/45801457/node-js-python-not-found-exception-due-to-node-sass-and-node-gyp
+<p align="center">
+  <a href="https://ant.design">
+    <img width="1000" src="./screenshots/main.png">
+  </a>
+</p>
+
+
+# Run
+
+```sh
+yarn start
+```
+
+# Build
+
+```sh
+yarn build
+```
