@@ -36,7 +36,11 @@
 
 ![richtext](../screenshots/richtext.gif)
 
-### 7. 应用配置导入导出
+### 7. 不同设备尺寸预览
+
+![preview](../screenshots/preview.gif)
+
+### 8. 应用配置导入导出
 
 **导出配置：**
 
