@@ -67,7 +67,9 @@ export default function Editor() {
   }
 
   const onResizeActive = () => {
-    setResizerActive(true);
+    if (configingWidgetId) {
+      setResizerActive(true);
+    }
   }
 
   const onResizeDeactive = () => {
@@ -92,7 +94,8 @@ export default function Editor() {
         active={resizerActive}
         onActive={onResizeActive}
         style={{
-          opacity: configingWidgetId ? 1 : 0
+          opacity: configingWidgetId ? 1 : 0,
+          cursor: configingWidgetId ? 'e-resize' : 'initial'
         }}
       />
       <SettingDrawer
